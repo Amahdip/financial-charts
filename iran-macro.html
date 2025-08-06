@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>روند داده‌های مقیاس‌شده - Iran Macro</title>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>روند داده‌های مقیاس‌شده</h1>
+			<div class="subtitle">تحلیل جامع شاخص‌های مالی (1398 تا 1404)</div>
+
+			<div class="stats-grid">
+				<div class="stat-card">
+					<div class="stat-value" style="color: #3182ce">3,108,120</div>
+					<div class="stat-label">بالاترین شاخص بورس</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value" style="color: #e53e3e">94,677,000</div>
+					<div class="stat-label">ارزش کل بورس (ریال)</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value" style="color: #38a169">977,800</div>
+					<div class="stat-label">نرخ دلار (ریال)</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value" style="color: #d69e2e">113,809,000</div>
+					<div class="stat-label">ارزش کل بورس (دلار)</div>
+				</div>
+			</div>
+
+			<button class="pdf-button" onclick="generatePDF()">📄 PDF</button>
+
+			<div class="chart-container">
+				<canvas id="myChart"></canvas>
+			</div>
+		</div>
+
+		<script>
+			// PDF Generation Function
+			async function generatePDF() {
+				try {
+					// Show loading state
+					const button = document.querySelector('.pdf-button');
+					const originalText = button.innerHTML;
+					button.innerHTML = '⏳ در حال ایجاد...';
+					button.disabled = true;
+
+					// Get the chart canvas directly
+					const chartCanvas = document.getElementById('myChart');
+
+					// Create a temporary container
+					const tempContainer = document.createElement('div');
+					tempContainer.style.position = 'absolute';
+					tempContainer.style.left = '-9999px';
+					tempContainer.style.top = '0';
+					tempContainer.style.width = '1400px';
+					tempContainer.style.height = '900px';
+					tempContainer.style.background = 'white';
+					tempContainer.style.padding = '40px';
+					tempContainer.style.fontFamily = 'IRANSansX, Arial, sans-serif';
+					tempContainer.style.direction = 'rtl';
+
+					// Add title
+					const title = document.createElement('h1');
+					title.textContent = 'روند داده‌های مقیاس‌ شده';
+					title.style.textAlign = 'center';
+					title.style.color = '#1a202c';
+					title.style.marginBottom = '10px';
+					title.style.fontSize = '28px';
+					title.style.fontWeight = '700';
+					title.style.letterSpacing = '2px';
+					title.style.background = 'none';
+					title.style.webkitBackgroundClip = 'unset';
+					title.style.webkitTextFillColor = 'unset';
+					title.style.backgroundClip = 'unset';
+
+					const subtitle = document.createElement('div');
+					subtitle.textContent = 'تحلیل جامع شاخص‌های مالی (1398 تا 1404)';
+					subtitle.style.textAlign = 'center';
+					subtitle.style.color = '#718096';
+					subtitle.style.fontSize = '16px';
+					subtitle.style.marginBottom = '30px';
+
+					// Create chart container
+					const chartDiv = document.createElement('div');
+					chartDiv.style.width = '100%';
+					chartDiv.style.height = '700px';
+					chartDiv.style.background = 'white';
+					chartDiv.style.border = '1px solid #e2e8f0';
+					chartDiv.style.borderRadius = '8px';
+					chartDiv.style.padding = '20px';
+					chartDiv.style.textAlign = 'center';
+					chartDiv.style.direction = 'rtl';
+
+					// Create new canvas for the chart
+					const newCanvas = document.createElement('canvas');
+					newCanvas.width = 1300;
+					newCanvas.height = 650;
+					newCanvas.style.margin = '0 auto';
+					newCanvas.style.display = 'block';
+					chartDiv.appendChild(newCanvas);
+
+					// Create stats grid for PDF
+					const statsGrid = document.createElement('div');
+					statsGrid.style.display = 'grid';
+					statsGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+					statsGrid.style.gap = '20px';
+					statsGrid.style.marginBottom = '30px';
+					statsGrid.style.marginTop = '20px';
+
+					// Add stat cards
+					const statCards = [
+						{
+							value: '3,108,120',
+							label: 'بالاترین شاخص بورس',
+							color: '#3182ce',
+						},
+						{
+							value: '94,677,000',
+							label: 'ارزش کل بورس (ریال)',
+							color: '#e53e3e',
+						},
+						{ value: '977,800', label: 'نرخ دلار (ریال)', color: '#38a169' },
+						{
+							value: '113,809,000',
+							label: 'ارزش کل بورس (دلار)',
+							color: '#d69e2e',
+						},
+					];
+
+					statCards.forEach((card) => {
+						const statCard = document.createElement('div');
+						statCard.style.background = 'white';
+						statCard.style.padding = '15px';
+						statCard.style.borderRadius = '12px';
+						statCard.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+						statCard.style.border = '1px solid #e2e8f0';
+						statCard.style.textAlign = 'center';
+
+						const statValue = document.createElement('div');
+						statValue.textContent = card.value;
+						statValue.style.fontSize = '18px';
+						statValue.style.fontWeight = '700';
+						statValue.style.color = card.color;
+						statValue.style.marginBottom = '5px';
+
+						const statLabel = document.createElement('div');
+						statLabel.textContent = card.label;
+						statLabel.style.fontSize = '12px';
+						statLabel.style.color = '#718096';
+						statLabel.style.fontWeight = '500';
+
+						statCard.appendChild(statValue);
+						statCard.appendChild(statLabel);
+						statsGrid.appendChild(statCard);
+					});
+
+					tempContainer.appendChild(title);
+					tempContainer.appendChild(subtitle);
+					tempContainer.appendChild(statsGrid);
+					tempContainer.appendChild(chartDiv);
+					document.body.appendChild(tempContainer);
+
+					// Create a new chart instance for PDF
+					const pdfChart = new Chart(newCanvas, {
+						...chartData,
+						options: {
+							...chartData.options,
+							responsive: false,
+							maintainAspectRatio: false,
+							plugins: {
+								...chartData.options.plugins,
+								legend: {
+									...chartData.options.plugins.legend,
+									labels: {
+										...chartData.options.plugins.legend.labels,
+										font: {
+											size: 14,
+											family: "'IRANSansX', sans-serif",
+											weight: '600',
+										},
+									},
+								},
+							},
+							scales: {
+								...chartData.options.scales,
+								x: {
+									...chartData.options.scales.x,
+									ticks: {
+										...chartData.options.scales.x.ticks,
+										font: {
+											size: 12,
+											family: "'IRANSansX', sans-serif",
+											weight: '500',
+										},
+									},
+								},
+								y: {
+									...chartData.options.scales.y,
+									ticks: {
+										...chartData.options.scales.y.ticks,
+										font: {
+											size: 12,
+											family: "'IRANSansX', sans-serif",
+											weight: '500',
+										},
+									},
+								},
+							},
+						},
+					});
+
+					// Wait for chart to render
+					await new Promise((resolve) => setTimeout(resolve, 1000));
+
+					// Convert to canvas using html2canvas
+					const canvas = await html2canvas(tempContainer, {
+						scale: 2,
+						useCORS: true,
+						allowTaint: true,
+						backgroundColor: '#ffffff',
+						width: 1400,
+						height: 900,
+						logging: false,
+					});
+
+					// Remove temporary container
+					document.body.removeChild(tempContainer);
+
+					// Create PDF
+					const { jsPDF } = window.jspdf;
+					const pdf = new jsPDF('landscape', 'mm', 'a4');
+
+					// Calculate dimensions to fit the chart on one page
+					const pageWidth = pdf.internal.pageSize.getWidth();
+					const pageHeight = pdf.internal.pageSize.getHeight();
+					const imgWidth = pageWidth - 20; // 10mm margin on each side
+					const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+					// If image is too tall, scale it down
+					const maxHeight = pageHeight - 20; // 10mm margin on top and bottom
+					const finalWidth =
+						imgHeight > maxHeight
+							? (maxHeight * imgWidth) / imgHeight
+							: imgWidth;
+					const finalHeight = imgHeight > maxHeight ? maxHeight : imgHeight;
+
+					// Center the image on the page
+					const x = (pageWidth - finalWidth) / 2;
+					const y = (pageHeight - finalHeight) / 2;
+
+					// Add the image to PDF
+					pdf.addImage(
+						canvas.toDataURL('image/png'),
+						'PNG',
+						x,
+						y,
+						finalWidth,
+						finalHeight
+					);
+
+					// Save the PDF
+					pdf.save('iran-macro-chart.pdf');
+
+					// Restore button state
+					button.innerHTML = originalText;
+					button.disabled = false;
+				} catch (error) {
+					console.error('Error generating PDF:', error);
+					alert('خطا در ایجاد PDF. لطفاً دوباره تلاش کنید.');
+
+					// Restore button state
+					const button = document.querySelector('.pdf-button');
+					button.innerHTML = '📄 PDF';
+					button.disabled = false;
+				}
+			}
+
+			const chartData = {
+				type: 'line',
+				data: {
+					labels: [
+						'فروردین 1398',
+						'اردیبهشت 1398',
+						'خرداد 1398',
+						'تیر 1398',
+						'مرداد 1398',
+						'شهریور 1398',
+						'مهر 1398',
+						'آبان 1398',
+						'آذر 1398',
+						'دی 1398',
+						'بهمن 1398',
+						'اسفند 1398',
+						'فروردین 1399',
+						'اردیبهشت 1399',
+						'خرداد 1399',
+						'تیر 1399',
+						'مرداد 1399',
+						'شهریور 1399',
+						'مهر 1399',
+						'آبان 1399',
+						'آذر 1399',
+						'دی 1399',
+						'بهمن 1399',
+						'اسفند 1399',
+						'فروردین 1400',
+						'اردیبهشت 1400',
+						'خرداد 1400',
+						'تیر 1400',
+						'مرداد 1400',
+						'شهریور 1400',
+						'مهر 1400',
+						'آبان 1400',
+						'آذر 1400',
+						'دی 1400',
+						'بهمن 1400',
+						'اسفند 1400',
+						'فروردین 1401',
+						'اردیبهشت 1401',
+						'خرداد 1401',
+						'تیر 1401',
+						'مرداد 1401',
+						'شهریور 1401',
+						'مهر 1401',
+						'آبان 1401',
+						'آذر 1401',
+						'دی 1401',
+						'بهمن 1401',
+						'اسفند 1401',
+						'فروردین 1402',
+						'اردیبهشت 1402',
+						'خرداد 1402',
+						'تیر 1402',
+						'مرداد 1402',
+						'شهریور 1402',
+						'مهر 1402',
+						'آبان 1402',
+						'آذر 1402',
+						'دی 1402',
+						'بهمن 1402',
+						'اسفند 1402',
+						'فروردین 1403',
+						'اردیبهشت 1403',
+						'خرداد 1403',
+						'تیر 1403',
+						'مرداد 1403',
+						'شهریور 1403',
+						'مهر 1403',
+						'آبان 1403',
+						'آذر 1403',
+						'دی 1403',
+						'بهمن 1403',
+						'اسفند 1403',
+						'فروردین 1404',
+						'اردیبهشت 1404',
+						'خرداد 1404',
+						'تیر 1404',
+					],
+					datasets: [
+						{
+							label: 'شاخص بورس / 10',
+							data: [
+								20438, 21517, 23389, 25128, 26613, 31147, 30581, 30500, 35672,
+								40601, 47876, 51290, 70899, 98676, 130081, 190117, 172726,
+								158121, 141235, 136654, 143639, 118398, 123272, 130766, 120705,
+								112816, 118691, 131131, 151589, 138647, 140776, 140713, 135901,
+								127945, 127430, 136725, 151222, 158214, 153339, 147350, 143148,
+								135524, 129680, 140765, 149620, 165758, 159426, 196046, 232413,
+								231851, 217389, 210305, 206763, 204992, 203221, 202279, 221186,
+								216693, 207078, 219509, 220199, 211256, 204398, 217219, 203721,
+								209700, 200728, 225761, 250178, 284994, 271934, 270976, 307792,
+								310812, 298461, 284390,
+							],
+							borderColor: '#3182ce',
+							backgroundColor: 'rgba(49, 130, 206, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#3182ce',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#3182ce',
+							pointHoverBorderColor: '#ffffff',
+						},
+						{
+							label: 'ارزش کل بورس (میلیارد ریال) / 1000',
+							data: [
+								6226, 6554, 7124, 7654, 8107, 9488, 9315, 9291, 10866, 12368,
+								14583, 15624, 21597, 30058, 39624, 57912, 52615, 48166, 43022,
+								41626, 43754, 36066, 37550, 39833, 36768, 34365, 36155, 39944,
+								46176, 42234, 42882, 42863, 41397, 38974, 38817, 41648, 46064,
+								48194, 46709, 44885, 43605, 41282, 39502, 42879, 45576, 50492,
+								48563, 59718, 70796, 70625, 66220, 64062, 62983, 62443, 61904,
+								61617, 67376, 66007, 63078, 66865, 67075, 64351, 62262, 66168,
+								62056, 63877, 61144, 68770, 76207, 86813, 82835, 82543, 93758,
+								94677, 90915, 86629,
+							],
+							borderColor: '#e53e3e',
+							backgroundColor: 'rgba(229, 62, 62, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#e53e3e',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#e53e3e',
+							pointHoverBorderColor: '#ffffff',
+						},
+						{
+							label: 'نرخ دلار (تومان)',
+							data: [
+								13470, 14235, 13200, 12524, 11600, 11393, 11232, 11794, 13169,
+								13439, 14393, 14903, 15442, 17701, 19480, 21800, 22502, 27497,
+								29644, 25620, 25604, 22645, 25171, 23963, 24184, 22300, 24259,
+								24628, 27666, 27521, 27415, 28440, 30077, 27525, 25417, 26252,
+								27862, 30323, 31978, 31883, 29344, 31673, 32812, 35658, 39761,
+								43976, 49902, 48101, 51607, 52331, 49731, 48336, 49023, 49393,
+								50636, 50199, 50076, 54223, 57036, 60351, 60090, 60560, 61480,
+								57611, 58160, 59230, 64855, 68930, 76755, 80670, 91995, 97780,
+								82790, 83190, 83535, 88110,
+							],
+							borderColor: '#38a169',
+							backgroundColor: 'rgba(56, 161, 105, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#38a169',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#38a169',
+							pointHoverBorderColor: '#ffffff',
+						},
+						{
+							label: 'ارزش کل بورس (میلیارد دلار) / 1000',
+							data: [
+								46218, 46044, 53973, 61117, 69884, 83278, 82935, 78774, 82513,
+								92027, 101324, 104835, 139858, 169809, 203411, 265652, 233822,
+								175167, 145129, 162476, 170889, 159265, 149180, 166227, 152035,
+								154105, 149036, 162190, 166905, 153459, 156418, 150714, 137637,
+								141594, 152720, 158648, 165330, 158936, 146067, 140779, 148598,
+								130339, 120389, 120251, 114625, 114817, 97317, 124150, 137183,
+								134958, 133156, 127704, 124978, 123615, 122252, 122745, 134547,
+								121733, 110594, 110794, 111625, 106260, 101272, 114853, 106699,
+								107846, 94279, 99768, 99287, 107615, 90042, 84417, 113247,
+								113809, 108835, 98319,
+							],
+							borderColor: '#d69e2e',
+							backgroundColor: 'rgba(214, 158, 46, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#d69e2e',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#d69e2e',
+							pointHoverBorderColor: '#ffffff',
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					devicePixelRatio: 2,
+					backgroundColor: '#FFFFFF',
+					interaction: {
+						intersect: false,
+						mode: 'index',
+					},
+					plugins: {
+						legend: {
+							position: 'top',
+							labels: {
+								color: '#1a202c',
+								font: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								padding: 20,
+								usePointStyle: true,
+								pointStyle: 'circle',
+								boxWidth: 8,
+								boxHeight: 8,
+							},
+						},
+						title: {
+							display: false,
+						},
+						tooltip: {
+							backgroundColor: 'rgba(26, 32, 44, 0.95)',
+							titleColor: '#ffffff',
+							bodyColor: '#ffffff',
+							borderColor: '#e2e8f0',
+							borderWidth: 1,
+							cornerRadius: 8,
+							displayColors: true,
+							titleFont: {
+								size: 14,
+								family: "'IRANSansX', sans-serif",
+								weight: '600',
+							},
+							bodyFont: {
+								size: 13,
+								family: "'IRANSansX', sans-serif",
+							},
+							padding: 12,
+						},
+					},
+					scales: {
+						y: {
+							type: 'linear',
+							position: 'left',
+							title: {
+								display: true,
+								text: 'مقادیر مقیاس‌شده',
+								color: '#1a202c',
+								font: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							min: 0,
+							max: 350000,
+							grid: {
+								color: 'rgba(226, 232, 240, 0.8)',
+								borderColor: '#e2e8f0',
+								drawBorder: true,
+								lineWidth: 1,
+								drawTicks: false,
+							},
+							ticks: {
+								color: '#718096',
+								font: {
+									size: 12,
+									family: "'IRANSansX', sans-serif",
+									weight: '500',
+								},
+								padding: 8,
+								callback: function (value) {
+									return value.toLocaleString('fa-IR');
+								},
+							},
+						},
+						x: {
+							title: {
+								display: true,
+								text: 'ماه/سال',
+								color: '#1a202c',
+								font: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							grid: {
+								color: 'rgba(226, 232, 240, 0.8)',
+								drawBorder: true,
+								borderColor: '#e2e8f0',
+								lineWidth: 1,
+								drawTicks: false,
+							},
+							ticks: {
+								maxRotation: 45,
+								minRotation: 45,
+								color: '#718096',
+								font: {
+									size: 10,
+									family: "'IRANSansX', sans-serif",
+									weight: '500',
+								},
+								padding: 5,
+								maxTicksLimit: 84,
+								autoSkip: false,
+							},
+						},
+					},
+				},
+			};
+
+			const ctx = document.getElementById('myChart').getContext('2d');
+			new Chart(ctx, chartData);
+		</script>
+	</body>
+</html>
