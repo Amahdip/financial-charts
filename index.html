@@ -673,6 +673,25 @@
 						280540, 286720, 297040, 306240, 317900, 325140, 337840, 344000,
 					],
 				},
+				// New data for red color (divided by 3 for scaling)
+				newData: {
+					realData: [
+						342727, 363515, 394145, 417049, 427299, 432169, 437249, 467048,
+						480737, 519814, 571444, 652414, 664400, 753200, 783000, 765400,
+						757900, 753300, 760600, 757700, 740900, 753900, 784800, 814400,
+						816300, 847500, 859100, 874600, 885000, 935200, 966300, 996700,
+						1020800, 1050800, 1078100, 1100000, 1124000, 1150000, 1170000,
+						1195000,
+					],
+					// Scaled data for visualization (divided by 3)
+					scaledData: [
+						114242, 121172, 131382, 139016, 142433, 144056, 145750, 155683,
+						160246, 173271, 190481, 217471, 221467, 251067, 261000, 255133,
+						252633, 251100, 253533, 252567, 246967, 251300, 261600, 271467,
+						272100, 282500, 286367, 291533, 295000, 311733, 322100, 332233,
+						340267, 350267, 359367, 366667, 374667, 383333, 390000, 398333,
+					],
+				},
 				labels: [
 					'فروردین 1401',
 					'اردیبهشت 1401',
@@ -1128,10 +1147,10 @@
 					statCards[2].querySelector('.stat-label').textContent =
 						'تغییر نرخ تورم (۱۴۰۱-۱۴۰۴)';
 
-					statCards[3].querySelector('.stat-value').textContent = '---';
+					statCards[3].querySelector('.stat-value').textContent = '249%+';
 					statCards[3].querySelector('.stat-value').style.color = '#e53e3e';
 					statCards[3].querySelector('.stat-label').textContent =
-						'آماده برای داده جدید';
+						'تغییر قیمت مسکن (۱۴۰۱-۱۴۰۴)';
 				}
 			}
 
@@ -1192,6 +1211,23 @@
 							pointBorderColor: '#ffffff',
 							pointBorderWidth: 2,
 							pointHoverBackgroundColor: '#38a169',
+							pointHoverBorderColor: '#ffffff',
+							spanGaps: true,
+						},
+						{
+							label: 'قیمت مسکن / 3',
+							data: chart2Data.newData.scaledData,
+							borderColor: '#e53e3e',
+							backgroundColor: 'rgba(229, 62, 62, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#e53e3e',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#e53e3e',
 							pointHoverBorderColor: '#ffffff',
 							spanGaps: true,
 						},
@@ -1263,12 +1299,17 @@
 										}
 										const formattedValue = realValue.toLocaleString('fa-IR');
 										return 'شاخص بورس: ' + formattedValue;
-									} else {
+									} else if (datasetIndex === 2) {
 										// Inflation data
 										const realValue =
 											chart2Data.inflationData.realData[dataIndex];
 										const formattedValue = realValue.toLocaleString('fa-IR');
 										return 'تورم: ' + formattedValue;
+									} else {
+										// Housing price data
+										const realValue = chart2Data.newData.realData[dataIndex];
+										const formattedValue = realValue.toLocaleString('fa-IR');
+										return 'قیمت مسکن: ' + formattedValue;
 									}
 								},
 							},
