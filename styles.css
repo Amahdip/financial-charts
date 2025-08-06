@@ -85,6 +85,39 @@ body {
 	backdrop-filter: blur(10px);
 }
 
+/* Tab Navigation */
+.tab-navigation {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+	gap: 10px;
+}
+
+.tab-button {
+	background: #f7fafc;
+	border: 2px solid #e2e8f0;
+	color: #4a5568;
+	padding: 12px 24px;
+	border-radius: 12px;
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+	background: #edf2f7;
+	border-color: #cbd5e0;
+}
+
+.tab-button.active {
+	background: #3182ce;
+	border-color: #3182ce;
+	color: white;
+}
+
+/* Chart Containers */
 .chart-container {
 	position: relative;
 	height: 550px;
@@ -95,6 +128,11 @@ body {
 	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
 		0 10px 10px -5px rgba(0, 0, 0, 0.04);
 	border: 1px solid #e2e8f0;
+	display: none;
+}
+
+.chart-container.active {
+	display: block;
 }
 
 h1 {
