@@ -40,4 +40,4 @@ Financial data from Iranian markets covering the period 1398-1404 (Persian calen
 
 ## License
 
-This project is open source and available under the MIT License. 
+This project is open source and available under the MIT License.
