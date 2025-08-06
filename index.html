@@ -655,6 +655,24 @@
 						284390,
 					],
 				},
+				// Inflation data from 1/1/1401 onwards
+				inflationData: {
+					realData: [
+						495.1, 520.4, 575.4, 600.4, 614.8, 631, 649.5, 663.5, 679.8, 713.4,
+						745.1, 794.3, 834.9, 858.3, 885.8, 908.8, 940.6, 971.6, 995.9,
+						1014.8, 1048.3, 1066.1, 1076.8, 1097.3, 1125.8, 1159.6, 1206,
+						1242.2, 1277, 1306.4, 1339.1, 1379.3, 1402.7, 1433.6, 1485.2,
+						1531.2, 1589.5, 1625.7, 1689.2, 1720.0,
+					],
+					// Scaled data for visualization (multiplied by 200)
+					scaledData: [
+						99020, 104080, 115080, 120080, 122960, 126200, 129900, 132700,
+						135960, 142680, 149020, 158860, 166980, 171660, 177160, 181760,
+						188120, 194320, 199180, 202960, 209660, 213220, 215360, 219460,
+						225160, 231920, 241200, 248440, 255400, 261280, 267820, 275860,
+						280540, 286720, 297040, 306240, 317900, 325140, 337840, 344000,
+					],
+				},
 				labels: [
 					'فروردین 1401',
 					'اردیبهشت 1401',
@@ -1073,38 +1091,42 @@
 				const statCards = document.querySelectorAll('.stat-card');
 
 				if (activeTab === 'chart1') {
-					// First chart stats (Financial Indicators)
+					// First chart stats (Financial Indicators) - Fixed colors
 					statCards[0].querySelector('.stat-value').textContent = '3,108,119';
+					statCards[0].querySelector('.stat-value').style.color = '#3182ce'; // Blue
 					statCards[0].querySelector('.stat-label').textContent =
 						'بالاترین شاخص بورس';
 
 					statCards[1].querySelector('.stat-value').textContent = '94,677,309';
+					statCards[1].querySelector('.stat-value').style.color = '#e53e3e'; // Red
 					statCards[1].querySelector('.stat-label').textContent =
 						'بالاترین ارزش کل بورس (ریال)';
 
 					statCards[2].querySelector('.stat-value').textContent = '977,800';
+					statCards[2].querySelector('.stat-value').style.color = '#38a169'; // Green
 					statCards[2].querySelector('.stat-label').textContent =
 						'بالاترین نرخ دلار (ریال)';
 
 					statCards[3].querySelector('.stat-value').textContent = '266';
+					statCards[3].querySelector('.stat-value').style.color = '#d69e2e'; // Yellow
 					statCards[3].querySelector('.stat-label').textContent =
 						'بالاترین ارزش کل بورس (دلار)';
 				} else if (activeTab === 'chart2') {
-					// Second chart stats (Gold data)
-					statCards[0].querySelector('.stat-value').textContent = '79,757,000';
+					// Second chart stats (Percentage changes from 1/1/1401)
+					statCards[0].querySelector('.stat-value').textContent = '445%+';
 					statCards[0].querySelector('.stat-value').style.color = '#fbbf24';
 					statCards[0].querySelector('.stat-label').textContent =
-						'بالاترین قیمت طلای ۱۸ عیار';
+						'تغییر قیمت طلا (۱۴۰۱-۱۴۰۴)';
 
-					statCards[1].querySelector('.stat-value').textContent = '3,108,119';
+					statCards[1].querySelector('.stat-value').textContent = '88%+';
 					statCards[1].querySelector('.stat-value').style.color = '#3182ce';
 					statCards[1].querySelector('.stat-label').textContent =
-						'بالاترین شاخص بورس (۱۴۰۰-۱۴۰۴)';
+						'تغییر شاخص بورس (۱۴۰۱-۱۴۰۴)';
 
-					statCards[2].querySelector('.stat-value').textContent = '---';
+					statCards[2].querySelector('.stat-value').textContent = '241%+';
 					statCards[2].querySelector('.stat-value').style.color = '#38a169';
 					statCards[2].querySelector('.stat-label').textContent =
-						'آماده برای داده جدید';
+						'تغییر نرخ تورم (۱۴۰۱-۱۴۰۴)';
 
 					statCards[3].querySelector('.stat-value').textContent = '---';
 					statCards[3].querySelector('.stat-value').style.color = '#e53e3e';
@@ -1153,6 +1175,23 @@
 							pointBorderColor: '#ffffff',
 							pointBorderWidth: 2,
 							pointHoverBackgroundColor: '#3182ce',
+							pointHoverBorderColor: '#ffffff',
+							spanGaps: true,
+						},
+						{
+							label: 'تورم × 200',
+							data: chart2Data.inflationData.scaledData,
+							borderColor: '#38a169',
+							backgroundColor: 'rgba(56, 161, 105, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#38a169',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#38a169',
 							pointHoverBorderColor: '#ffffff',
 							spanGaps: true,
 						},
@@ -1215,7 +1254,7 @@
 										const realValue = chart2Data.goldData.realData[dataIndex];
 										const formattedValue = realValue.toLocaleString('fa-IR');
 										return 'طلای ۱۸ عیار: ' + formattedValue;
-									} else {
+									} else if (datasetIndex === 1) {
 										// Stock index data
 										const realValue =
 											chart2Data.stockIndexData.realData[dataIndex];
@@ -1224,6 +1263,12 @@
 										}
 										const formattedValue = realValue.toLocaleString('fa-IR');
 										return 'شاخص بورس: ' + formattedValue;
+									} else {
+										// Inflation data
+										const realValue =
+											chart2Data.inflationData.realData[dataIndex];
+										const formattedValue = realValue.toLocaleString('fa-IR');
+										return 'تورم: ' + formattedValue;
 									}
 								},
 							},
