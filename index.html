@@ -2264,6 +2264,14 @@
 						  ).toFixed(2)
 						: '--';
 
+				// Calculate median for evaluator P/E companies
+				const evaluatorPEMedian =
+					evaluatorValidPEs.length > 0
+						? evaluatorValidPEs
+								.sort((a, b) => a - b)
+								[Math.floor(evaluatorValidPEs.length / 2)].toFixed(2)
+						: '--';
+
 				// Add average row for evaluator P/E companies
 				const evaluatorPEAverageRow = document.createElement('tr');
 				evaluatorPEAverageRow.style.fontWeight = 'bold';
@@ -2276,6 +2284,19 @@
 					<td><strong>${evaluatorPEAverage}</strong></td>
 				`;
 				evaluatorTbody.appendChild(evaluatorPEAverageRow);
+
+				// Add median row for evaluator P/E companies
+				const evaluatorPEMedianRow = document.createElement('tr');
+				evaluatorPEMedianRow.style.fontWeight = 'bold';
+				evaluatorPEMedianRow.style.backgroundColor = '#f7fafc';
+				evaluatorPEMedianRow.innerHTML = `
+					<td><strong>${comparisonData.evaluatorCompanies.length + 2}</strong></td>
+					<td><strong>میانه</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>${evaluatorPEMedian}</strong></td>
+				`;
+				evaluatorTbody.appendChild(evaluatorPEMedianRow);
 
 				// Populate evaluator EV/Revenue companies table
 				const evaluatorEvRevenueTbody = document.getElementById(
@@ -2307,6 +2328,14 @@
 						  ).toFixed(2)
 						: '--';
 
+				// Calculate median for evaluator EV/Revenue companies
+				const evaluatorEvRevenueMedian =
+					evaluatorValidEvRevenue.length > 0
+						? evaluatorValidEvRevenue
+								.sort((a, b) => a - b)
+								[Math.floor(evaluatorValidEvRevenue.length / 2)].toFixed(2)
+						: '--';
+
 				// Add average row for evaluator EV/Revenue companies
 				const evaluatorEvRevenueAverageRow = document.createElement('tr');
 				evaluatorEvRevenueAverageRow.style.fontWeight = 'bold';
@@ -2319,6 +2348,19 @@
 					<td><strong>${evaluatorEvRevenueAverage}</strong></td>
 				`;
 				evaluatorEvRevenueTbody.appendChild(evaluatorEvRevenueAverageRow);
+
+				// Add median row for evaluator EV/Revenue companies
+				const evaluatorEvRevenueMedianRow = document.createElement('tr');
+				evaluatorEvRevenueMedianRow.style.fontWeight = 'bold';
+				evaluatorEvRevenueMedianRow.style.backgroundColor = '#f7fafc';
+				evaluatorEvRevenueMedianRow.innerHTML = `
+					<td><strong>${comparisonData.evaluatorEvRevenue.length + 2}</strong></td>
+					<td><strong>میانه</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>${evaluatorEvRevenueMedian}</strong></td>
+				`;
+				evaluatorEvRevenueTbody.appendChild(evaluatorEvRevenueMedianRow);
 
 				// Populate our P/E companies table
 				const ourTbody = document.getElementById('our-companies-body');
@@ -2379,6 +2421,22 @@
 						  ).toFixed(2)
 						: '--';
 
+				// Calculate median for our EV/Revenue companies (2024 values)
+				const ourEvRevenue2024Median =
+					ourValidEvRevenue2024.length > 0
+						? ourValidEvRevenue2024
+								.sort((a, b) => a - b)
+								[Math.floor(ourValidEvRevenue2024.length / 2)].toFixed(2)
+						: '--';
+
+				// Calculate median for our EV/Revenue companies (2025 forecast)
+				const ourEvRevenue2025Median =
+					ourValidEvRevenue2025.length > 0
+						? ourValidEvRevenue2025
+								.sort((a, b) => a - b)
+								[Math.floor(ourValidEvRevenue2025.length / 2)].toFixed(2)
+						: '--';
+
 				// Add average row for our EV/Revenue companies
 				const ourEvRevenueAverageRow = document.createElement('tr');
 				ourEvRevenueAverageRow.style.fontWeight = 'bold';
@@ -2390,6 +2448,18 @@
 					<td><strong>${ourEvRevenue2025Average}x</strong></td>
 				`;
 				ourEvRevenueTbody.appendChild(ourEvRevenueAverageRow);
+
+				// Add median row for our EV/Revenue companies
+				const ourEvRevenueMedianRow = document.createElement('tr');
+				ourEvRevenueMedianRow.style.fontWeight = 'bold';
+				ourEvRevenueMedianRow.style.backgroundColor = '#f7fafc';
+				ourEvRevenueMedianRow.innerHTML = `
+					<td><strong>${comparisonData.ourEvRevenue.length + 2}</strong></td>
+					<td><strong>میانه</strong></td>
+					<td><strong style="color: #e53e3e;">${ourEvRevenue2024Median}x</strong></td>
+					<td><strong>${ourEvRevenue2025Median}x</strong></td>
+				`;
+				ourEvRevenueTbody.appendChild(ourEvRevenueMedianRow);
 			}
 		</script>
 	</body>
