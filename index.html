@@ -22,6 +22,7 @@
 				<button class="tab-button" onclick="switchTab('chart2')">
 					شاخص‌های جایگزین
 				</button>
+				<button class="tab-button" onclick="switchTab('tables')">جداول</button>
 			</div>
 
 			<div class="stats-grid">
@@ -52,6 +53,197 @@
 
 			<div id="chart2" class="chart-container">
 				<canvas id="myChart2"></canvas>
+			</div>
+
+			<div id="tables" class="chart-container">
+				<div class="tables-content">
+					<div class="table-layout">
+						<div class="table-section">
+							<!-- EV/Revenue Category -->
+							<div id="ev-revenue-category" class="category-content active">
+								<div id="ev-revenue-original-table" class="sub-table active">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="ev-revenue-original-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div id="ev-revenue-corrected-table" class="sub-table">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="ev-revenue-corrected-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div id="ev-revenue-2022-table" class="sub-table">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="ev-revenue-2022-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div id="ev-revenue-custom-table" class="sub-table">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="ev-revenue-custom-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<!-- P/E Category -->
+							<div id="pe-category" class="category-content">
+								<div id="pe-original-table" class="sub-table active">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="pe-original-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div id="pe-corrected-table" class="sub-table">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="pe-corrected-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div id="pe-2022-table" class="sub-table">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="pe-2022-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div id="pe-custom-table" class="sub-table">
+									<div class="table-container">
+										<table>
+											<thead>
+												<tr>
+													<th>ردیف</th>
+													<th>شرح</th>
+													<th>مبلغ (میلیون ریال)</th>
+												</tr>
+											</thead>
+											<tbody id="pe-custom-body">
+												<!-- Data will be populated by JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="controls-section">
+							<div class="category-controls">
+								<button
+									class="category-btn active"
+									onclick="showCategory('ev-revenue')"
+								>
+									EV/Revenue
+								</button>
+								<button class="category-btn" onclick="showCategory('pe')">
+									P/E
+								</button>
+							</div>
+
+							<div class="subcategory-controls">
+								<button
+									class="subcategory-btn active"
+									onclick="showSubTable('ev-revenue', 'original')"
+								>
+									جداول اصلی گزارش
+								</button>
+								<button
+									class="subcategory-btn"
+									onclick="showSubTable('ev-revenue', 'corrected')"
+								>
+									جداول اصلی گزارش با نسبت‌های صحیح
+								</button>
+								<button
+									class="subcategory-btn"
+									onclick="showSubTable('ev-revenue', '2022')"
+								>
+									جداول گزارش در پایان سال ۱۴۰۱
+								</button>
+								<button
+									class="subcategory-btn"
+									onclick="showSubTable('ev-revenue', 'custom')"
+								>
+									جداول با شرکت‌های متناسب
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -1111,6 +1303,10 @@
 
 				if (activeTab === 'chart1') {
 					// First chart stats (Financial Indicators) - Fixed colors
+					statCards.forEach((card) => {
+						card.style.display = 'block';
+					});
+
 					statCards[0].querySelector('.stat-value').textContent = '3,108,119';
 					statCards[0].querySelector('.stat-value').style.color = '#3182ce'; // Blue
 					statCards[0].querySelector('.stat-label').textContent =
@@ -1132,6 +1328,10 @@
 						'بالاترین ارزش کل بورس (دلار)';
 				} else if (activeTab === 'chart2') {
 					// Second chart stats (Percentage changes from 1/1/1401)
+					statCards.forEach((card) => {
+						card.style.display = 'block';
+					});
+
 					statCards[0].querySelector('.stat-value').textContent = '445%+';
 					statCards[0].querySelector('.stat-value').style.color = '#fbbf24';
 					statCards[0].querySelector('.stat-label').textContent =
@@ -1151,6 +1351,11 @@
 					statCards[3].querySelector('.stat-value').style.color = '#e53e3e';
 					statCards[3].querySelector('.stat-label').textContent =
 						'تغییر قیمت مسکن (۱۴۰۱-۱۴۰۴)';
+				} else if (activeTab === 'tables') {
+					// Tables tab - hide stat boxes
+					statCards.forEach((card) => {
+						card.style.display = 'none';
+					});
 				}
 			}
 
@@ -1390,6 +1595,513 @@
 			// Initialize second chart
 			const ctx2 = document.getElementById('myChart2').getContext('2d');
 			new Chart(ctx2, chart2Config);
+
+			// Initialize table data
+			populateSubTable('ev-revenue', 'original');
+
+			// Initialize subcategory buttons for the default category
+			updateSubcategoryButtons('ev-revenue');
+
+			// Ensure the first table is visible on page load
+			document
+				.getElementById('ev-revenue-original-table')
+				.classList.add('active');
+
+			// Table functions
+			function showCategory(category) {
+				// Hide all categories
+				document.querySelectorAll('.category-content').forEach((content) => {
+					content.classList.remove('active');
+				});
+
+				// Remove active class from all category buttons
+				document.querySelectorAll('.category-btn').forEach((btn) => {
+					btn.classList.remove('active');
+				});
+
+				// Show selected category
+				document.getElementById(category + '-category').classList.add('active');
+
+				// Add active class to clicked button
+				event.target.classList.add('active');
+
+				// Update subcategory button onclick handlers
+				updateSubcategoryButtons(category);
+
+				// Reset subcategory to first option (جداول اصلی گزارش) and update subcategory buttons
+				showSubTable(category, 'original');
+
+				// Ensure the first subcategory button (جداول اصلی گزارش) is active
+				const subcategoryButtons =
+					document.querySelectorAll('.subcategory-btn');
+				subcategoryButtons.forEach((btn, index) => {
+					if (index === 0) {
+						btn.classList.add('active');
+					} else {
+						btn.classList.remove('active');
+					}
+				});
+			}
+
+			function updateSubcategoryButtons(category) {
+				const subcategoryButtons =
+					document.querySelectorAll('.subcategory-btn');
+				subcategoryButtons[0].onclick = () =>
+					showSubTable(category, 'original');
+				subcategoryButtons[1].onclick = () =>
+					showSubTable(category, 'corrected');
+				subcategoryButtons[2].onclick = () => showSubTable(category, '2022');
+				subcategoryButtons[3].onclick = () => showSubTable(category, 'custom');
+			}
+
+			function showSubTable(category, subType) {
+				// First, hide all sub-tables across ALL categories
+				document.querySelectorAll('.sub-table').forEach((table) => {
+					table.classList.remove('active');
+				});
+
+				// Remove active class from ALL subcategory buttons across ALL categories
+				document.querySelectorAll('.subcategory-btn').forEach((btn) => {
+					btn.classList.remove('active');
+				});
+
+				// Show selected sub-table
+				document
+					.getElementById(category + '-' + subType + '-table')
+					.classList.add('active');
+
+				// Add active class to clicked button
+				event.target.classList.add('active');
+
+				// Populate table data
+				populateSubTable(category, subType);
+			}
+
+			function populateSubTable(category, subType) {
+				// Sample data - replace with actual data
+				const sampleData = {
+					'ev-revenue': {
+						corrected: [
+							{
+								description:
+									'درآمد عملیاتی سال ۱۴۰۳ - ارائه شده توسط شرکت طبق صورتهای مالی حسابرسی نشده',
+								amount: 31579776,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'افزایش ۵۰ درصدی طبق روند سنوات گذشته',
+								amount: 15789888,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'درآمد عملیاتی پیش بینی سال ۱۴۰۴',
+								amount: 47369664,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'متوسط نسبت EV/Revenue شرکتهای مشابه بین المللی',
+								amount: 4.6,
+								unit: '',
+							},
+							{
+								description:
+									'جمع كل ارزش شرکت فناوری ایده پرداز صبا (بدون محاسبه ارزش برند و سایر امتیازات)',
+								amount: 217900454,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش تلویحى فيليمو - ۸۰ درصد ارزش شرکت فناوری ایده پرداز صبا',
+								amount: 174320364,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام پلتفرم فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد عدم نقدشوندگی (DLOM) نسبت به بازار بورس ایران',
+								amount: 142942698,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 31377665,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'خسارت وارد شده به سهامدار ۱۲ درصدی - آقای مهدی رضوی',
+								amount: 3765320,
+								unit: 'میلیون ریال',
+							},
+						],
+						original: [
+							{
+								description: 'درآمد عملیاتی پیش بینی سال ۱۴۰۴',
+								amount: 47369664,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'متوسط نسبت EV/Revenue شرکتهای مشابه بین المللی',
+								amount: 5,
+								unit: '',
+							},
+							{
+								description: 'جمع كل ارزش شرکت فناوری ایده پرداز صبا',
+								amount: 236848320,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش تلویحی فیلیمو - ۸۰ درصد ارزش شرکت فناوری ایده پرداز صبا',
+								amount: 189478656,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام پلتفرم فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد عدم نقدشوندگی (DLOM) نسبت به بازار بورس ایران',
+								amount: 155372498,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 34106158,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'خسارت وارد شده به سهامدار ۱۲ درصدی - آقای مهدی رضوی',
+								amount: 4092739,
+								unit: 'میلیون ریال',
+							},
+						],
+						2022: [
+							{
+								description: 'درآمد عملیاتی سال ۱۴۰۰',
+								amount: 7305556,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'متوسط نسبت EV/Revenue شرکتهای مشابه بين المللي (2022)',
+								amount: 3,
+								unit: '',
+							},
+							{
+								description: 'جمع كل ارزش شرکت فناوری ایده پرداز صبا',
+								amount: 21916668,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش تلویحی فیلیمو - ۸۰ درصد ارزش شرکت فناوری ایده پرداز صبا',
+								amount: 17533334,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام پلتفرم فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد عدم نقد شوندگی (DLOM) نسبت به بازار بورس ایران',
+								amount: 14377334,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 3156000,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'خسارت وارد شده به سهامدار ۱۲ درصدی - آقای مهدی رضوی',
+								amount: 378720,
+								unit: 'میلیون ریال',
+							},
+						],
+						custom: [
+							{
+								description:
+									'درآمد عملیاتی سال ۱۴۰۳ - ارائه شده توسط شرکت طبق صورتهای مالی حسابرسی نشده',
+								amount: 31579776,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'افزایش ۵۰ درصدی طبق روند سنوات گذشته',
+								amount: 15789888,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'درآمد عملیاتی پیش بینی سال ۱۴۰۴',
+								amount: 47369664,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'متوسط نسبت EV/Revenue شرکتهای مشابه بین المللی',
+								amount: 1.88,
+								unit: '',
+							},
+							{
+								description:
+									'جمع كل ارزش شرکت فناوری ایده پرداز صبا بدون محاسبه ارزش برند و سایر امتیازات',
+								amount: 89054732,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش تلویحی فیلیمو - ۸۰ درصد ارزش شرکت فناوری ایده پرداز صبا',
+								amount: 71243975,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام پلتفرم فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد عدم نقدشوندگی (DLOM) نسبت به بازار بورس ایران',
+								amount: 58420059,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 12823915,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'خسارت وارد شده به سهامدار ۱۲ درصدی - آقای مهدی رضوی',
+								amount: 1538870,
+								unit: 'میلیون ریال',
+							},
+						],
+					},
+					pe: {
+						corrected: [
+							{
+								description:
+									'متوسط سود خالص پس از کسر مالیات در سنوات ۱۴۰۳ و ۱۴۰۴',
+								amount: 8780351,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'متوسط P/E شرکتهای مشابه بین المللی با تعدیل نرخ بهره',
+								amount: 25,
+								unit: '',
+							},
+							{
+								description:
+									'جمع كل ارزش شرکت فناوران ایده پرداز صبا (بدون محاسبه ارزش برند و سایر امتیازات)',
+								amount: 219508775,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش پلتفرم فیلیمو - ۸۰ درصد ارزش شرکت فناوران ایده پرداز صبا',
+								amount: 175607020,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد نقدشوندگی',
+								amount: 143997756,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 31609264,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'خسارت وارد به سهامدار ۱۲ درصدی - آقای مهداد رضوی',
+								amount: 3793112,
+								unit: 'میلیون ریال',
+							},
+						],
+						original: [
+							{
+								description:
+									'متوسط سود خالص پس از کسر مالیات در سنوات ۱۴۰۳ و ۱۴۰۴',
+								amount: 8780351,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'متوسط P/E شرکتهای مشابه بین المللی با تعدیل نرخ بهره',
+								amount: 30,
+								unit: '',
+							},
+							{
+								description:
+									'جمع كل ارزش شرکت فناوران ایده پرداز صبا (بدون محاسبه ارزش برند و سایر امتیازات)',
+								amount: 263410530,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش پلتفرم فیلیمو - ۸۰ درصد ارزش شرکت فناوران ایده پرداز صبا',
+								amount: 210728424,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد نقدشوندگی',
+								amount: 172797308,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 37931116,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'خسارت وارد به سهامدار ۱۲ درصدی - آقای مهداد رضوی',
+								amount: 4551734,
+								unit: 'میلیون ریال',
+							},
+						],
+						2022: [
+							{
+								description: 'سود خالص پس از کسر مالیات در سال ۱۴۰۰',
+								amount: 1434749,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'متوسط P/E شرکتهای مشابه بین المللی (2022)',
+								amount: 27.5,
+								unit: '',
+							},
+							{
+								description: 'جمع كل ارزش شرکت فناوران ایده پرداز صبا',
+								amount: 39455598,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش پلتفرم فیلیمو - ۸۰ درصد ارزش شرکت فناوران ایده پرداز صبا',
+								amount: 31564478,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد نقدشوندگی',
+								amount: 25882872,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 5681606,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'خسارت وارد به سهامدار ۱۲ درصدی - آقای مهداد رضوی',
+								amount: 681793,
+								unit: 'میلیون ریال',
+							},
+						],
+						custom: [
+							{
+								description:
+									'متوسط سود خالص پس از کسر مالیات در سنوات ۱۴۰۳ و ۱۴۰۴',
+								amount: 8780351,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'متوسط P/E شرکتهای مشابه بین المللی با تعدیل نرخ بهره',
+								amount: 10.76,
+								unit: '',
+							},
+							{
+								description:
+									'جمع كل ارزش شرکت فناوران ایده پرداز صبا بدون محاسبه ارزش برند و سایر امتیازات',
+								amount: 94476577,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش پلتفرم فیلیمو - ۸۰ درصد ارزش شرکت فناوران ایده پرداز صبا',
+								amount: 75581261,
+								unit: 'میلیون ریال',
+							},
+							{
+								description:
+									'ارزش سهام فیلیمو خارج از بورس - تعدیل با تخفیف ۱۸ درصد نقدشوندگی',
+								amount: 61976634,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'تفاوت ارزش پلتفرم فیلیمو در صورت ورود به بورس',
+								amount: 13604627,
+								unit: 'میلیون ریال',
+							},
+							{
+								description: 'خسارت وارد به سهامدار ۱۲ درصدی - آقای مهداد رضوی',
+								amount: 1632555,
+								unit: 'میلیون ریال',
+							},
+						],
+					},
+				};
+
+				const tbody = document.getElementById(
+					category + '-' + subType + '-body'
+				);
+				tbody.innerHTML = '';
+
+				const data = sampleData[category][subType];
+				const ratioColumn = category === 'ev-revenue' ? 'EV/Revenue' : 'P/E';
+
+				data.forEach((item, index) => {
+					const row = document.createElement('tr');
+
+					// Check if this is a financial data table structure (2022, original, corrected, custom, etc.)
+					if (
+						subType === '2022' ||
+						(category === 'pe' && subType === 'original') ||
+						(category === 'pe' && subType === 'corrected') ||
+						(category === 'pe' && subType === 'custom') ||
+						(category === 'ev-revenue' && subType === 'original') ||
+						(category === 'ev-revenue' && subType === 'corrected') ||
+						(category === 'ev-revenue' && subType === 'custom')
+					) {
+						row.innerHTML = `
+							<td>${index + 1}</td>
+							<td>${item.description}</td>
+							<td>${item.amount.toLocaleString('fa-IR')}</td>
+						`;
+					} else {
+						// Standard company/ratio structure with enhanced status styling
+						const statusClass = getStatusClass(item.status);
+						const changeClass = getChangeClass(item.change);
+
+						row.innerHTML = `
+							<td>${item.company}</td>
+							<td>${item.ratio}</td>
+							<td class="${changeClass}">${item.change}</td>
+							<td class="${statusClass}">${item.status}</td>
+						`;
+					}
+
+					tbody.appendChild(row);
+				});
+			}
+
+			// Helper functions for status and change styling
+			function getStatusClass(status) {
+				switch (status) {
+					case 'بهبود':
+						return 'status-improved';
+					case 'کاهش':
+						return 'status-decreased';
+					case 'ثابت':
+						return 'status-stable';
+					default:
+						return '';
+				}
+			}
+
+			function getChangeClass(change) {
+				if (change.startsWith('+')) {
+					return 'change-positive';
+				} else if (change.startsWith('-')) {
+					return 'change-negative';
+				} else {
+					return 'change-neutral';
+				}
+			}
 		</script>
 	</body>
 </html>
