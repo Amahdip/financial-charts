@@ -19,51 +19,6 @@
 	font-style: normal;
 }
 
-@media print {
-	body {
-		margin: 0;
-		padding: 0;
-		background: white !important;
-		font-family: 'IRANSansX', 'Arial', sans-serif !important;
-	}
-	.container {
-		max-width: none;
-		margin: 0;
-		padding: 20px;
-		background: white !important;
-		border-radius: 0;
-		box-shadow: none;
-		border: none;
-	}
-	.chart-container {
-		height: 75vh !important;
-		page-break-inside: avoid;
-		background: white !important;
-		border-radius: 0;
-		padding: 15px;
-		box-shadow: none;
-		border: 1px solid #e1e5e9 !important;
-	}
-	h1 {
-		font-size: 1.8em !important;
-		margin-bottom: 15px !important;
-		color: #1a202c !important;
-		background: none !important;
-		-webkit-background-clip: unset !important;
-		-webkit-text-fill-color: unset !important;
-		background-clip: unset !important;
-		font-weight: 700 !important;
-	}
-	.subtitle {
-		font-size: 1em !important;
-		color: #4a5568 !important;
-		margin-bottom: 20px !important;
-	}
-	.pdf-button {
-		display: none !important;
-	}
-}
-
 body {
 	font-family: 'IRANSansX', 'Arial', sans-serif;
 	margin: 0;
@@ -157,30 +112,6 @@ h1 {
 	letter-spacing: 0.025em;
 }
 
-.pdf-button {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-	color: white;
-	border: none;
-	padding: 8px 16px;
-	border-radius: 8px;
-	font-size: 12px;
-	font-weight: 600;
-	cursor: pointer;
-	box-shadow: 0 4px 8px -2px rgba(66, 153, 225, 0.3);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	letter-spacing: 0.025em;
-	z-index: 1000;
-}
-
-.pdf-button:hover {
-	transform: translateY(-1px);
-	box-shadow: 0 6px 12px -3px rgba(66, 153, 225, 0.4);
-	background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
-}
-
 .stats-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -208,12 +139,6 @@ h1 {
 	font-size: 0.9em;
 	color: #718096;
 	font-weight: 500;
-}
-
-@media print {
-	.stats-grid {
-		display: none;
-	}
 }
 
 /* Tables Styles */
@@ -309,7 +234,7 @@ h1 {
 }
 
 .table-container th {
-	padding: 16px 12px;
+	padding: 8px 12px;
 	text-align: center;
 	font-weight: 600;
 	font-size: 13px;
@@ -330,7 +255,7 @@ h1 {
 }
 
 .table-container td {
-	padding: 14px 12px;
+	padding: 6px 12px;
 	text-align: center;
 	font-size: 12px;
 	color: #4a5568;
