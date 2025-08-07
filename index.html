@@ -23,6 +23,9 @@
 					شاخص‌های جایگزین
 				</button>
 				<button class="tab-button" onclick="switchTab('tables')">جداول</button>
+				<button class="tab-button" onclick="switchTab('comparison')">
+					مقایسه شرکت‌ها
+				</button>
 			</div>
 
 			<div class="stats-grid">
@@ -242,6 +245,112 @@
 								</button>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="comparison" class="chart-container">
+				<div class="sub-tab-navigation">
+					<button
+						class="sub-tab-button active"
+						onclick="switchComparisonSubTab('evaluator-pe-tab')"
+					>
+						شرکت‌های متناسب - P/E
+					</button>
+					<button
+						class="sub-tab-button"
+						onclick="switchComparisonSubTab('our-pe-tab')"
+					>
+						شرکت‌های انتخاب شده توسط کارشناسان - P/E
+					</button>
+					<button
+						class="sub-tab-button"
+						onclick="switchComparisonSubTab('evaluator-ev-tab')"
+					>
+						شرکت‌های متناسب - EV/Revenue
+					</button>
+					<button
+						class="sub-tab-button"
+						onclick="switchComparisonSubTab('our-ev-tab')"
+					>
+						شرکت‌های انتخاب شده توسط کارشناسان - EV/Revenue
+					</button>
+				</div>
+
+				<div id="evaluator-pe-tab" class="comparison-sub-table active">
+					<div class="table-container">
+						<table>
+							<thead>
+								<tr>
+									<th>ردیف</th>
+									<th>شرکت</th>
+									<th>نماد</th>
+									<th>سرویس</th>
+									<th>Forward P/E (FY25)</th>
+								</tr>
+							</thead>
+							<tbody id="evaluator-companies-body">
+								<!-- Data will be populated by JavaScript -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div id="our-pe-tab" class="comparison-sub-table">
+					<div class="table-container">
+						<table>
+							<thead>
+								<tr>
+									<th>ردیف</th>
+									<th>برند</th>
+									<th>شرکت مادر</th>
+									<th>وضعیت بورسی مستقل</th>
+									<th>P/E مستقل؟</th>
+									<th>P/E ادعایی در گزارش</th>
+									<th>توضیحات</th>
+								</tr>
+							</thead>
+							<tbody id="our-companies-body">
+								<!-- Data will be populated by JavaScript -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div id="evaluator-ev-tab" class="comparison-sub-table">
+					<div class="table-container">
+						<table>
+							<thead>
+								<tr>
+									<th>ردیف</th>
+									<th>شرکت</th>
+									<th>نماد</th>
+									<th>سرویس</th>
+									<th>EV/Revenue</th>
+								</tr>
+							</thead>
+							<tbody id="evaluator-ev-revenue-body">
+								<!-- Data will be populated by JavaScript -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div id="our-ev-tab" class="comparison-sub-table">
+					<div class="table-container">
+						<table>
+							<thead>
+								<tr>
+									<th>ردیف</th>
+									<th>شرکت</th>
+									<th>2024 (EV/Revenue) ادعایی در گزارش</th>
+									<th>2025 (پیش بینی)</th>
+								</tr>
+							</thead>
+							<tbody id="our-ev-revenue-body">
+								<!-- Data will be populated by JavaScript -->
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -1356,6 +1465,14 @@
 					statCards.forEach((card) => {
 						card.style.display = 'none';
 					});
+				} else if (activeTab === 'comparison') {
+					// Comparison tab - hide stat boxes
+					statCards.forEach((card) => {
+						card.style.display = 'none';
+					});
+
+					// Populate comparison tables
+					populateComparisonTables();
 				}
 			}
 
@@ -2101,6 +2218,452 @@
 				} else {
 					return 'change-neutral';
 				}
+			}
+
+			// Comparison companies data
+			const comparisonData = {
+				evaluatorCompanies: [
+					{
+						company: 'iQIYI',
+						symbol: 'IQ',
+						service: 'Pure SVOD (China)',
+						pe: 10.22,
+					},
+					{
+						company: 'CuriosityStream',
+						symbol: 'CURI',
+						service: 'Pure SVOD',
+						pe: 8.33,
+					},
+					{
+						company: 'Gaia',
+						symbol: 'GAIA',
+						service: 'Diversified (Max)',
+						pe: 13.85,
+					},
+					{
+						company: 'Warner Bros Discovery',
+						symbol: 'WBD',
+						service: 'Diversified (+Paramount)',
+						pe: 9.08,
+					},
+					{
+						company: 'Paramount Global',
+						symbol: 'PARA',
+						service: 'Diversified (+Paramount)',
+						pe: 16.5,
+					},
+					{
+						company: 'Kuaishou Technology',
+						symbol: '1024.HK',
+						service: 'live streaming, online marketing (China)',
+						pe: 11.54,
+					},
+					{
+						company: 'Roku',
+						symbol: 'ROKU',
+						service: 'Streaming',
+						pe: 10.45,
+					},
+					{
+						company: 'Cineverse',
+						symbol: 'CNVS',
+						service: 'streaming channels',
+						pe: 9.21,
+					},
+					{
+						company: 'Baidu',
+						symbol: 'BIDU',
+						service: "China's SE",
+						pe: 10.37,
+					},
+					{
+						company: 'Coupang Play',
+						symbol: 'CPNG',
+						service: 'Korean VOD',
+						pe: 13.77,
+					},
+					{
+						company: 'Start',
+						symbol: 'NMGR',
+						service: 'Russian',
+						pe: 7.58,
+					},
+					{
+						company: 'TIM Play',
+						symbol: 'TIMB',
+						service: 'Brazil',
+						pe: 8.26,
+					},
+					{
+						company: 'SK Telecom (Wavve)',
+						symbol: 'SKM',
+						service: 'Korean Movies',
+						pe: '--',
+					},
+					{
+						company: 'América Móvil (Claro Video)',
+						symbol: 'AMX',
+						service: 'Dubai',
+						pe: '--',
+					},
+					{
+						company: 'LionsGate (StarzPlay Arabia)',
+						symbol: 'LION',
+						service: 'Turkey',
+						pe: '--',
+					},
+					{
+						company: 'BluTv (Turkcell)',
+						symbol: 'TCELL',
+						service: 'Turkey',
+						pe: '--',
+					},
+					{
+						company: 'PuhuTV(Turk Telekom)',
+						symbol: 'TTKOM',
+						service: 'Turkey',
+						pe: '--',
+					},
+				],
+				evaluatorEvRevenue: [
+					{
+						company: 'iQIYI',
+						symbol: 'IQ',
+						service: 'Pure SVOD (China)',
+						evRevenue: 0.79,
+					},
+					{
+						company: 'CuriosityStream',
+						symbol: 'CURI',
+						service: 'Pure SVOD',
+						evRevenue: 4.35,
+					},
+					{
+						company: 'Gaia',
+						symbol: 'GAIA',
+						service: 'Pure SVOD',
+						evRevenue: 1.21,
+					},
+					{
+						company: 'Walt Disney Co.',
+						symbol: 'DIS',
+						service: 'Diversified (+Disney)',
+						evRevenue: 2.73,
+					},
+					{
+						company: 'Warner Bros Discovery',
+						symbol: 'WBD',
+						service: 'Diversified (Max)',
+						evRevenue: 1.69,
+					},
+					{
+						company: 'Paramount Global',
+						symbol: 'PARA',
+						service: 'Diversified (+Paramount)',
+						evRevenue: 0.79,
+					},
+					{
+						company: 'Bilibili Inc.',
+						symbol: 'BILI',
+						service: 'Pure SVOD (China)',
+						evRevenue: 1.8,
+					},
+					{
+						company: 'Kuaishou Technology',
+						symbol: '1024.HK',
+						service: 'live streaming, online marketing (China)',
+						evRevenue: 1.8,
+					},
+					{
+						company: 'Roku',
+						symbol: 'ROKU',
+						service: 'Streaming',
+						evRevenue: 2.9,
+					},
+					{
+						company: 'Cineverse',
+						symbol: 'CNVS',
+						service: 'streaming channels',
+						evRevenue: 1.0,
+					},
+				],
+				ourCompanies: [
+					{
+						brand: 'Netflix',
+						parentCompany: '-',
+						independentStatus: 'بله',
+						independentPE: 'دارد',
+						claimedPE: 45,
+						description: '',
+					},
+					{
+						brand: '+Disney',
+						parentCompany: 'Walt Disney Co. (DIS)',
+						independentStatus: 'ندارد',
+						independentPE: 'ندارد',
+						claimedPE: 50,
+						description: 'P/E متعلق به DIS است',
+					},
+					{
+						brand: 'Amazon Prime Video',
+						parentCompany: 'Amazon.com Inc.',
+						independentStatus: 'ندارد',
+						independentPE: 'ندارد',
+						claimedPE: 40,
+						description: 'فقط Amazon دارای P/E است',
+					},
+					{
+						brand: 'YouTube',
+						parentCompany: 'Alphabet Inc. (GOOG)',
+						independentStatus: 'ندارد',
+						independentPE: 'ندارد',
+						claimedPE: 30,
+						description: 'فقط Alphabet دارای P/E است',
+					},
+					{
+						brand: 'TikTok',
+						parentCompany: 'ByteDance Ltd.',
+						independentStatus: 'خصوصی است',
+						independentPE: 'ندارد',
+						claimedPE: 40,
+						description: 'شرکت غیر بورسی است',
+					},
+					{
+						brand: 'Instagram',
+						parentCompany: 'Meta Platforms Inc.',
+						independentStatus: 'ندارد',
+						independentPE: 'ندارد',
+						claimedPE: 35,
+						description: 'بخشی از Meta است',
+					},
+					{
+						brand: 'Snapchat',
+						parentCompany: 'Snap Inc.',
+						independentStatus: 'بله',
+						independentPE: 'دارد',
+						claimedPE: 30,
+						description: '',
+					},
+				],
+				ourEvRevenue: [
+					{
+						company: 'Netflix',
+						forecast2025: 6,
+						evRevenue2024: 6.3,
+					},
+					{
+						company: '+Disney',
+						forecast2025: 4.5,
+						evRevenue2024: 4.8,
+					},
+					{
+						company: 'Amazon Prime Video',
+						forecast2025: 5,
+						evRevenue2024: 5.2,
+					},
+					{
+						company: 'Tencent Video',
+						forecast2025: 3.7,
+						evRevenue2024: 3.5,
+					},
+					{
+						company: 'Warner Bros. Discovery (HBO Max)',
+						forecast2025: 3,
+						evRevenue2024: 2.8,
+					},
+					{
+						company: '+Paramount',
+						forecast2025: 2.2,
+						evRevenue2024: 2,
+					},
+					{
+						company: '+Apple TV',
+						forecast2025: 4.3,
+						evRevenue2024: 4,
+					},
+				],
+			};
+
+			// Function to switch comparison sub-tabs
+			function switchComparisonSubTab(subTabId) {
+				// Hide all comparison sub-tables
+				document
+					.querySelectorAll('.comparison-sub-table')
+					.forEach((subTable) => {
+						subTable.classList.remove('active');
+					});
+
+				// Remove active class from all sub-tab buttons
+				document.querySelectorAll('.sub-tab-button').forEach((button) => {
+					button.classList.remove('active');
+				});
+
+				// Show selected sub-table
+				document.getElementById(subTabId).classList.add('active');
+
+				// Add active class to clicked button
+				event.target.classList.add('active');
+			}
+
+			// Function to populate comparison tables
+			function populateComparisonTables() {
+				// Populate evaluator P/E companies table
+				const evaluatorTbody = document.getElementById(
+					'evaluator-companies-body'
+				);
+				evaluatorTbody.innerHTML = '';
+
+				comparisonData.evaluatorCompanies.forEach((company, index) => {
+					const row = document.createElement('tr');
+					row.innerHTML = `
+						<td>${index + 1}</td>
+						<td>${company.company}</td>
+						<td>${company.symbol}</td>
+						<td>${company.service}</td>
+						<td>${company.pe}</td>
+					`;
+					evaluatorTbody.appendChild(row);
+				});
+
+				// Calculate average for evaluator P/E companies (excluding null values)
+				const evaluatorValidPEs = comparisonData.evaluatorCompanies
+					.filter((company) => company.pe !== '--')
+					.map((company) => company.pe);
+				const evaluatorPEAverage =
+					evaluatorValidPEs.length > 0
+						? (
+								evaluatorValidPEs.reduce((sum, pe) => sum + pe, 0) /
+								evaluatorValidPEs.length
+						  ).toFixed(2)
+						: '--';
+
+				// Add average row for evaluator P/E companies
+				const evaluatorPEAverageRow = document.createElement('tr');
+				evaluatorPEAverageRow.style.fontWeight = 'bold';
+				evaluatorPEAverageRow.style.backgroundColor = '#f7fafc';
+				evaluatorPEAverageRow.innerHTML = `
+					<td><strong>${comparisonData.evaluatorCompanies.length + 1}</strong></td>
+					<td><strong>میانگین</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>${evaluatorPEAverage}</strong></td>
+				`;
+				evaluatorTbody.appendChild(evaluatorPEAverageRow);
+
+				// Populate evaluator EV/Revenue companies table
+				const evaluatorEvRevenueTbody = document.getElementById(
+					'evaluator-ev-revenue-body'
+				);
+				evaluatorEvRevenueTbody.innerHTML = '';
+
+				comparisonData.evaluatorEvRevenue.forEach((company, index) => {
+					const row = document.createElement('tr');
+					row.innerHTML = `
+						<td>${index + 1}</td>
+						<td>${company.company}</td>
+						<td>${company.symbol}</td>
+						<td>${company.service}</td>
+						<td>${company.evRevenue}</td>
+					`;
+					evaluatorEvRevenueTbody.appendChild(row);
+				});
+
+				// Calculate average for evaluator EV/Revenue companies
+				const evaluatorValidEvRevenue = comparisonData.evaluatorEvRevenue
+					.filter((company) => company.evRevenue !== '--')
+					.map((company) => company.evRevenue);
+				const evaluatorEvRevenueAverage =
+					evaluatorValidEvRevenue.length > 0
+						? (
+								evaluatorValidEvRevenue.reduce((sum, ev) => sum + ev, 0) /
+								evaluatorValidEvRevenue.length
+						  ).toFixed(2)
+						: '--';
+
+				// Add average row for evaluator EV/Revenue companies
+				const evaluatorEvRevenueAverageRow = document.createElement('tr');
+				evaluatorEvRevenueAverageRow.style.fontWeight = 'bold';
+				evaluatorEvRevenueAverageRow.style.backgroundColor = '#f7fafc';
+				evaluatorEvRevenueAverageRow.innerHTML = `
+					<td><strong>${comparisonData.evaluatorEvRevenue.length + 1}</strong></td>
+					<td><strong>میانگین</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>-</strong></td>
+					<td><strong>${evaluatorEvRevenueAverage}</strong></td>
+				`;
+				evaluatorEvRevenueTbody.appendChild(evaluatorEvRevenueAverageRow);
+
+				// Populate our P/E companies table
+				const ourTbody = document.getElementById('our-companies-body');
+				ourTbody.innerHTML = '';
+
+				comparisonData.ourCompanies.forEach((company, index) => {
+					const row = document.createElement('tr');
+					row.innerHTML = `
+						<td>${index + 1}</td>
+						<td>${company.brand}</td>
+						<td>${company.parentCompany}</td>
+						<td>${company.independentStatus}</td>
+						<td>${company.independentPE}</td>
+						<td style="color: #e53e3e; font-weight: 600;">${company.claimedPE}</td>
+						<td>${company.description}</td>
+					`;
+					ourTbody.appendChild(row);
+				});
+
+				// Populate our EV/Revenue companies table
+				const ourEvRevenueTbody = document.getElementById(
+					'our-ev-revenue-body'
+				);
+				ourEvRevenueTbody.innerHTML = '';
+
+				comparisonData.ourEvRevenue.forEach((company, index) => {
+					const row = document.createElement('tr');
+					row.innerHTML = `
+						<td>${index + 1}</td>
+						<td>${company.company}</td>
+						<td style="color: #e53e3e; font-weight: 600;">${company.evRevenue2024}x</td>
+						<td>${company.forecast2025}x</td>
+					`;
+					ourEvRevenueTbody.appendChild(row);
+				});
+
+				// Calculate average for our EV/Revenue companies (2024 values)
+				const ourValidEvRevenue2024 = comparisonData.ourEvRevenue
+					.filter((company) => company.evRevenue2024 !== '--')
+					.map((company) => company.evRevenue2024);
+				const ourEvRevenue2024Average =
+					ourValidEvRevenue2024.length > 0
+						? (
+								ourValidEvRevenue2024.reduce((sum, ev) => sum + ev, 0) /
+								ourValidEvRevenue2024.length
+						  ).toFixed(2)
+						: '--';
+
+				// Calculate average for our EV/Revenue companies (2025 forecast)
+				const ourValidEvRevenue2025 = comparisonData.ourEvRevenue
+					.filter((company) => company.forecast2025 !== '--')
+					.map((company) => company.forecast2025);
+				const ourEvRevenue2025Average =
+					ourValidEvRevenue2025.length > 0
+						? (
+								ourValidEvRevenue2025.reduce((sum, ev) => sum + ev, 0) /
+								ourValidEvRevenue2025.length
+						  ).toFixed(2)
+						: '--';
+
+				// Add average row for our EV/Revenue companies
+				const ourEvRevenueAverageRow = document.createElement('tr');
+				ourEvRevenueAverageRow.style.fontWeight = 'bold';
+				ourEvRevenueAverageRow.style.backgroundColor = '#f7fafc';
+				ourEvRevenueAverageRow.innerHTML = `
+					<td><strong>${comparisonData.ourEvRevenue.length + 1}</strong></td>
+					<td><strong>میانگین</strong></td>
+					<td><strong style="color: #e53e3e;">${ourEvRevenue2024Average}x</strong></td>
+					<td><strong>${ourEvRevenue2025Average}x</strong></td>
+				`;
+				ourEvRevenueTbody.appendChild(ourEvRevenueAverageRow);
 			}
 		</script>
 	</body>
