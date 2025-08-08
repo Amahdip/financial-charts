@@ -127,6 +127,12 @@
 					>
 						نمودار میله‌ای شماره ۴
 					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart12')"
+					>
+						نمودار شیب متوسط ماهانه
+					</button>
 				</div>
 
 				<div id="periodic-chart1" class="periodic-sub-chart active">
@@ -2900,6 +2906,231 @@
 								title: {
 									display: true,
 									text: 'شاخص‌های مالی',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+						},
+					},
+				});
+
+				// Chart 12: Slope Chart - Monthly Average Growth Comparison
+				const ctxPeriodic12 = document
+					.getElementById('periodicChart12')
+					.getContext('2d');
+				new Chart(ctxPeriodic12, {
+					type: 'line',
+					data: {
+						labels: ['دوره اول (۱۳۹۸-۱۴۰۰)', 'دوره دوم (۱۴۰۱-۱۴۰۴)'],
+						datasets: [
+							{
+								label: 'شاخص بورس',
+								data: [
+									monthlyPercentages.stockIndex.period1,
+									monthlyPercentages.stockIndex.period2,
+								],
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#3182ce',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ارزش دلاری بورس',
+								data: [
+									monthlyPercentages.marketValueUSD.period1,
+									monthlyPercentages.marketValueUSD.period2,
+								],
+								borderColor: '#38a169',
+								backgroundColor: 'rgba(56, 161, 105, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#38a169',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'سکه امامی جدید',
+								data: [
+									monthlyPercentages.goldPrice.period1,
+									monthlyPercentages.goldPrice.period2,
+								],
+								borderColor: '#d69e2e',
+								backgroundColor: 'rgba(214, 158, 46, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#d69e2e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'دلار',
+								data: [
+									monthlyPercentages.dollarRate.period1,
+									monthlyPercentages.dollarRate.period2,
+								],
+								borderColor: '#9f7aea',
+								backgroundColor: 'rgba(159, 122, 234, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#9f7aea',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'شاخص تورم',
+								data: [
+									monthlyPercentages.inflation.period1,
+									monthlyPercentages.inflation.period2,
+								],
+								borderColor: '#f56565',
+								backgroundColor: 'rgba(245, 101, 101, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#f56565',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'مسکن',
+								data: [
+									monthlyPercentages.housingPrice.period1,
+									monthlyPercentages.housingPrice.period2,
+								],
+								borderColor: '#ed8936',
+								backgroundColor: 'rgba(237, 137, 54, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#ed8936',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'مقایسه متوسط ماهانه رشد (نمودار شیب)',
+								font: {
+									size: 16,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 15,
+									usePointStyle: true,
+									pointStyle: 'circle',
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										return (
+											context.dataset.label +
+											': ' +
+											context.parsed.y.toFixed(2) +
+											'%'
+										);
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: false,
+								title: {
+									display: true,
+									text: 'متوسط ماهانه رشد (%)',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+									callback: function (value) {
+										return value + '%';
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'دوره زمانی',
 									font: {
 										size: 14,
 										family: "'IRANSansX', sans-serif",
