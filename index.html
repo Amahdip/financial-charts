@@ -17,6 +17,9 @@
 				<button class="tab-button active" onclick="switchTab('chart1')">
 					شاخص‌های مالی
 				</button>
+				<button class="tab-button" onclick="switchTab('periodic-comparison')">
+					مقایسه دوره‌ای
+				</button>
 				<button class="tab-button" onclick="switchTab('chart2')">
 					شاخص‌های جایگزین
 				</button>
@@ -48,6 +51,101 @@
 			<!-- Chart Containers -->
 			<div id="chart1" class="chart-container active">
 				<canvas id="myChart"></canvas>
+			</div>
+
+			<div id="periodic-comparison" class="chart-container">
+				<div class="periodic-sub-tab-navigation">
+					<button
+						class="periodic-sub-tab-button active"
+						onclick="switchPeriodicSubTab('periodic-chart1')"
+					>
+						شاخص بورس
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart2')"
+					>
+						ارزش ریالی بورس
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart3')"
+					>
+						ارزش دلاری بورس
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart4')"
+					>
+						سکه امامی جدید
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart5')"
+					>
+						دلار
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart6')"
+					>
+						شاخص تورم
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart7')"
+					>
+						مسکن
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart8')"
+					>
+						نمودار میله ای
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart9')"
+					>
+						نمودار میله ای ۲
+					</button>
+				</div>
+
+				<div id="periodic-chart1" class="periodic-sub-chart active">
+					<canvas id="periodicChart1"></canvas>
+				</div>
+
+				<div id="periodic-chart2" class="periodic-sub-chart">
+					<canvas id="periodicChart2"></canvas>
+				</div>
+
+				<div id="periodic-chart3" class="periodic-sub-chart">
+					<canvas id="periodicChart3"></canvas>
+				</div>
+
+				<div id="periodic-chart4" class="periodic-sub-chart">
+					<canvas id="periodicChart4"></canvas>
+				</div>
+
+				<div id="periodic-chart5" class="periodic-sub-chart">
+					<canvas id="periodicChart5"></canvas>
+				</div>
+
+				<div id="periodic-chart6" class="periodic-sub-chart">
+					<canvas id="periodicChart6"></canvas>
+				</div>
+
+				<div id="periodic-chart7" class="periodic-sub-chart">
+					<canvas id="periodicChart7"></canvas>
+				</div>
+
+				<div id="periodic-chart8" class="periodic-sub-chart">
+					<canvas id="periodicChart8"></canvas>
+				</div>
+
+				<div id="periodic-chart9" class="periodic-sub-chart">
+					<canvas id="periodicChart9"></canvas>
+				</div>
 			</div>
 
 			<div id="chart2" class="chart-container">
@@ -955,18 +1053,19 @@
 							pointHoverBorderColor: '#ffffff',
 						},
 						{
-							label: 'ارزش کل بورس (میلیارد دلار) × 1000',
+							label: 'ارزش کل بورس (میلیارد دلار) × 500',
 							data: [
-								46218, 46044, 53973, 61117, 69884, 83278, 82935, 78774, 82513,
-								92027, 101324, 104835, 139858, 169809, 203411, 265652, 233822,
-								175167, 145129, 162476, 170889, 159265, 149180, 166227, 152035,
-								154105, 149036, 162190, 166905, 153459, 156418, 150714, 137637,
-								141594, 152720, 158648, 165330, 158936, 146067, 140779, 148598,
-								130339, 120389, 120251, 114625, 114817, 97317, 124150, 137183,
-								134958, 133156, 127704, 124978, 123615, 122252, 122745, 134547,
-								121733, 110594, 110794, 111625, 106260, 101272, 114853, 106699,
-								107846, 94279, 99768, 99287, 107615, 90042, 84417, 113247,
-								113809, 108835, 98319,
+								23109, 23022, 26986.5, 30558.5, 34942, 41639, 41467.5, 39387,
+								41256.5, 46013.5, 50662, 52417.5, 69929, 84904.5, 101705.5,
+								132826, 116911, 87583.5, 72564.5, 81238, 85444.5, 79632.5,
+								74590, 83113.5, 76017.5, 77052.5, 74518, 81095, 83452.5,
+								76729.5, 78209, 75357, 68818.5, 70797, 76360, 79324, 82665,
+								79468, 73033.5, 70389.5, 74299, 65169.5, 60194.5, 60125.5,
+								57312.5, 57408.5, 48658.5, 62075, 68591.5, 67479, 66578, 63852,
+								62489, 61807.5, 61126, 61372.5, 67273.5, 60866.5, 55297, 55397,
+								55812.5, 53130, 50636, 57426.5, 53349.5, 53923, 47139.5, 49884,
+								49643.5, 53807.5, 45021, 42208.5, 56623.5, 56904.5, 54417.5,
+								49159.5,
 							],
 							borderColor: '#d69e2e',
 							backgroundColor: 'rgba(214, 158, 46, 0.08)',
@@ -1191,6 +1290,11 @@
 					statCards[3].querySelector('.stat-value').style.color = '#d69e2e'; // Yellow
 					statCards[3].querySelector('.stat-label').textContent =
 						'بالاترین ارزش کل بورس (دلار)';
+				} else if (activeTab === 'periodic-comparison') {
+					// Periodic comparison tab - hide stat boxes for now
+					statCards.forEach((card) => {
+						card.style.display = 'none';
+					});
 				} else if (activeTab === 'chart2') {
 					// Second chart stats (Percentage changes from 1/1/1401)
 					statCards.forEach((card) => {
@@ -1468,6 +1572,1031 @@
 			// Initialize second chart
 			const ctx2 = document.getElementById('myChart2').getContext('2d');
 			new Chart(ctx2, chart2Config);
+
+			// Periodic comparison data structure
+			const periodicData = {
+				// Period 1: از ابتدای اسفند ۱۳۹۸ تا ابتدای دی ۱۴۰۰
+				period1: {
+					startDate: 'اسفند ۱۳۹۸',
+					endDate: 'دی ۱۴۰۰',
+					stockIndex: [
+						204375, 215168, 233886, 251278, 266127, 311471, 305807, 304997,
+						356721, 406008, 478755, 512900, 708995, 986759, 1300813, 1901169,
+						1727265, 1581206, 1412355, 1366535, 1436393, 1183978, 1232716,
+						1307657, 1207047, 1128164, 1186906, 1311306, 1515887, 1386466,
+						1407758, 1407133, 1359011, 1279450, 1274305, 1367250, 1512219,
+						1582144, 1533394, 1473498, 1431477, 1355241, 1296798, 1407654,
+						1496201, 1657577, 1594263, 1960457, 2324133, 2318507, 2173893,
+					],
+					marketValueRial: [
+						6225526, 6554295, 7124469, 7654252, 8106571, 9487808, 9315275,
+						9290602, 10866181, 12367527, 14583494, 15623595, 21596889, 30057957,
+						39624433, 57912068, 52614714, 48165581, 43022143, 41626423,
+						43754378, 36065501, 37550121, 39832929, 36768204, 34365332,
+						36154671, 39944070, 46175856, 42233550, 42882122, 42863081,
+						41397226, 38973689, 38816963, 41648206, 46064142, 48194139,
+						46709154, 44884651, 43604640, 41282384, 39502132, 42878958,
+						45576204, 50491922, 48563302, 59718058, 70796076, 70624695,
+						66219594,
+					],
+					dollarRate: [
+						134700, 142350, 132000, 125240, 116000, 113930, 112320, 117940,
+						131690, 134390, 143930, 149030, 154420, 177010, 194800, 218000,
+						225020, 274970, 296440, 256200, 256040, 226450, 251710, 239630,
+						241840, 223000, 242590, 246280, 276660, 275210, 274150, 284400,
+						300770, 275250, 254170, 262520, 278620, 303230, 319780, 318830,
+						293440, 316730, 328120, 356580, 397610, 439761, 499020, 481014,
+						516069, 523310, 497310, 483360, 490230, 493930, 506362, 501990,
+						500760, 542230, 570360, 603510, 600900, 605600, 614800, 576110,
+						581600, 592300, 648550, 689300, 767550, 806700, 919950, 977800,
+						827900, 831900, 835350, 881100,
+					],
+					marketValueUSD: [
+						46, 46, 54, 61, 70, 83, 83, 79, 83, 92, 101, 105, 140, 170, 203,
+						266, 234, 175, 145, 162, 171, 159, 149, 166, 152, 154, 149, 162,
+						167, 153, 156, 151, 138, 142, 153, 159, 165, 159, 146, 141, 149,
+						130, 120, 120, 115, 115, 97, 124, 137, 135, 133,
+					],
+					goldPrice: [
+						13076000, 13561000, 14390000, 13536000, 12337000, 13212000,
+						13493170, 14924440, 17775440, 20360960, 22981100, 26339970,
+						25980000, 25648000, 23120000, 22889000, 23166000, 23270000,
+						24286000, 24212000, 24672000, 27285000, 28266000, 32975000,
+						37650000, 33783000, 33714000, 33610000, 35803000, 37881000,
+						43364000, 45026000, 48985000, 52309000, 66000300, 79757000,
+						65850000, 64940000, 74027250, 71320000,
+					],
+					inflation: [
+						495.1, 520.4, 575.4, 600.4, 614.8, 631, 649.5, 663.5, 679.8, 713.4,
+						745.1, 794.3, 834.9, 858.3, 885.8, 908.8, 940.6, 971.6, 995.9,
+						1014.8, 1048.3, 1066.1, 1076.8, 1097.3, 1125.8, 1159.6, 1206,
+						1242.2, 1277, 1306.4, 1339.1, 1379.3, 1402.7, 1433.6, 1485.2,
+						1531.2, 1589.5, 1625.7, 1689.2, 1720.0,
+					],
+					housingPrice: [
+						342727, 363515, 394145, 417049, 427299, 432169, 437249, 467048,
+						480737, 519814, 571444, 652414, 664400, 753200, 783000, 765400,
+						757900, 753300, 760600, 757700, 740900, 753900, 784800, 814400,
+						816300, 847500, 859100, 874600, 885000, 935200, 966300, 996700,
+						1020800, 1050800, 1078100, 1100000, 1124000, 1150000, 1170000,
+						1195000,
+					],
+				},
+				// Period 2: از ابتدای ۱۴۰۲ تا ۱۵ تیر ۱۴۰۴
+				period2: {
+					startDate: 'فروردین ۱۴۰۲',
+					endDate: 'تیر ۱۴۰۴',
+					stockIndex: [
+						2032212, 2022787, 2211856, 2166928, 2070775, 2195092, 2201987,
+						2112560, 2043980, 2172192, 2037209, 2097005, 2007281, 2257614,
+						2501778, 2849940, 2719339, 2709764, 3077924, 3108119, 2984605,
+						2843904,
+					],
+					marketValueRial: [
+						61903799, 61616690, 67375993, 66007414, 63078484, 66865340,
+						67075358, 64351309, 62262277, 66167770, 62056008, 63877460,
+						61144372, 68769824, 76207371, 86812850, 82834562, 82542906,
+						93757528, 94677309, 90914927, 86628981,
+					],
+					dollarRate: [
+						490230, 493930, 506362, 501990, 500760, 542230, 570360, 603510,
+						600900, 605600, 614800, 576110, 581600, 592300, 648550, 689300,
+						767550, 806700, 919950, 977800, 827900, 831900, 835350, 881100,
+					],
+					marketValueUSD: [
+						122, 123, 135, 122, 111, 111, 112, 106, 101, 115, 107, 108, 94, 100,
+						99, 108, 90, 84, 113, 114, 109, 98,
+					],
+					goldPrice: [65850000, 64940000, 74027250, 71320000],
+					inflation: [1589.5, 1625.7, 1689.2, 1720.0],
+					housingPrice: [1124000, 1150000, 1170000, 1195000],
+				},
+			};
+
+			// Initialize periodic comparison charts
+			function initializePeriodicCharts() {
+				// Average monthly percentage changes for each metric
+				const monthlyPercentages = {
+					stockIndex: { period1: 8.36, period2: 2.61 },
+					marketValueRial: { period1: 8.36, period2: 2.7 },
+					marketValueUSD: { period1: 1.67, period2: -0.96 },
+					goldPrice: { period1: 6.84, period2: 13.56 },
+					dollarRate: { period1: 4.75, period2: 5.97 },
+					inflation: { period1: 5.15, period2: 6.21 },
+					housingPrice: { period1: 6.45, period2: 6.19 },
+				};
+
+				// Total percentage changes for each metric
+				const totalPercentages = {
+					stockIndex: { period1: 183.6, period2: 104.47 },
+					marketValueRial: { period1: 183.6, period2: 108.0 },
+					marketValueUSD: { period1: 33.4, period2: -38.36 },
+					goldPrice: { period1: 150.42, period2: 542.37 },
+					dollarRate: { period1: 104.57, period2: 238.94 },
+					inflation: { period1: 113.21, period2: 248.58 },
+					housingPrice: { period1: 141.81, period2: 247.66 },
+				};
+
+				// Time labels for each period - both periods start at the same point
+				const periodLabels = ['شروع دوره', 'پایان دوره'];
+
+				// Chart 1: Stock Index
+				const ctxPeriodic1 = document
+					.getElementById('periodicChart1')
+					.getContext('2d');
+				new Chart(ctxPeriodic1, {
+					type: 'line',
+					data: {
+						labels: periodLabels,
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, monthlyPercentages.stockIndex.period1],
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#3182ce',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								data: [0, monthlyPercentages.stockIndex.period2],
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [10, 5],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#3182ce',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('شاخص بورس'),
+				});
+
+				// Chart 2: Market Value Rial
+				const ctxPeriodic2 = document
+					.getElementById('periodicChart2')
+					.getContext('2d');
+				new Chart(ctxPeriodic2, {
+					type: 'line',
+					data: {
+						labels: periodLabels,
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, monthlyPercentages.marketValueRial.period1],
+								borderColor: '#e53e3e',
+								backgroundColor: 'rgba(229, 62, 62, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#e53e3e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								data: [0, monthlyPercentages.marketValueRial.period2],
+								borderColor: '#e53e3e',
+								backgroundColor: 'rgba(229, 62, 62, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [10, 5],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#e53e3e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('ارزش ریالی بورس'),
+				});
+
+				// Chart 3: Market Value USD
+				const ctxPeriodic3 = document
+					.getElementById('periodicChart3')
+					.getContext('2d');
+				new Chart(ctxPeriodic3, {
+					type: 'line',
+					data: {
+						labels: periodLabels,
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, monthlyPercentages.marketValueUSD.period1],
+								borderColor: '#38a169',
+								backgroundColor: 'rgba(56, 161, 105, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#38a169',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								data: [0, monthlyPercentages.marketValueUSD.period2],
+								borderColor: '#38a169',
+								backgroundColor: 'rgba(56, 161, 105, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [10, 5],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#38a169',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('ارزش دلاری بورس'),
+				});
+
+				// Chart 4: Gold Price
+				const ctxPeriodic4 = document
+					.getElementById('periodicChart4')
+					.getContext('2d');
+				new Chart(ctxPeriodic4, {
+					type: 'line',
+					data: {
+						labels: periodLabels,
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, monthlyPercentages.goldPrice.period1],
+								borderColor: '#d69e2e',
+								backgroundColor: 'rgba(214, 158, 46, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#d69e2e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								data: [0, monthlyPercentages.goldPrice.period2],
+								borderColor: '#d69e2e',
+								backgroundColor: 'rgba(214, 158, 46, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [10, 5],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#d69e2e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('سکه امامی جدید'),
+				});
+
+				// Chart 5: Dollar Rate
+				const ctxPeriodic5 = document
+					.getElementById('periodicChart5')
+					.getContext('2d');
+				new Chart(ctxPeriodic5, {
+					type: 'line',
+					data: {
+						labels: periodLabels,
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, monthlyPercentages.dollarRate.period1],
+								borderColor: '#9f7aea',
+								backgroundColor: 'rgba(159, 122, 234, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#9f7aea',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								data: [0, monthlyPercentages.dollarRate.period2],
+								borderColor: '#9f7aea',
+								backgroundColor: 'rgba(159, 122, 234, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [10, 5],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#9f7aea',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('دلار'),
+				});
+
+				// Chart 6: Inflation
+				const ctxPeriodic6 = document
+					.getElementById('periodicChart6')
+					.getContext('2d');
+				new Chart(ctxPeriodic6, {
+					type: 'line',
+					data: {
+						labels: periodLabels,
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, monthlyPercentages.inflation.period1],
+								borderColor: '#f56565',
+								backgroundColor: 'rgba(245, 101, 101, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#f56565',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								data: [0, monthlyPercentages.inflation.period2],
+								borderColor: '#f56565',
+								backgroundColor: 'rgba(245, 101, 101, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [10, 5],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#f56565',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('شاخص تورم'),
+				});
+
+				// Chart 7: Housing Price
+				const ctxPeriodic7 = document
+					.getElementById('periodicChart7')
+					.getContext('2d');
+				new Chart(ctxPeriodic7, {
+					type: 'line',
+					data: {
+						labels: periodLabels,
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, monthlyPercentages.housingPrice.period1],
+								borderColor: '#ed8936',
+								backgroundColor: 'rgba(237, 137, 54, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#ed8936',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								data: [0, monthlyPercentages.housingPrice.period2],
+								borderColor: '#f6ad55',
+								backgroundColor: 'rgba(246, 173, 85, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								borderDash: [10, 5],
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#f6ad55',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('مسکن'),
+				});
+
+				// Chart 8: Bar Chart 1 - Monthly Average Comparison
+				const ctxPeriodic8 = document
+					.getElementById('periodicChart8')
+					.getContext('2d');
+				new Chart(ctxPeriodic8, {
+					type: 'bar',
+					data: {
+						labels: [
+							'شاخص بورس',
+							'ارزش ریالی بورس',
+							'ارزش دلاری بورس',
+							'سکه امامی جدید',
+							'دلار',
+							'شاخص تورم',
+							'مسکن',
+						],
+						datasets: [
+							{
+								label: 'دوره اول (ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰)',
+								data: [
+									monthlyPercentages.stockIndex.period1,
+									monthlyPercentages.marketValueRial.period1,
+									monthlyPercentages.marketValueUSD.period1,
+									monthlyPercentages.goldPrice.period1,
+									monthlyPercentages.dollarRate.period1,
+									monthlyPercentages.inflation.period1,
+									monthlyPercentages.housingPrice.period1,
+								],
+								backgroundColor: [
+									'rgba(49, 130, 206, 0.8)',
+									'rgba(229, 62, 62, 0.8)',
+									'rgba(56, 161, 105, 0.8)',
+									'rgba(214, 158, 46, 0.8)',
+									'rgba(159, 122, 234, 0.8)',
+									'rgba(245, 101, 101, 0.8)',
+									'rgba(237, 137, 54, 0.8)',
+								],
+								borderColor: [
+									'#3182ce',
+									'#e53e3e',
+									'#38a169',
+									'#d69e2e',
+									'#9f7aea',
+									'#f56565',
+									'#ed8936',
+								],
+								borderWidth: 2,
+							},
+							{
+								label: 'دوره دوم (ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴)',
+								data: [
+									monthlyPercentages.stockIndex.period2,
+									monthlyPercentages.marketValueRial.period2,
+									monthlyPercentages.marketValueUSD.period2,
+									monthlyPercentages.goldPrice.period2,
+									monthlyPercentages.dollarRate.period2,
+									monthlyPercentages.inflation.period2,
+									monthlyPercentages.housingPrice.period2,
+								],
+								backgroundColor: [
+									'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%)',
+									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
+									'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
+									'linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%)',
+									'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%)',
+									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
+									'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)',
+								],
+								borderColor: [
+									'#1e40af',
+									'#dc2626',
+									'#059669',
+									'#d97706',
+									'#7c3aed',
+									'#dc2626',
+									'#ea580c',
+								],
+								borderWidth: 3,
+								borderDash: [5, 5],
+								pattern: {
+									backgroundColor: 'rgba(255, 255, 255, 0.1)',
+									borderColor: 'rgba(255, 255, 255, 0.2)',
+									borderWidth: 1,
+								},
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'نمودار میله ای مقایسه درصد تغییرات ماهانه همه شاخص‌ها',
+								font: {
+									size: 16,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 15,
+									usePointStyle: true,
+									pointStyle: 'rect',
+									generateLabels: function (chart) {
+										const datasets = chart.data.datasets;
+										return datasets.map((dataset, index) => {
+											// For first period: use solid blue
+											// For second period: use pale blue
+											const fillColor =
+												index === 0
+													? 'rgba(49, 130, 206, 0.8)'
+													: 'rgba(49, 130, 206, 0.4)';
+											const strokeColor = index === 0 ? '#3182ce' : '#3182ce';
+
+											return {
+												text: dataset.label,
+												fillStyle: fillColor,
+												strokeStyle: strokeColor,
+												lineWidth: 0,
+												pointStyle: 'rect',
+												hidden: false,
+												index: index,
+											};
+										});
+									},
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										const datasetIndex = context.datasetIndex;
+										const periodText =
+											datasetIndex === 0 ? 'دوره اول' : 'دوره دوم';
+										return (
+											context.dataset.label +
+											' (' +
+											periodText +
+											')' +
+											': ' +
+											context.parsed.y.toFixed(2) +
+											'%'
+										);
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: true,
+								title: {
+									display: true,
+									text: 'درصد تغییر ماهانه',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+									callback: function (value) {
+										return value + '%';
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'شاخص‌های مالی',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+						},
+					},
+				});
+
+				// Chart 9: Bar Chart 2 - Total Percentage Changes
+				const ctxPeriodic9 = document
+					.getElementById('periodicChart9')
+					.getContext('2d');
+				new Chart(ctxPeriodic9, {
+					type: 'bar',
+					data: {
+						labels: [
+							'شاخص بورس',
+							'ارزش ریالی بورس',
+							'ارزش دلاری بورس',
+							'سکه امامی جدید',
+							'دلار',
+							'شاخص تورم',
+							'مسکن',
+						],
+						datasets: [
+							{
+								label: 'دوره اول (ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰)',
+								data: [
+									totalPercentages.stockIndex.period1,
+									totalPercentages.marketValueRial.period1,
+									totalPercentages.marketValueUSD.period1,
+									totalPercentages.goldPrice.period1,
+									totalPercentages.dollarRate.period1,
+									totalPercentages.inflation.period1,
+									totalPercentages.housingPrice.period1,
+								],
+								backgroundColor: [
+									'rgba(49, 130, 206, 0.8)',
+									'rgba(229, 62, 62, 0.8)',
+									'rgba(56, 161, 105, 0.8)',
+									'rgba(214, 158, 46, 0.8)',
+									'rgba(159, 122, 234, 0.8)',
+									'rgba(245, 101, 101, 0.8)',
+									'rgba(237, 137, 54, 0.8)',
+								],
+								borderColor: [
+									'#3182ce',
+									'#e53e3e',
+									'#38a169',
+									'#d69e2e',
+									'#9f7aea',
+									'#f56565',
+									'#ed8936',
+								],
+								borderWidth: 2,
+							},
+							{
+								label: 'دوره دوم (ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴)',
+								data: [
+									totalPercentages.stockIndex.period2,
+									totalPercentages.marketValueRial.period2,
+									totalPercentages.marketValueUSD.period2,
+									totalPercentages.goldPrice.period2,
+									totalPercentages.dollarRate.period2,
+									totalPercentages.inflation.period2,
+									totalPercentages.housingPrice.period2,
+								],
+								backgroundColor: [
+									'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%)',
+									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
+									'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
+									'linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%)',
+									'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%)',
+									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
+									'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)',
+								],
+								borderColor: [
+									'#1e40af',
+									'#dc2626',
+									'#059669',
+									'#d97706',
+									'#7c3aed',
+									'#dc2626',
+									'#ea580c',
+								],
+								borderWidth: 3,
+								borderDash: [5, 5],
+								pattern: {
+									backgroundColor: 'rgba(255, 255, 255, 0.1)',
+									borderColor: 'rgba(255, 255, 255, 0.2)',
+									borderWidth: 1,
+								},
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'نمودار میلهای مقایسه درصد تغییرات کل همه شاخص‌ها',
+								font: {
+									size: 16,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 15,
+									usePointStyle: true,
+									pointStyle: 'rect',
+									generateLabels: function (chart) {
+										const datasets = chart.data.datasets;
+										return datasets.map((dataset, index) => {
+											// For first period: use solid blue
+											// For second period: use pale blue
+											const fillColor =
+												index === 0
+													? 'rgba(49, 130, 206, 0.8)'
+													: 'rgba(49, 130, 206, 0.4)';
+											const strokeColor = index === 0 ? '#3182ce' : '#3182ce';
+
+											return {
+												text: dataset.label,
+												fillStyle: fillColor,
+												strokeStyle: strokeColor,
+												lineWidth: 0,
+												pointStyle: 'rect',
+												hidden: false,
+												index: index,
+											};
+										});
+									},
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										const datasetIndex = context.datasetIndex;
+										const periodText =
+											datasetIndex === 0 ? 'دوره اول' : 'دوره دوم';
+										return (
+											context.dataset.label +
+											' (' +
+											periodText +
+											')' +
+											': ' +
+											context.parsed.y.toFixed(2) +
+											'%'
+										);
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: true,
+								title: {
+									display: true,
+									text: 'درصد تغییر کل',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+									callback: function (value) {
+										return value + '%';
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'شاخص‌های مالی',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+						},
+					},
+				});
+			}
+
+			// Helper function to get chart options
+			function getChartOptions(title) {
+				return {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						title: {
+							display: true,
+							text: `مقایسه درصد تغییرات ${title} در دو دوره زمانی`,
+							font: {
+								size: 16,
+								family: "'IRANSansX', sans-serif",
+								weight: '600',
+							},
+						},
+						legend: {
+							position: 'top',
+							labels: {
+								color: '#1a202c',
+								font: {
+									size: 11,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								padding: 15,
+								usePointStyle: false,
+								generateLabels: function (chart) {
+									const datasets = chart.data.datasets;
+									return datasets.map((dataset, index) => ({
+										text: dataset.label,
+										fillStyle: 'transparent',
+										strokeStyle: dataset.borderColor,
+										lineWidth: 3,
+										lineDash: dataset.borderDash || [],
+										pointStyle: 'line',
+										hidden: false,
+										index: index,
+									}));
+								},
+							},
+						},
+						tooltip: {
+							backgroundColor: 'rgba(26, 32, 44, 0.95)',
+							titleColor: '#ffffff',
+							bodyColor: '#ffffff',
+							borderColor: '#e2e8f0',
+							borderWidth: 1,
+							cornerRadius: 8,
+							displayColors: true,
+							titleFont: {
+								size: 14,
+								family: "'IRANSansX', sans-serif",
+								weight: '600',
+							},
+							bodyFont: {
+								size: 13,
+								family: "'IRANSansX', sans-serif",
+							},
+							padding: 12,
+							callbacks: {
+								label: function (context) {
+									const datasetIndex = context.datasetIndex;
+									const periodText =
+										datasetIndex === 0 ? 'دوره اول' : 'دوره دوم';
+									return (
+										context.dataset.label +
+										' (' +
+										periodText +
+										')' +
+										': ' +
+										context.parsed.y.toFixed(2) +
+										'%'
+									);
+								},
+							},
+						},
+					},
+					scales: {
+						y: {
+							beginAtZero: true,
+							title: {
+								display: true,
+								text: 'درصد تغییر',
+								font: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								color: '#1a202c',
+							},
+							ticks: {
+								color: '#4a5568',
+								font: {
+									size: 12,
+									family: "'IRANSansX', sans-serif",
+								},
+								callback: function (value) {
+									return value + '%';
+								},
+							},
+							grid: {
+								color: '#e2e8f0',
+								drawBorder: false,
+							},
+						},
+						x: {
+							title: {
+								display: true,
+								text: 'زمان',
+								font: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								color: '#1a202c',
+							},
+							ticks: {
+								color: '#4a5568',
+								font: {
+									size: 12,
+									family: "'IRANSansX', sans-serif",
+								},
+							},
+							grid: {
+								color: '#e2e8f0',
+								drawBorder: false,
+							},
+						},
+					},
+				};
+			}
+
+			// Call the initialization function
+			initializePeriodicCharts();
 
 			// Initialize table data
 			populateSubTable('ev-revenue', 'original');
@@ -2226,6 +3355,27 @@
 				});
 
 				// Show selected sub-table
+				document.getElementById(subTabId).classList.add('active');
+
+				// Add active class to clicked button
+				event.target.classList.add('active');
+			}
+
+			// Function to switch periodic comparison sub-tabs
+			function switchPeriodicSubTab(subTabId) {
+				// Hide all periodic sub-charts
+				document.querySelectorAll('.periodic-sub-chart').forEach((subChart) => {
+					subChart.classList.remove('active');
+				});
+
+				// Remove active class from all periodic sub-tab buttons
+				document
+					.querySelectorAll('.periodic-sub-tab-button')
+					.forEach((button) => {
+						button.classList.remove('active');
+					});
+
+				// Show selected sub-chart
 				document.getElementById(subTabId).classList.add('active');
 
 				// Add active class to clicked button
