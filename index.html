@@ -101,13 +101,25 @@
 						class="periodic-sub-tab-button"
 						onclick="switchPeriodicSubTab('periodic-chart8')"
 					>
-						نمودار میله ای
+						نمودار میله‌ای ۱
 					</button>
 					<button
 						class="periodic-sub-tab-button"
 						onclick="switchPeriodicSubTab('periodic-chart9')"
 					>
-						نمودار میله ای ۲
+						نمودار میله‌ای ۲
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart10')"
+					>
+						نمودار میله‌ای شماره ۳
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart11')"
+					>
+						نمودار میله‌ای شماره ۴
 					</button>
 				</div>
 
@@ -145,6 +157,12 @@
 
 				<div id="periodic-chart9" class="periodic-sub-chart">
 					<canvas id="periodicChart9"></canvas>
+				</div>
+				<div id="periodic-chart10" class="periodic-sub-chart">
+					<canvas id="periodicChart10"></canvas>
+				</div>
+				<div id="periodic-chart11" class="periodic-sub-chart">
+					<canvas id="periodicChart11"></canvas>
 				</div>
 			</div>
 
@@ -2037,22 +2055,22 @@
 									monthlyPercentages.housingPrice.period1,
 								],
 								backgroundColor: [
-									'rgba(49, 130, 206, 0.8)',
-									'rgba(229, 62, 62, 0.8)',
-									'rgba(56, 161, 105, 0.8)',
-									'rgba(214, 158, 46, 0.8)',
-									'rgba(159, 122, 234, 0.8)',
-									'rgba(245, 101, 101, 0.8)',
-									'rgba(237, 137, 54, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
 								],
 								borderColor: [
-									'#3182ce',
-									'#e53e3e',
-									'#38a169',
-									'#d69e2e',
-									'#9f7aea',
-									'#f56565',
-									'#ed8936',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
 								],
 								borderWidth: 2,
 							},
@@ -2068,22 +2086,22 @@
 									monthlyPercentages.housingPrice.period2,
 								],
 								backgroundColor: [
-									'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%)',
-									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
-									'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
-									'linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%)',
-									'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%)',
-									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
-									'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
 								],
 								borderColor: [
-									'#1e40af',
-									'#dc2626',
-									'#059669',
-									'#d97706',
-									'#7c3aed',
-									'#dc2626',
-									'#ea580c',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
 								],
 								borderWidth: 3,
 								borderDash: [5, 5],
@@ -2101,7 +2119,7 @@
 						plugins: {
 							title: {
 								display: true,
-								text: 'نمودار میله ای مقایسه درصد تغییرات ماهانه همه شاخص‌ها',
+								text: 'نمودار میله‌ای مقایسه درصد تغییرات ماهانه همه شاخص‌ها',
 								font: {
 									size: 16,
 									family: "'IRANSansX', sans-serif",
@@ -2264,22 +2282,22 @@
 									totalPercentages.housingPrice.period1,
 								],
 								backgroundColor: [
-									'rgba(49, 130, 206, 0.8)',
-									'rgba(229, 62, 62, 0.8)',
-									'rgba(56, 161, 105, 0.8)',
-									'rgba(214, 158, 46, 0.8)',
-									'rgba(159, 122, 234, 0.8)',
-									'rgba(245, 101, 101, 0.8)',
-									'rgba(237, 137, 54, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
+									'rgba(34, 197, 94, 0.8)',
 								],
 								borderColor: [
-									'#3182ce',
-									'#e53e3e',
-									'#38a169',
-									'#d69e2e',
-									'#9f7aea',
-									'#f56565',
-									'#ed8936',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
+									'#22c55e',
 								],
 								borderWidth: 2,
 							},
@@ -2295,22 +2313,22 @@
 									totalPercentages.housingPrice.period2,
 								],
 								backgroundColor: [
-									'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%)',
-									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
-									'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
-									'linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%)',
-									'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%)',
-									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
-									'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
+									'rgba(239, 68, 68, 0.8)',
 								],
 								borderColor: [
-									'#1e40af',
-									'#dc2626',
-									'#059669',
-									'#d97706',
-									'#7c3aed',
-									'#dc2626',
-									'#ea580c',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
+									'#ef4444',
 								],
 								borderWidth: 3,
 								borderDash: [5, 5],
@@ -2413,6 +2431,337 @@
 								title: {
 									display: true,
 									text: 'درصد تغییر کل',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+									callback: function (value) {
+										return value + '%';
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'شاخص‌های مالی',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+						},
+					},
+				});
+
+				// Chart 10: Bar Chart 3 - Normalized Comparison (Period 1 × 40 months)
+				const ctxPeriodic10 = document
+					.getElementById('periodicChart10')
+					.getContext('2d');
+				new Chart(ctxPeriodic10, {
+					type: 'bar',
+					data: {
+						labels: [
+							'شاخص بورس',
+							'ارزش ریالی بورس',
+							'ارزش دلاری بورس',
+							'سکه امامی جدید',
+							'دلار',
+							'شاخص تورم',
+							'مسکن',
+						],
+						datasets: [
+							{
+								label:
+									'دوره اول × ۴۰ ماه (ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰)',
+								data: [
+									monthlyPercentages.stockIndex.period1 * 40,
+									monthlyPercentages.marketValueRial.period1 * 40,
+									monthlyPercentages.marketValueUSD.period1 * 40,
+									monthlyPercentages.goldPrice.period1 * 40,
+									monthlyPercentages.dollarRate.period1 * 40,
+									monthlyPercentages.inflation.period1 * 40,
+									monthlyPercentages.housingPrice.period1 * 40,
+								],
+								backgroundColor: [
+									'rgba(49, 130, 206, 0.8)',
+									'rgba(229, 62, 62, 0.8)',
+									'rgba(56, 161, 105, 0.8)',
+									'rgba(214, 158, 46, 0.8)',
+									'rgba(159, 122, 234, 0.8)',
+									'rgba(245, 101, 101, 0.8)',
+									'rgba(237, 137, 54, 0.8)',
+								],
+								borderColor: [
+									'#3182ce',
+									'#e53e3e',
+									'#38a169',
+									'#d69e2e',
+									'#9f7aea',
+									'#f56565',
+									'#ed8936',
+								],
+								borderWidth: 2,
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'نمودار میله‌ای شماره ۳: دوره اول × ۴۰ ماه',
+								font: {
+									size: 16,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 15,
+									usePointStyle: true,
+									pointStyle: 'rect',
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										return (
+											context.dataset.label +
+											': ' +
+											context.parsed.y.toFixed(2) +
+											'%'
+										);
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: true,
+								title: {
+									display: true,
+									text: 'درصد تغییرات نرمال‌شده',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+									callback: function (value) {
+										return value + '%';
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'شاخص‌های مالی',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+						},
+					},
+				});
+
+				// Chart 11: Bar Chart 4 - Normalized Comparison (Period 2 × 22 months)
+				const ctxPeriodic11 = document
+					.getElementById('periodicChart11')
+					.getContext('2d');
+				new Chart(ctxPeriodic11, {
+					type: 'bar',
+					data: {
+						labels: [
+							'شاخص بورس',
+							'ارزش ریالی بورس',
+							'ارزش دلاری بورس',
+							'سکه امامی جدید',
+							'دلار',
+							'شاخص تورم',
+							'مسکن',
+						],
+						datasets: [
+							{
+								label: 'دوره دوم × ۲۲ ماه (ابتدای ۱۴۰۱ - انتهای تیر ۱۴۰۴)',
+								data: [
+									monthlyPercentages.stockIndex.period2 * 22,
+									monthlyPercentages.marketValueRial.period2 * 22,
+									monthlyPercentages.marketValueUSD.period2 * 22,
+									monthlyPercentages.goldPrice.period2 * 22,
+									monthlyPercentages.dollarRate.period2 * 22,
+									monthlyPercentages.inflation.period2 * 22,
+									monthlyPercentages.housingPrice.period2 * 22,
+								],
+								backgroundColor: [
+									'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%)',
+									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
+									'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
+									'linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%)',
+									'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%)',
+									'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)',
+									'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)',
+								],
+								borderColor: [
+									'#1e40af',
+									'#dc2626',
+									'#059669',
+									'#d97706',
+									'#7c3aed',
+									'#dc2626',
+									'#ea580c',
+								],
+								borderWidth: 3,
+								borderDash: [5, 5],
+								pattern: {
+									backgroundColor: 'rgba(255, 255, 255, 0.1)',
+									borderColor: 'rgba(255, 255, 255, 0.2)',
+									borderWidth: 1,
+								},
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'نمودار میله‌ای شماره ۴: دوره دوم × ۲۲ ماه',
+								font: {
+									size: 16,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 15,
+									usePointStyle: true,
+									pointStyle: 'rect',
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										return (
+											context.dataset.label +
+											': ' +
+											context.parsed.y.toFixed(2) +
+											'%'
+										);
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: true,
+								title: {
+									display: true,
+									text: 'درصد تغییرات نرمال‌شده',
 									font: {
 										size: 14,
 										family: "'IRANSansX', sans-serif",
