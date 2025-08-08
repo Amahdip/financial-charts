@@ -133,6 +133,18 @@
 					>
 						نمودار شیب متوسط ماهانه
 					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart13')"
+					>
+						ارزش دلاری بورس (مقدار)
+					</button>
+					<button
+						class="periodic-sub-tab-button"
+						onclick="switchPeriodicSubTab('periodic-chart14')"
+					>
+						ارزش اسمی در مقابل ارزش واقعی بازار
+					</button>
 				</div>
 
 				<div id="periodic-chart1" class="periodic-sub-chart active">
@@ -178,6 +190,12 @@
 				</div>
 				<div id="periodic-chart12" class="periodic-sub-chart">
 					<canvas id="periodicChart12"></canvas>
+				</div>
+				<div id="periodic-chart13" class="periodic-sub-chart">
+					<canvas id="periodicChart13"></canvas>
+				</div>
+				<div id="periodic-chart14" class="periodic-sub-chart">
+					<canvas id="periodicChart14"></canvas>
 				</div>
 			</div>
 
@@ -3143,6 +3161,535 @@
 									font: {
 										size: 12,
 										family: "'IRANSansX', sans-serif",
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+						},
+					},
+				});
+
+				// Chart 13: USD Market Value Amount Chart
+				const ctxPeriodic13 = document
+					.getElementById('periodicChart13')
+					.getContext('2d');
+				new Chart(ctxPeriodic13, {
+					type: 'line',
+					data: {
+						labels: [
+							'شروع دوره اول',
+							'پایان دوره اول',
+							'شروع دوره دوم',
+							'پایان دوره دوم',
+						],
+						datasets: [
+							{
+								label: 'دوره اول (افزایش)',
+								data: [101, 138, null, null],
+								borderColor: '#38a169',
+								backgroundColor: 'rgba(56, 161, 105, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#38a169',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'دوره دوم (کاهش)',
+								data: [null, null, 159, 98],
+								borderColor: '#e53e3e',
+								backgroundColor: 'rgba(229, 62, 62, 0.1)',
+								fill: false,
+								tension: 0,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#e53e3e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'ارزش دلاری بورس - مقایسه مقادیر ابتدا و انتهای دوره‌ها',
+								font: {
+									size: 16,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 15,
+									usePointStyle: true,
+									pointStyle: 'circle',
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										return (
+											context.dataset.label +
+											': ' +
+											context.parsed.y.toLocaleString('fa-IR') +
+											' میلیارد دلار'
+										);
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: false,
+								title: {
+									display: true,
+									text: 'ارزش (میلیارد دلار)',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+									callback: function (value) {
+										return value.toLocaleString('fa-IR');
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'زمان',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									color: '#1a202c',
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 10,
+										family: "'IRANSansX', sans-serif",
+									},
+									maxRotation: 45,
+									minRotation: 45,
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+						},
+					},
+				});
+
+				// Chart 14: Real Stock Index Growth (Inflation-Adjusted)
+				const ctxPeriodic14 = document
+					.getElementById('periodicChart14')
+					.getContext('2d');
+
+				// Complete market value data from فروردین 1398 to تیر 1404
+				const marketValueData = [
+					6225526,
+					6554295,
+					7124469,
+					7654252,
+					8106571,
+					9487808,
+					9315275,
+					9290602,
+					10866181,
+					12367527,
+					14583494,
+					15623595,
+					21596889,
+					30057957,
+					39624433,
+					57912068,
+					52614714,
+					48165581,
+					43022143,
+					41626423,
+					43754378,
+					36065501,
+					37550121,
+					39832929,
+					36768204,
+					34365332,
+					36154671,
+					39944070,
+					46175856,
+					42233550,
+					42882122,
+					42863081,
+					41397226,
+					38973689,
+					38816963,
+					41648206,
+					46064142,
+					48194139,
+					46709154,
+					44884651,
+					43604640,
+					41282384,
+					39502132,
+					42878958,
+					45576204,
+					50491922,
+					48563302,
+					59718058,
+					70796076,
+					70624695,
+					66219594,
+					null,
+					null,
+					null,
+					61903799,
+					61616690,
+					67375993,
+					66007414,
+					63078484,
+					66865340,
+					67075358,
+					64351309,
+					62262277,
+					66167770,
+					62056008,
+					63877460,
+					61144372,
+					68769824,
+					76207371,
+					86812850,
+					82834562,
+					82542906,
+					93757528,
+					94677309,
+					90914927,
+					86628981,
+				];
+
+				// Complete inflation data from فروردین 1398 to تیر 1404
+				const inflationData = [
+					182.7, 188.2, 192.6, 196.9, 198.5, 200.1, 201.4, 204.1, 212.5, 214.7,
+					219.6, 226.5, 229.9, 240.2, 249.8, 261.8, 270.8, 281.3, 302.8, 326.1,
+					338.9, 347.5, 363, 374.2, 378.3, 382, 399.3, 410, 421.7, 435.6, 448.9,
+					459.7, 468.2, 474.2, 482, 484.6, 495.1, 520.4, 575.4, 600.4, 614.8,
+					631, 649.5, 663.5, 679.8, 713.4, 745.1, 794.3, 834.9, 858.3, 885.8,
+					908.8, 940.6, 971.6, 995.9, 1014.8, 1048.3, 1066.1, 1076.8, 1097.3,
+					1125.8, 1159.6, 1206, 1242.2, 1277, 1306.4, 1339.1, 1379.3, 1402.7,
+					1433.6, 1485.2, 1531.2, 1589.5, 1625.7, 1689.2,
+				];
+
+				// Month labels for the entire period from فروردین 1398 to تیر 1404
+				const monthLabels = [
+					'فروردین 1398',
+					'اردیبهشت 1398',
+					'خرداد 1398',
+					'تیر 1398',
+					'مرداد 1398',
+					'شهریور 1398',
+					'مهر 1398',
+					'آبان 1398',
+					'آذر 1398',
+					'دی 1398',
+					'بهمن 1398',
+					'اسفند 1398',
+					'فروردین 1399',
+					'اردیبهشت 1399',
+					'خرداد 1399',
+					'تیر 1399',
+					'مرداد 1399',
+					'شهریور 1399',
+					'مهر 1399',
+					'آبان 1399',
+					'آذر 1399',
+					'دی 1399',
+					'بهمن 1399',
+					'اسفند 1399',
+					'فروردین 1400',
+					'اردیبهشت 1400',
+					'خرداد 1400',
+					'تیر 1400',
+					'مرداد 1400',
+					'شهریور 1400',
+					'مهر 1400',
+					'آبان 1400',
+					'آذر 1400',
+					'دی 1400',
+					'بهمن 1400',
+					'اسفند 1400',
+					'فروردین 1401',
+					'اردیبهشت 1401',
+					'خرداد 1401',
+					'تیر 1401',
+					'مرداد 1401',
+					'شهریور 1401',
+					'مهر 1401',
+					'آبان 1401',
+					'آذر 1401',
+					'دی 1401',
+					'بهمن 1401',
+					'اسفند 1401',
+					'فروردین 1402',
+					'اردیبهشت 1402',
+					'خرداد 1402',
+					'تیر 1402',
+					'مرداد 1402',
+					'شهریور 1402',
+					'مهر 1402',
+					'آبان 1402',
+					'آذر 1402',
+					'دی 1402',
+					'بهمن 1402',
+					'اسفند 1402',
+					'فروردین 1403',
+					'اردیبهشت 1403',
+					'خرداد 1403',
+					'تیر 1403',
+					'مرداد 1403',
+					'شهریور 1403',
+					'مهر 1403',
+					'آبان 1403',
+					'آذر 1403',
+					'دی 1403',
+					'بهمن 1403',
+					'اسفند 1403',
+					'فروردین 1404',
+					'اردیبهشت 1404',
+					'خرداد 1404',
+					'تیر 1404',
+				];
+
+				// Calculate inflation-adjusted true values from the user's data
+				const nominalMarketValues = [
+					6225526, 6554295, 7124469, 7654252, 8106571, 9487808, 9315275,
+					9290602, 10866181, 12367527, 14583494, 15623595, 21596889, 30057957,
+					39624433, 57912068, 52614714, 48165581, 43022143, 41626423, 43754378,
+					36065501, 37550121, 39832929, 36768204, 34365332, 36154671, 39944070,
+					46175856, 42233550, 42882122, 42863081, 41397226, 38973689, 38816963,
+					41648206, 46064142, 48194139, 46709154, 44884651, 43604640, 41282384,
+					39502132, 42878958, 45576204, 50491922, 48563302, 59718058, 70796076,
+					70624695, 66219594, 66219594, 66219594, 66219594, 61903799, 61616690,
+					67375993, 66007414, 63078484, 66865340, 67075358, 64351309, 62262277,
+					66167770, 62056008, 63877460, 61144372, 68769824, 76207371, 86812850,
+					82834562, 82542906, 93757528, 94677309, 90914927, 86628981,
+				];
+
+				const inflationAdjustedValues = [
+					6225526, 6366881.793, 6771898.492, 7124274.137, 7487383.208,
+					8702768.276, 8487971.269, 8351698.441, 9424325.248, 10628885.1,
+					12290750.59, 12781147.36, 17475843.74, 23539445.09, 30090495.67,
+					42532487.62, 37179784.46, 32594229.64, 26622398.21, 23710163.97,
+					23991568.79, 19166758.93, 19100829.69, 19672701.48, 17943545.95,
+					16595402.52, 16707922.41, 18011372.23, 20307393.69, 17904262.67,
+					17632551.11, 17200503.5, 16294228.5, 15131496.8, 14821753.78,
+					15822875.83, 17157726.65, 17074323.25, 14743669.65, 13527184.71,
+					12816983.17, 11796660.09, 10942082.77, 11641605.85, 12087910.43,
+					12794216.9, 11737008.95, 13657932.04, 15493437.1, 15021691.72,
+					13603441.82, 13250225.34, 12786584.09, 12365167.86, 11250024.1,
+					10984345.83, 11648442.06, 11214043.3, 10603894.78, 11038613.6,
+					10786580.72, 10024672.05, 9298116.63, 9602256.989, 8736553.268,
+					8791847.207, 8195610.143, 8971669.546, 9789761.903, 10936506.3,
+					10041688.68, 9695318.65, 10643418.43, 10505434.52, 9677615.718,
+					9044933.24,
+				];
+
+				// Month labels for the chart (all months)
+				const chartLabels = monthLabels;
+
+				new Chart(ctxPeriodic14, {
+					type: 'line',
+					data: {
+						labels: chartLabels,
+						datasets: [
+							{
+								label: 'ارزش اسمی بازار',
+								data: nominalMarketValues,
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								pointRadius: 0,
+								pointHoverRadius: 6,
+								pointBackgroundColor: '#3182ce',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ارزش واقعی (کسر تورم)',
+								data: inflationAdjustedValues,
+								borderColor: '#e53e3e',
+								backgroundColor: 'rgba(229, 62, 62, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 2,
+								pointRadius: 0,
+								pointHoverRadius: 6,
+								pointBackgroundColor: '#e53e3e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'ارزش اسمی بازار در مقابل ارزش واقعی (کسر تورم)',
+								font: {
+									size: 16,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 15,
+									usePointStyle: true,
+									pointStyle: 'circle',
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										return (
+											context.dataset.label +
+											': ' +
+											context.parsed.y.toFixed(2) +
+											'%'
+										);
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: true,
+								title: {
+									display: true,
+									text: 'ارزش (ریال)',
+									color: '#1a202c',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+									},
+									callback: function (value) {
+										return (value / 1000000).toFixed(0) + 'M';
+									},
+								},
+								grid: {
+									color: '#e2e8f0',
+									drawBorder: false,
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'ماه/سال',
+									color: '#1a202c',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 10,
+										family: "'IRANSansX', sans-serif",
+									},
+									maxRotation: 45,
+									minRotation: 45,
+									maxTicksLimit: 30,
+									callback: function (value, index) {
+										// Show every 3rd label to avoid overcrowding
+										if (index % 3 === 0 || index === chartLabels.length - 1) {
+											return chartLabels[index];
+										}
+										return '';
 									},
 								},
 								grid: {
