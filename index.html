@@ -53,7 +53,35 @@
 
 			<!-- Chart Containers -->
 			<div id="chart1" class="chart-container">
-				<canvas id="myChart"></canvas>
+				<div class="sub-tab-navigation">
+					<button
+						class="sub-tab-button active"
+						onclick="switchSubTab('line-chart')"
+					>
+						نمودار خطی
+					</button>
+					<button class="sub-tab-button" onclick="switchSubTab('point-chart')">
+						نمودار نقطه‌ای شاخص
+					</button>
+					<button
+						class="sub-tab-button"
+						onclick="switchSubTab('annual-growth-chart')"
+					>
+						درصد رشد سالانه شاخص
+					</button>
+				</div>
+
+				<div id="line-chart" class="sub-chart active">
+					<canvas id="myChart"></canvas>
+				</div>
+
+				<div id="point-chart" class="sub-chart">
+					<canvas id="stockIndexPointChart"></canvas>
+				</div>
+
+				<div id="annual-growth-chart" class="sub-chart">
+					<canvas id="annualGrowthChart"></canvas>
+				</div>
 			</div>
 
 			<div id="periodic-comparison" class="chart-container active">
@@ -1220,6 +1248,30 @@
 				updateStatBoxes(tabId);
 			}
 
+			// Sub-tab switching function
+			function switchSubTab(subTabId) {
+				// Get the parent chart container
+				const parentContainer = event.target.closest('.chart-container');
+
+				// Hide all sub-charts in this container
+				parentContainer.querySelectorAll('.sub-chart').forEach((subChart) => {
+					subChart.classList.remove('active');
+				});
+
+				// Remove active class from all sub-tab buttons in this container
+				parentContainer
+					.querySelectorAll('.sub-tab-button')
+					.forEach((button) => {
+						button.classList.remove('active');
+					});
+
+				// Show selected sub-chart
+				document.getElementById(subTabId).classList.add('active');
+
+				// Add active class to clicked button
+				event.target.classList.add('active');
+			}
+
 			// Function to update stat boxes based on active chart
 			function updateStatBoxes(activeTab) {
 				const statCards = document.querySelectorAll('.stat-card');
@@ -1297,6 +1349,507 @@
 
 			const ctx = document.getElementById('myChart').getContext('2d');
 			new Chart(ctx, chartData);
+
+			// Stock Index Point Chart (نمودار نقطه‌ای شاخص)
+			const ctxPointChart = document
+				.getElementById('stockIndexPointChart')
+				.getContext('2d');
+			new Chart(ctxPointChart, {
+				type: 'line',
+				data: {
+					labels: [
+						'فروردین 1398',
+						'اردیبهشت 1398',
+						'خرداد 1398',
+						'تیر 1398',
+						'مرداد 1398',
+						'شهریور 1398',
+						'مهر 1398',
+						'آبان 1398',
+						'آذر 1398',
+						'دی 1398',
+						'بهمن 1398',
+						'اسفند 1398',
+						'فروردین 1399',
+						'اردیبهشت 1399',
+						'خرداد 1399',
+						'تیر 1399',
+						'مرداد 1399',
+						'شهریور 1399',
+						'مهر 1399',
+						'آبان 1399',
+						'آذر 1399',
+						'دی 1399',
+						'بهمن 1399',
+						'اسفند 1399',
+						'فروردین 1400',
+						'اردیبهشت 1400',
+						'خرداد 1400',
+						'تیر 1400',
+						'مرداد 1400',
+						'شهریور 1400',
+						'مهر 1400',
+						'آبان 1400',
+						'آذر 1400',
+						'دی 1400',
+						'بهمن 1400',
+						'اسفند 1400',
+						'فروردین 1401',
+						'اردیبهشت 1401',
+						'خرداد 1401',
+						'تیر 1401',
+						'مرداد 1401',
+						'شهریور 1401',
+						'مهر 1401',
+						'آبان 1401',
+						'آذر 1401',
+						'دی 1401',
+						'بهمن 1401',
+						'اسفند 1401',
+						'فروردین 1402',
+						'اردیبهشت 1402',
+						'خرداد 1402',
+						'تیر 1402',
+						'مرداد 1402',
+						'شهریور 1402',
+						'مهر 1402',
+						'آبان 1402',
+						'آذر 1402',
+						'دی 1402',
+						'بهمن 1402',
+						'اسفند 1402',
+						'فروردین 1403',
+						'اردیبهشت 1403',
+						'خرداد 1403',
+						'تیر 1403',
+						'مرداد 1403',
+						'شهریور 1403',
+						'مهر 1403',
+						'آبان 1403',
+						'آذر 1403',
+						'دی 1403',
+						'بهمن 1403',
+						'اسفند 1403',
+						'فروردین 1404',
+						'اردیبهشت 1404',
+						'خرداد 1404',
+						'تیر 1404',
+					],
+					datasets: [
+						{
+							label: 'شاخص بورس',
+							data: realData.stockIndex,
+							borderColor: '#3182ce',
+							backgroundColor: 'rgba(49, 130, 206, 0.1)',
+							fill: false,
+							tension: 0,
+							borderWidth: 2,
+							pointRadius: 4,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#3182ce',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#3182ce',
+							pointHoverBorderColor: '#ffffff',
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					devicePixelRatio: 2,
+					backgroundColor: '#FFFFFF',
+					interaction: {
+						intersect: false,
+						mode: 'index',
+					},
+					plugins: {
+						legend: {
+							position: 'top',
+							labels: {
+								color: '#1a202c',
+								font: {
+									family: 'IRANSansX',
+									size: 14,
+									weight: '600',
+								},
+								usePointStyle: true,
+								padding: 20,
+							},
+						},
+						tooltip: {
+							backgroundColor: 'rgba(26, 32, 44, 0.9)',
+							titleColor: '#ffffff',
+							bodyColor: '#ffffff',
+							borderColor: '#e2e8f0',
+							borderWidth: 1,
+							cornerRadius: 8,
+							displayColors: true,
+							titleFont: {
+								family: 'IRANSansX',
+								size: 14,
+								weight: '600',
+							},
+							bodyFont: {
+								family: 'IRANSansX',
+								size: 13,
+								weight: '500',
+							},
+							callbacks: {
+								label: function (context) {
+									const value = context.parsed.y;
+									return `شاخص بورس: ${value.toLocaleString('fa-IR')}`;
+								},
+							},
+						},
+					},
+					scales: {
+						x: {
+							display: true,
+							title: {
+								display: true,
+								text: 'زمان',
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 14,
+									weight: '600',
+								},
+							},
+							ticks: {
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 10,
+									weight: '500',
+								},
+								maxRotation: 45,
+								minRotation: 45,
+								// Force display of all labels including the last one
+								callback: function (value, index, ticks) {
+									// Always show the last label (تیر 1404)
+									if (index === ticks.length - 1) {
+										return this.getLabelForValue(value);
+									}
+									// Show every 3rd label to reduce clutter but ensure visibility
+									if (index % 3 === 0) {
+										return this.getLabelForValue(value);
+									}
+									return '';
+								},
+								// Ensure all ticks are rendered
+								autoSkip: false,
+								maxTicksLimit: null,
+							},
+							grid: {
+								color: '#e2e8f0',
+								drawBorder: false,
+							},
+							// Add padding to ensure the last label (تیر 1404) is visible
+							afterFit: function (scale) {
+								scale.paddingRight = 100;
+							},
+						},
+						y: {
+							display: true,
+							title: {
+								display: true,
+								text: 'شاخص بورس',
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 14,
+									weight: '600',
+								},
+							},
+							ticks: {
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 12,
+									weight: '500',
+								},
+								callback: function (value) {
+									return value.toLocaleString('fa-IR');
+								},
+							},
+							grid: {
+								color: '#e2e8f0',
+								drawBorder: false,
+							},
+						},
+					},
+				},
+			});
+
+			// Calculate annual growth percentages
+			function calculateAnnualGrowth() {
+				const stockData = realData.stockIndex;
+				const annualGrowth = [];
+				const projectedGrowth = [];
+
+				// Calculate growth for each year (1398-1403)
+				for (let year = 1398; year <= 1403; year++) {
+					const startIndex = (year - 1398) * 12; // Start of year (فروردین)
+					const endIndex = startIndex + 11; // End of year (اسفند)
+
+					if (endIndex < stockData.length) {
+						const startValue = stockData[startIndex];
+						const endValue = stockData[endIndex];
+						const growth = ((endValue - startValue) / startValue) * 100;
+						annualGrowth.push({
+							year: year,
+							growth: growth,
+							type: 'full',
+						});
+						projectedGrowth.push(null); // No projection for complete years
+					}
+				}
+
+				// Calculate growth for 1404 (4 months so far: فروردین to تیر)
+				const startIndex1404 = (1404 - 1398) * 12; // Start of 1404 (فروردین)
+				const endIndex1404 = startIndex1404 + 3; // End of 4 months (تیر)
+
+				if (endIndex1404 < stockData.length) {
+					const startValue1404 = stockData[startIndex1404];
+					const endValue1404 = stockData[endIndex1404];
+					const growth1404 =
+						((endValue1404 - startValue1404) / startValue1404) * 100;
+
+					// Add actual 4-month growth
+					annualGrowth.push({
+						year: 1404,
+						growth: growth1404,
+						type: 'partial',
+					});
+
+					// Add projected full-year growth (extrapolated)
+					const projectedGrowth1404 = growth1404 * (12 / 4); // Extrapolate to full year
+					projectedGrowth.push(projectedGrowth1404);
+				}
+
+				return { annualGrowth, projectedGrowth };
+			}
+
+			// Annual Growth Chart
+			const ctxAnnualGrowth = document
+				.getElementById('annualGrowthChart')
+				.getContext('2d');
+			const { annualGrowth, projectedGrowth } = calculateAnnualGrowth();
+
+			new Chart(ctxAnnualGrowth, {
+				type: 'bar',
+				data: {
+					labels: annualGrowth.map((item) => item.year.toString()),
+					datasets: [
+						{
+							label: 'پیش‌بینی ۱۴۰۴',
+							data: projectedGrowth,
+							backgroundColor: projectedGrowth.map((value) => {
+								return value !== null
+									? 'rgba(156, 163, 175, 0.3)'
+									: 'transparent';
+							}),
+							borderColor: projectedGrowth.map((value) => {
+								return value !== null
+									? 'rgba(156, 163, 175, 0.6)'
+									: 'transparent';
+							}),
+							borderWidth: 2,
+							borderDash: [5, 5], // Dashed border for projected
+							order: 1, // This dataset will be drawn behind
+						},
+						{
+							label: 'درصد رشد سالانه',
+							data: annualGrowth.map((item) => item.growth),
+							backgroundColor: annualGrowth.map((item) => {
+								return item.growth >= 0
+									? 'rgba(56, 161, 105, 0.9)'
+									: 'rgba(229, 62, 62, 0.9)'; // Green for positive, Red for negative
+							}),
+							borderColor: annualGrowth.map((item) => {
+								return item.growth >= 0
+									? 'rgba(56, 161, 105, 1)'
+									: 'rgba(229, 62, 62, 1)';
+							}),
+							borderWidth: 1,
+							order: 2, // This dataset will be drawn on top
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					devicePixelRatio: 2,
+					backgroundColor: '#FFFFFF',
+					interaction: {
+						intersect: false,
+						mode: 'index',
+					},
+					plugins: {
+						legend: {
+							position: 'top',
+							labels: {
+								color: '#1a202c',
+								font: {
+									family: 'IRANSansX',
+									size: 14,
+									weight: '600',
+								},
+								usePointStyle: true,
+								padding: 20,
+								generateLabels: function (chart) {
+									return [
+										{
+											text: 'رشد مثبت',
+											fillStyle: 'rgba(56, 161, 105, 0.9)',
+											strokeStyle: 'rgba(56, 161, 105, 1)',
+											lineWidth: 1,
+											hidden: false,
+											index: 0,
+										},
+										{
+											text: 'رشد منفی',
+											fillStyle: 'rgba(229, 62, 62, 0.9)',
+											strokeStyle: 'rgba(229, 62, 62, 1)',
+											lineWidth: 1,
+											hidden: false,
+											index: 1,
+										},
+										{
+											text: 'پیش‌بینی ۱۴۰۴ (پشت)',
+											fillStyle: 'rgba(156, 163, 175, 0.3)',
+											strokeStyle: 'rgba(156, 163, 175, 0.6)',
+											lineWidth: 2,
+											lineDash: [5, 5],
+											hidden: false,
+											index: 2,
+										},
+									];
+								},
+							},
+						},
+						tooltip: {
+							backgroundColor: 'rgba(26, 32, 44, 0.9)',
+							titleColor: '#ffffff',
+							bodyColor: '#ffffff',
+							borderColor: '#e2e8f0',
+							borderWidth: 1,
+							cornerRadius: 8,
+							displayColors: true,
+							titleFont: {
+								family: 'IRANSansX',
+								size: 14,
+								weight: '600',
+							},
+							bodyFont: {
+								family: 'IRANSansX',
+								size: 13,
+								weight: '500',
+							},
+							callbacks: {
+								label: function (context) {
+									const value = context.parsed.y;
+									const datasetIndex = context.datasetIndex;
+									const dataIndex = context.dataIndex;
+
+									// Format number with proper RTL negative sign placement
+									const formatNumber = (num) => {
+										if (num < 0) {
+											// Use Persian locale formatting for negative numbers
+											return num.toLocaleString('fa-IR', {
+												minimumFractionDigits: 1,
+												maximumFractionDigits: 1,
+											});
+										}
+										return num.toLocaleString('fa-IR', {
+											minimumFractionDigits: 1,
+											maximumFractionDigits: 1,
+										});
+									};
+
+									if (datasetIndex === 0) {
+										// Projected dataset (drawn behind)
+										if (value !== null) {
+											return `پیش‌بینی رشد سالانه: ${formatNumber(value)}%`;
+										}
+									} else if (datasetIndex === 1) {
+										// Main dataset (actual growth, drawn on top)
+										const item = annualGrowth[dataIndex];
+										if (item?.type === 'partial') {
+											return `رشد ۴ ماهه: ${formatNumber(value)}%`;
+										}
+										return `رشد سالانه: ${formatNumber(value)}%`;
+									}
+									return '';
+								},
+							},
+						},
+					},
+					scales: {
+						x: {
+							stacked: true, // Enable stacking for overlapping bars
+							display: true,
+							title: {
+								display: true,
+								text: 'سال',
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 14,
+									weight: '600',
+								},
+							},
+							ticks: {
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 12,
+									weight: '500',
+								},
+							},
+							grid: {
+								color: '#e2e8f0',
+								drawBorder: false,
+							},
+						},
+						y: {
+							stacked: true, // Enable stacking for overlapping bars
+							display: true,
+							title: {
+								display: true,
+								text: 'درصد رشد',
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 14,
+									weight: '600',
+								},
+							},
+							ticks: {
+								color: '#4a5568',
+								font: {
+									family: 'IRANSansX',
+									size: 12,
+									weight: '500',
+								},
+								callback: function (value) {
+									// Format number with proper RTL negative sign placement using Persian locale
+									const formatted = value.toLocaleString('fa-IR', {
+										minimumFractionDigits: 0,
+										maximumFractionDigits: 0,
+									});
+									return `${formatted}%`;
+								},
+							},
+							grid: {
+								color: '#e2e8f0',
+								drawBorder: false,
+							},
+						},
+					},
+				},
+			});
 
 			// Second chart configuration
 			const chart2Config = {

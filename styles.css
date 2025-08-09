@@ -573,6 +573,16 @@ h1 {
 	display: block;
 }
 
+/* Regular sub-chart styles */
+.sub-chart {
+	display: none;
+	height: 450px;
+}
+
+.sub-chart.active {
+	display: block;
+}
+
 /* Comparison table styles */
 .comparison-table-container {
 	background: white;
