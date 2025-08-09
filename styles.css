@@ -486,6 +486,48 @@ h1 {
 	display: block;
 }
 
+/* Period selection navigation styles */
+.period-selection-navigation {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	gap: 15px;
+}
+
+.period-selection-button {
+	background: #f7fafc;
+	border: 2px solid #e2e8f0;
+	color: #4a5568;
+	padding: 12px 24px;
+	border-radius: 12px;
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.period-selection-button:hover {
+	background: #edf2f7;
+	border-color: #cbd5e0;
+	transform: translateY(-1px);
+}
+
+.period-selection-button.active {
+	background: #d69e2e;
+	border-color: #d69e2e;
+	color: white;
+	box-shadow: 0 4px 12px rgba(214, 158, 46, 0.3);
+}
+
+.period-content {
+	display: none;
+}
+
+.period-content.active {
+	display: block;
+}
+
 /* Periodic comparison sub-tab styles */
 .periodic-sub-tab-navigation {
 	display: flex;

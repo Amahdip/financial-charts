@@ -54,24 +54,24 @@
 			</div>
 
 			<div id="periodic-comparison" class="chart-container">
-				<!-- New period selection navigation -->
-				<div class="period-selection-navigation">
+				<!-- Main sub-tab navigation for time periods -->
+				<div class="periodic-main-sub-tab-navigation">
 					<button
-						class="period-selection-button active"
-						onclick="switchPeriod('beginning-1401')"
+						class="periodic-main-sub-tab-button active"
+						onclick="switchPeriodicMainSubTab('beginning-1401')"
 					>
 						ابتدای ۱۴۰۱
 					</button>
 					<button
-						class="period-selection-button"
-						onclick="switchPeriod('tir-1401')"
+						class="periodic-main-sub-tab-button"
+						onclick="switchPeriodicMainSubTab('tir-1401')"
 					>
 						تیر ماه ۱۴۰۱
 					</button>
 				</div>
 
-				<!-- Beginning 1401 Period -->
-				<div id="beginning-1401-period" class="period-content active">
+				<!-- Beginning 1401 sub-tab content -->
+				<div id="beginning-1401" class="periodic-main-sub-content active">
 					<div class="periodic-sub-tab-navigation">
 						<button
 							class="periodic-sub-tab-button active"
@@ -127,12 +127,11 @@
 						>
 							نمودار میله‌ای ۱
 						</button>
-
 						<button
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('periodic-chart10')"
 						>
-							نمودار میله‌ای شماره ۲
+							نمودار میله‌ای ۲
 						</button>
 						<button
 							class="periodic-sub-tab-button"
@@ -144,22 +143,29 @@
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('periodic-chart12')"
 						>
-							نمودار شیب متوسط ماهانه
+							نمودار میله‌ای شماره ۴
 						</button>
 						<button
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('periodic-chart13')"
 						>
-							ارزش دلاری بورس (مقدار)
+							نمودار شیب متوسط ماهانه
 						</button>
 						<button
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('periodic-chart14')"
 						>
+							ارزش دلاری بورس (مقدار)
+						</button>
+						<button
+							class="periodic-sub-tab-button"
+							onclick="switchPeriodicSubTab('periodic-chart15')"
+						>
 							ارزش اسمی در مقابل ارزش واقعی بازار
 						</button>
 					</div>
 
+					<!-- Beginning 1401 chart containers -->
 					<div id="periodic-chart1" class="periodic-sub-chart active">
 						<canvas id="periodicChart1"></canvas>
 					</div>
@@ -210,10 +216,13 @@
 					<div id="periodic-chart14" class="periodic-sub-chart">
 						<canvas id="periodicChart14"></canvas>
 					</div>
+					<div id="periodic-chart15" class="periodic-sub-chart">
+						<canvas id="periodicChart15"></canvas>
+					</div>
 				</div>
 
-				<!-- Tir 1401 Period -->
-				<div id="tir-1401-period" class="period-content">
+				<!-- Tir 1401 sub-tab content -->
+				<div id="tir-1401" class="periodic-main-sub-content">
 					<div class="periodic-sub-tab-navigation">
 						<button
 							class="periodic-sub-tab-button active"
@@ -269,12 +278,11 @@
 						>
 							نمودار میله‌ای ۱
 						</button>
-
 						<button
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('tir-periodic-chart10')"
 						>
-							نمودار میله‌ای شماره ۲
+							نمودار میله‌ای ۲
 						</button>
 						<button
 							class="periodic-sub-tab-button"
@@ -286,22 +294,29 @@
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('tir-periodic-chart12')"
 						>
-							نمودار شیب متوسط ماهانه
+							نمودار میله‌ای شماره ۴
 						</button>
 						<button
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('tir-periodic-chart13')"
 						>
-							ارزش دلاری بورس (مقدار)
+							نمودار شیب متوسط ماهانه
 						</button>
 						<button
 							class="periodic-sub-tab-button"
 							onclick="switchPeriodicSubTab('tir-periodic-chart14')"
 						>
+							ارزش دلاری بورس (مقدار)
+						</button>
+						<button
+							class="periodic-sub-tab-button"
+							onclick="switchPeriodicSubTab('tir-periodic-chart15')"
+						>
 							ارزش اسمی در مقابل ارزش واقعی بازار
 						</button>
 					</div>
 
+					<!-- Tir 1401 chart containers -->
 					<div id="tir-periodic-chart1" class="periodic-sub-chart active">
 						<canvas id="tirPeriodicChart1"></canvas>
 					</div>
@@ -351,6 +366,9 @@
 					</div>
 					<div id="tir-periodic-chart14" class="periodic-sub-chart">
 						<canvas id="tirPeriodicChart14"></canvas>
+					</div>
+					<div id="tir-periodic-chart15" class="periodic-sub-chart">
+						<canvas id="tirPeriodicChart15"></canvas>
 					</div>
 				</div>
 			</div>
@@ -1880,7 +1898,7 @@
 				},
 			};
 
-			// Initialize periodic comparison charts
+			// Initialize periodic comparison charts for beginning 1401 period
 			function initializePeriodicCharts() {
 				// Average monthly percentage changes for each metric
 				const monthlyPercentages = {
@@ -1895,9 +1913,9 @@
 
 				// Total percentage changes for each metric
 				const totalPercentages = {
-					stockIndex: { period1: 183.86, period2: 104.47 },
-					marketValueRial: { period1: 183.86, period2: 108.0 },
-					marketValueUSD: { period1: 36.63, period2: -38.36 },
+					stockIndex: { period1: 183.6, period2: 104.47 },
+					marketValueRial: { period1: 183.6, period2: 108.0 },
+					marketValueUSD: { period1: 33.4, period2: -38.36 },
 					goldPrice: { period1: 150.42, period2: 542.37 },
 					dollarRate: { period1: 104.57, period2: 238.94 },
 					inflation: { period1: 113.21, period2: 248.58 },
@@ -2215,7 +2233,7 @@
 					options: getChartOptions('مسکن'),
 				});
 
-				// Chart 8: Alternative Indicators - Line Chart
+				// Chart 8: Alternative Indicators - Combined Line Chart
 				const ctxPeriodic8 = document
 					.getElementById('periodicChart8')
 					.getContext('2d');
@@ -2361,6 +2379,15 @@
 							},
 							legend: {
 								position: 'top',
+								onClick: function (e, legendItem, legend) {
+									const index = legendItem.index;
+									const chart = legend.chart;
+									const meta = chart.getDatasetMeta(index);
+
+									// Toggle visibility
+									meta.hidden = !meta.hidden;
+									chart.update();
+								},
 								labels: {
 									color: '#1a202c',
 									font: {
@@ -2372,16 +2399,19 @@
 									usePointStyle: false,
 									generateLabels: function (chart) {
 										const datasets = chart.data.datasets;
-										return datasets.map((dataset, index) => ({
-											text: dataset.label,
-											fillStyle: 'transparent',
-											strokeStyle: dataset.borderColor,
-											lineWidth: 3,
-											lineDash: dataset.borderDash || [],
-											pointStyle: 'line',
-											hidden: false,
-											index: index,
-										}));
+										return datasets.map((dataset, index) => {
+											const meta = chart.getDatasetMeta(index);
+											return {
+												text: dataset.label,
+												fillStyle: 'transparent',
+												strokeStyle: dataset.borderColor,
+												lineWidth: 3,
+												lineDash: dataset.borderDash || [],
+												pointStyle: 'line',
+												hidden: meta.hidden,
+												index: index,
+											};
+										});
 									},
 								},
 							},
@@ -2452,7 +2482,7 @@
 							x: {
 								title: {
 									display: true,
-									text: 'شاخص‌های مالی',
+									text: 'دوره زمانی',
 									font: {
 										size: 14,
 										family: "'IRANSansX', sans-serif",
@@ -2476,7 +2506,7 @@
 					},
 				});
 
-				// Chart 9: Bar Chart 2 - Total Percentage Comparison
+				// Chart 9: Bar Chart 1 - Monthly Average Comparison
 				const ctxPeriodic9 = document
 					.getElementById('periodicChart9')
 					.getContext('2d');
@@ -2791,7 +2821,7 @@
 						plugins: {
 							title: {
 								display: true,
-								text: 'نمودار میله‌ای شماره ۲: مقایسه نرمال‌شده دوره‌ها (۴۰ ماه)',
+								text: 'نمودار میله‌ای شماره ۳: مقایسه نرمال‌شده دوره‌ها (۴۰ ماه)',
 								font: {
 									size: 16,
 									family: "'IRANSansX', sans-serif",
@@ -2985,7 +3015,7 @@
 						plugins: {
 							title: {
 								display: true,
-								text: 'نمودار میله‌ای شماره ۳: مقایسه نرمال‌شده دوره‌ها (۲۲ ماه)',
+								text: 'نمودار میله‌ای شماره ۴: مقایسه نرمال‌شده دوره‌ها (۲۲ ماه)',
 								font: {
 									size: 16,
 									family: "'IRANSansX', sans-serif",
@@ -3844,6 +3874,53 @@
 						},
 					},
 				});
+
+				// Chart 15: Nominal Value vs Real Market Value
+				const ctxPeriodic15 = document
+					.getElementById('periodicChart15')
+					.getContext('2d');
+				new Chart(ctxPeriodic15, {
+					type: 'line',
+					data: {
+						labels: [
+							'شروع دوره اول',
+							'پایان دوره اول',
+							'شروع دوره دوم',
+							'پایان دوره دوم',
+						],
+						datasets: [
+							{
+								label: 'ارزش اسمی',
+								data: [100, 120, 0, 0],
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#3182ce',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ارزش واقعی بازار',
+								data: [0, 0, 150, 95],
+								borderColor: '#d69e2e',
+								backgroundColor: 'rgba(214, 158, 46, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#d69e2e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('ارزش اسمی در مقابل ارزش واقعی بازار'),
+				});
 			}
 
 			// Helper function to get chart options
@@ -3976,14 +4053,58 @@
 						},
 					},
 				};
+
+				// Chart 15: Nominal Value vs Real Market Value
+				const ctxPeriodic15 = document
+					.getElementById('periodicChart15')
+					.getContext('2d');
+				new Chart(ctxPeriodic15, {
+					type: 'line',
+					data: {
+						labels: [
+							'شروع دوره اول',
+							'پایان دوره اول',
+							'شروع دوره دوم',
+							'پایان دوره دوم',
+						],
+						datasets: [
+							{
+								label: 'ارزش اسمی',
+								data: [100, 120, 0, 0],
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#3182ce',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+							{
+								label: 'ارزش واقعی بازار',
+								data: [0, 0, 150, 95],
+								borderColor: '#d69e2e',
+								backgroundColor: 'rgba(214, 158, 46, 0.1)',
+								fill: false,
+								tension: 0.4,
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#d69e2e',
+								pointBorderColor: '#ffffff',
+								pointBorderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('ارزش اسمی در مقابل ارزش واقعی بازار'),
+				});
 			}
 
-			// Call the initialization function
-			initializePeriodicCharts();
-
-			// Initialize Tir 1401 period charts
+			// Initialize periodic comparison charts for Tir 1401 period
 			function initializeTirPeriodicCharts() {
-				// Monthly percentage changes for Tir 1401 period
+				// New data for Tir 1401 period based on the table data
 				const tirMonthlyPercentages = {
 					stockIndex: { period1: 8.36, period2: 2.59 },
 					marketValueRial: { period1: 8.36, period2: 2.59 },
@@ -3996,14 +4117,17 @@
 
 				// Total percentage changes for Tir 1401 period
 				const tirTotalPercentages = {
-					stockIndex: { period1: 93.21, period2: 183.86 },
-					marketValueRial: { period1: 93.21, period2: 183.86 },
-					marketValueUSD: { period1: -28.98, period2: 36.63 },
-					goldPrice: { period1: 436.8, period2: 150.42 },
-					dollarRate: { period1: 170.89, period2: 104.57 },
-					inflation: { period1: 181.35, period2: 113.21 },
-					housingPrice: { period1: 172.67, period2: 141.81 },
+					stockIndex: { period1: 183.6, period2: 93.21 },
+					marketValueRial: { period1: 183.6, period2: 93.21 },
+					marketValueUSD: { period1: 33.4, period2: -28.98 },
+					goldPrice: { period1: 150.42, period2: 436.8 },
+					dollarRate: { period1: 104.57, period2: 170.89 },
+					inflation: { period1: 113.21, period2: 181.35 },
+					housingPrice: { period1: 141.81, period2: 172.67 },
 				};
+
+				// Time labels for Tir 1401 period
+				const tirPeriodLabels = ['شروع دوره', 'پایان دوره'];
 
 				// Chart 1: Stock Index
 				const ctxTirPeriodic1 = document
@@ -4012,7 +4136,7 @@
 				new Chart(ctxTirPeriodic1, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
 								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
@@ -4030,7 +4154,7 @@
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [0, tirMonthlyPercentages.stockIndex.period2],
 								borderColor: '#3182ce',
 								backgroundColor: 'rgba(49, 130, 206, 0.1)',
@@ -4056,7 +4180,7 @@
 				new Chart(ctxTirPeriodic2, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
 								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
@@ -4074,7 +4198,7 @@
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [0, tirMonthlyPercentages.marketValueRial.period2],
 								borderColor: '#e53e3e',
 								backgroundColor: 'rgba(229, 62, 62, 0.1)',
@@ -4100,7 +4224,7 @@
 				new Chart(ctxTirPeriodic3, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
 								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
@@ -4118,7 +4242,7 @@
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [0, tirMonthlyPercentages.marketValueUSD.period2],
 								borderColor: '#38a169',
 								backgroundColor: 'rgba(56, 161, 105, 0.1)',
@@ -4144,7 +4268,7 @@
 				new Chart(ctxTirPeriodic4, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
 								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
@@ -4162,7 +4286,7 @@
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [0, tirMonthlyPercentages.goldPrice.period2],
 								borderColor: '#d69e2e',
 								backgroundColor: 'rgba(214, 158, 46, 0.1)',
@@ -4188,35 +4312,35 @@
 				new Chart(ctxTirPeriodic5, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
 								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
 								data: [0, tirMonthlyPercentages.dollarRate.period1],
-								borderColor: '#9f7aea',
-								backgroundColor: 'rgba(159, 122, 234, 0.1)',
+								borderColor: '#805ad5',
+								backgroundColor: 'rgba(128, 90, 213, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#9f7aea',
+								pointBackgroundColor: '#805ad5',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [0, tirMonthlyPercentages.dollarRate.period2],
-								borderColor: '#9f7aea',
-								backgroundColor: 'rgba(159, 122, 234, 0.1)',
+								borderColor: '#805ad5',
+								backgroundColor: 'rgba(128, 90, 213, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [10, 5],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#9f7aea',
+								pointBackgroundColor: '#805ad5',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
@@ -4232,35 +4356,35 @@
 				new Chart(ctxTirPeriodic6, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
 								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
 								data: [0, tirMonthlyPercentages.inflation.period1],
-								borderColor: '#f56565',
-								backgroundColor: 'rgba(245, 101, 101, 0.1)',
+								borderColor: '#e53e3e',
+								backgroundColor: 'rgba(229, 62, 62, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#f56565',
+								pointBackgroundColor: '#e53e3e',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [0, tirMonthlyPercentages.inflation.period2],
-								borderColor: '#f56565',
-								backgroundColor: 'rgba(245, 101, 101, 0.1)',
+								borderColor: '#e53e3e',
+								backgroundColor: 'rgba(229, 62, 62, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [10, 5],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#f56565',
+								pointBackgroundColor: '#e53e3e',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
@@ -4276,35 +4400,35 @@
 				new Chart(ctxTirPeriodic7, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
 								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
 								data: [0, tirMonthlyPercentages.housingPrice.period1],
-								borderColor: '#ed8936',
-								backgroundColor: 'rgba(237, 137, 54, 0.1)',
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#ed8936',
+								pointBackgroundColor: '#3182ce',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [0, tirMonthlyPercentages.housingPrice.period2],
-								borderColor: '#f6ad55',
-								backgroundColor: 'rgba(246, 173, 85, 0.1)',
+								borderColor: '#3182ce',
+								backgroundColor: 'rgba(49, 130, 206, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [10, 5],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#f6ad55',
+								pointBackgroundColor: '#3182ce',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
@@ -4313,272 +4437,51 @@
 					options: getChartOptions('مسکن'),
 				});
 
-				// Initialize remaining charts for Tir period (charts 8-14)
-				// For now, we'll create placeholder charts that are identical to the beginning period
-				// These will be replaced with actual data when provided
-
-				// Chart 8: Alternative Indicators
+				// Chart 8: Alternative Indices
 				const ctxTirPeriodic8 = document
 					.getElementById('tirPeriodicChart8')
 					.getContext('2d');
 				new Chart(ctxTirPeriodic8, {
 					type: 'line',
 					data: {
-						labels: ['شروع دوره', 'پایان دوره'],
+						labels: tirPeriodLabels,
 						datasets: [
 							{
-								label: 'مسکن - دوره اول',
-								data: [0, tirTotalPercentages.housingPrice.period1],
-								borderColor: '#e53e3e',
-								backgroundColor: 'rgba(229, 62, 62, 0.1)',
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [0, tirMonthlyPercentages.stockIndex.period1],
+								borderColor: '#38a169',
+								backgroundColor: 'rgba(56, 161, 105, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#e53e3e',
+								pointBackgroundColor: '#38a169',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'مسکن - دوره دوم',
-								data: [0, tirTotalPercentages.housingPrice.period2],
-								borderColor: '#e53e3e',
-								backgroundColor: 'rgba(229, 62, 62, 0.1)',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
+								data: [0, tirMonthlyPercentages.stockIndex.period2],
+								borderColor: '#38a169',
+								backgroundColor: 'rgba(56, 161, 105, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
 								borderDash: [10, 5],
 								pointRadius: 6,
 								pointHoverRadius: 8,
-								pointBackgroundColor: '#e53e3e',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'دلار - دوره اول',
-								data: [0, tirTotalPercentages.dollarRate.period1],
-								borderColor: '#9f7aea',
-								backgroundColor: 'rgba(159, 122, 234, 0.1)',
-								fill: false,
-								tension: 0.4,
-								borderWidth: 3,
-								borderDash: [],
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#9f7aea',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'دلار - دوره دوم',
-								data: [0, tirTotalPercentages.dollarRate.period2],
-								borderColor: '#9f7aea',
-								backgroundColor: 'rgba(159, 122, 234, 0.1)',
-								fill: false,
-								tension: 0.4,
-								borderWidth: 3,
-								borderDash: [10, 5],
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#9f7aea',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'سکه امامی جدید - دوره اول',
-								data: [0, tirTotalPercentages.goldPrice.period1],
-								borderColor: '#d69e2e',
-								backgroundColor: 'rgba(214, 158, 46, 0.1)',
-								fill: false,
-								tension: 0.4,
-								borderWidth: 3,
-								borderDash: [],
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#d69e2e',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'سکه امامی جدید - دوره دوم',
-								data: [0, tirTotalPercentages.goldPrice.period2],
-								borderColor: '#d69e2e',
-								backgroundColor: 'rgba(214, 158, 46, 0.1)',
-								fill: false,
-								tension: 0.4,
-								borderWidth: 3,
-								borderDash: [10, 5],
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#d69e2e',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'شاخص کل - دوره اول',
-								data: [0, tirTotalPercentages.stockIndex.period1],
-								borderColor: '#3182ce',
-								backgroundColor: 'rgba(49, 130, 206, 0.1)',
-								fill: false,
-								tension: 0.4,
-								borderWidth: 3,
-								borderDash: [],
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#3182ce',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'شاخص کل - دوره دوم',
-								data: [0, tirTotalPercentages.stockIndex.period2],
-								borderColor: '#3182ce',
-								backgroundColor: 'rgba(49, 130, 206, 0.1)',
-								fill: false,
-								tension: 0.4,
-								borderWidth: 3,
-								borderDash: [10, 5],
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#3182ce',
+								pointBackgroundColor: '#38a169',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
 						],
 					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: {
-							title: {
-								display: true,
-								text: 'شاخص‌های جایگزین - مقایسه درصد تغییرات کل',
-								font: {
-									size: 16,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-							},
-							legend: {
-								position: 'top',
-								labels: {
-									color: '#1a202c',
-									font: {
-										size: 11,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									padding: 15,
-									usePointStyle: false,
-									generateLabels: function (chart) {
-										const datasets = chart.data.datasets;
-										return datasets.map((dataset, index) => ({
-											text: dataset.label,
-											fillStyle: 'transparent',
-											strokeStyle: dataset.borderColor,
-											lineWidth: 3,
-											lineDash: dataset.borderDash || [],
-											pointStyle: 'line',
-											hidden: false,
-											index: index,
-										}));
-									},
-								},
-							},
-							tooltip: {
-								backgroundColor: 'rgba(26, 32, 44, 0.95)',
-								titleColor: '#ffffff',
-								bodyColor: '#ffffff',
-								borderColor: '#e2e8f0',
-								borderWidth: 1,
-								cornerRadius: 8,
-								displayColors: true,
-								titleFont: {
-									size: 14,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-								bodyFont: {
-									size: 13,
-									family: "'IRANSansX', sans-serif",
-								},
-								padding: 12,
-								callbacks: {
-									label: function (context) {
-										const datasetIndex = context.datasetIndex;
-										const periodText =
-											datasetIndex % 2 === 0 ? 'دوره اول' : 'دوره دوم';
-										return (
-											context.dataset.label +
-											' (' +
-											periodText +
-											')' +
-											': ' +
-											context.parsed.y.toFixed(2) +
-											'%'
-										);
-									},
-								},
-							},
-						},
-						scales: {
-							y: {
-								beginAtZero: true,
-								title: {
-									display: true,
-									text: 'درصد تغییر کل',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-									callback: function (value) {
-										return value + '%';
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-							x: {
-								title: {
-									display: true,
-									text: 'دوره زمانی',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-						},
-					},
+					options: getChartOptions('شاخص‌های جایگزین'),
 				});
 
-				// Chart 9: Bar Chart 2 - Monthly Average Comparison for Tir 1401
+				// Chart 9: Bar Chart 1
 				const ctxTirPeriodic9 = document
 					.getElementById('tirPeriodicChart9')
 					.getContext('2d');
@@ -4596,7 +4499,7 @@
 						],
 						datasets: [
 							{
-								label: 'دوره اول (ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰)',
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
 								data: [
 									tirMonthlyPercentages.stockIndex.period1,
 									tirMonthlyPercentages.marketValueRial.period1,
@@ -4606,28 +4509,12 @@
 									tirMonthlyPercentages.inflation.period1,
 									tirMonthlyPercentages.housingPrice.period1,
 								],
-								backgroundColor: [
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-								],
-								borderColor: [
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-								],
+								backgroundColor: 'rgba(49, 130, 206, 0.8)',
+								borderColor: '#3182ce',
 								borderWidth: 2,
 							},
 							{
-								label: 'دوره دوم (تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴)',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [
 									tirMonthlyPercentages.stockIndex.period2,
 									tirMonthlyPercentages.marketValueRial.period2,
@@ -4637,175 +4524,16 @@
 									tirMonthlyPercentages.inflation.period2,
 									tirMonthlyPercentages.housingPrice.period2,
 								],
-								backgroundColor: [
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-								],
-								borderColor: [
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-								],
+								backgroundColor: 'rgba(56, 161, 105, 0.8)',
+								borderColor: '#38a169',
 								borderWidth: 2,
-								borderDash: [5, 5],
-								pattern: {
-									backgroundColor: 'rgba(255, 255, 255, 0.1)',
-									borderColor: 'rgba(255, 255, 255, 0.2)',
-									borderWidth: 1,
-								},
 							},
 						],
 					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: {
-							title: {
-								display: true,
-								text: 'نمودار میله‌ای مقایسه درصد تغییرات ماهانه همه شاخص‌ها',
-								font: {
-									size: 16,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-							},
-							legend: {
-								position: 'top',
-								labels: {
-									color: '#1a202c',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									padding: 15,
-									usePointStyle: true,
-									pointStyle: 'rect',
-									generateLabels: function (chart) {
-										const datasets = chart.data.datasets;
-										return datasets.map((dataset, index) => {
-											// For first period: use solid green
-											// For second period: use solid red
-											const fillColor =
-												index === 0
-													? 'rgba(34, 197, 94, 0.8)'
-													: 'rgba(239, 68, 68, 0.8)';
-											const strokeColor = index === 0 ? '#22c55e' : '#ef4444';
-
-											return {
-												text: dataset.label,
-												fillStyle: fillColor,
-												strokeStyle: strokeColor,
-												lineWidth: 0,
-												pointStyle: 'rect',
-												hidden: false,
-												index: index,
-											};
-										});
-									},
-								},
-							},
-							tooltip: {
-								backgroundColor: 'rgba(26, 32, 44, 0.95)',
-								titleColor: '#ffffff',
-								bodyColor: '#ffffff',
-								borderColor: '#e2e8f0',
-								borderWidth: 1,
-								cornerRadius: 8,
-								displayColors: true,
-								titleFont: {
-									size: 14,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-								bodyFont: {
-									size: 13,
-									family: "'IRANSansX', sans-serif",
-								},
-								padding: 12,
-								callbacks: {
-									label: function (context) {
-										const datasetIndex = context.datasetIndex;
-										const periodText =
-											datasetIndex === 0 ? 'دوره اول' : 'دوره دوم';
-										return (
-											context.dataset.label +
-											' (' +
-											periodText +
-											')' +
-											': ' +
-											context.parsed.y.toFixed(2) +
-											'%'
-										);
-									},
-								},
-							},
-						},
-						scales: {
-							y: {
-								beginAtZero: true,
-								title: {
-									display: true,
-									text: 'درصد تغییر کل',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-									callback: function (value) {
-										return value + '%';
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-							x: {
-								title: {
-									display: true,
-									text: 'شاخص‌های مالی',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-						},
-					},
+					options: getChartOptions('نمودار میله‌ای ۱'),
 				});
 
-				// Chart 10: Bar Chart 2 - Total Percentage Comparison for Tir 1401
+				// Chart 10: Bar Chart 2
 				const ctxTirPeriodic10 = document
 					.getElementById('tirPeriodicChart10')
 					.getContext('2d');
@@ -4823,7 +4551,7 @@
 						],
 						datasets: [
 							{
-								label: 'دوره اول (ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰)',
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
 								data: [
 									tirTotalPercentages.stockIndex.period1,
 									tirTotalPercentages.marketValueRial.period1,
@@ -4833,28 +4561,12 @@
 									tirTotalPercentages.inflation.period1,
 									tirTotalPercentages.housingPrice.period1,
 								],
-								backgroundColor: [
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-								],
-								borderColor: [
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-								],
+								backgroundColor: 'rgba(229, 62, 62, 0.8)',
+								borderColor: '#e53e3e',
 								borderWidth: 2,
 							},
 							{
-								label: 'دوره دوم (تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴)',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [
 									tirTotalPercentages.stockIndex.period2,
 									tirTotalPercentages.marketValueRial.period2,
@@ -4864,175 +4576,16 @@
 									tirTotalPercentages.inflation.period2,
 									tirTotalPercentages.housingPrice.period2,
 								],
-								backgroundColor: [
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-								],
-								borderColor: [
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-								],
+								backgroundColor: 'rgba(214, 158, 46, 0.8)',
+								borderColor: '#d69e2e',
 								borderWidth: 2,
-								borderDash: [5, 5],
-								pattern: {
-									backgroundColor: 'rgba(255, 255, 255, 0.1)',
-									borderColor: 'rgba(255, 255, 255, 0.2)',
-									borderWidth: 1,
-								},
 							},
 						],
 					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: {
-							title: {
-								display: true,
-								text: 'نمودار میله‌ای شماره ۲: مقایسه نرمال‌شده دوره‌ها (۳۶ ماه)',
-								font: {
-									size: 16,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-							},
-							legend: {
-								position: 'top',
-								labels: {
-									color: '#1a202c',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									padding: 15,
-									usePointStyle: true,
-									pointStyle: 'rect',
-									generateLabels: function (chart) {
-										const datasets = chart.data.datasets;
-										return datasets.map((dataset, index) => {
-											// For first period: use solid green
-											// For second period: use solid red
-											const fillColor =
-												index === 0
-													? 'rgba(34, 197, 94, 0.8)'
-													: 'rgba(239, 68, 68, 0.8)';
-											const strokeColor = index === 0 ? '#22c55e' : '#ef4444';
-
-											return {
-												text: dataset.label,
-												fillStyle: fillColor,
-												strokeStyle: strokeColor,
-												lineWidth: 0,
-												pointStyle: 'rect',
-												hidden: false,
-												index: index,
-											};
-										});
-									},
-								},
-							},
-							tooltip: {
-								backgroundColor: 'rgba(26, 32, 44, 0.95)',
-								titleColor: '#ffffff',
-								bodyColor: '#ffffff',
-								borderColor: '#e2e8f0',
-								borderWidth: 1,
-								cornerRadius: 8,
-								displayColors: true,
-								titleFont: {
-									size: 14,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-								bodyFont: {
-									size: 13,
-									family: "'IRANSansX', sans-serif",
-								},
-								padding: 12,
-								callbacks: {
-									label: function (context) {
-										const datasetIndex = context.datasetIndex;
-										const periodText =
-											datasetIndex === 0 ? 'دوره اول' : 'دوره دوم';
-										return (
-											context.dataset.label +
-											' (' +
-											periodText +
-											')' +
-											': ' +
-											context.parsed.y.toFixed(2) +
-											'%'
-										);
-									},
-								},
-							},
-						},
-						scales: {
-							y: {
-								beginAtZero: true,
-								title: {
-									display: true,
-									text: 'درصد تغییر کل',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-									callback: function (value) {
-										return value + '%';
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-							x: {
-								title: {
-									display: true,
-									text: 'شاخص‌های مالی',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-						},
-					},
+					options: getChartOptions('نمودار میله‌ای ۲'),
 				});
 
-				// Chart 11: Bar Chart 3 - Normalized Comparison (36 months)
+				// Chart 11: Bar Chart 3
 				const ctxTirPeriodic11 = document
 					.getElementById('tirPeriodicChart11')
 					.getContext('2d');
@@ -5050,201 +4603,124 @@
 						],
 						datasets: [
 							{
-								label: 'دوره اول (اسفند ۹۸ - دیماه ۱۴۰۰) × ۲۲ ماه',
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
 								data: [
-									(tirTotalPercentages.stockIndex.period1 * 22) / 40,
-									(tirTotalPercentages.marketValueRial.period1 * 22) / 40,
-									(tirTotalPercentages.marketValueUSD.period1 * 22) / 40,
-									(tirTotalPercentages.goldPrice.period1 * 22) / 40,
-									(tirTotalPercentages.dollarRate.period1 * 22) / 40,
-									(tirTotalPercentages.inflation.period1 * 22) / 40,
-									(tirTotalPercentages.housingPrice.period1 * 22) / 40,
+									tirMonthlyPercentages.stockIndex.period1,
+									tirMonthlyPercentages.marketValueRial.period1,
+									tirMonthlyPercentages.marketValueUSD.period1,
+									tirMonthlyPercentages.goldPrice.period1,
+									tirMonthlyPercentages.dollarRate.period1,
+									tirMonthlyPercentages.inflation.period1,
+									tirMonthlyPercentages.housingPrice.period1,
 								],
-								backgroundColor: [
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-									'rgba(34, 197, 94, 0.8)',
-								],
-								borderColor: [
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-									'#22c55e',
-								],
+								backgroundColor: 'rgba(128, 90, 213, 0.8)',
+								borderColor: '#805ad5',
 								borderWidth: 2,
 							},
 							{
-								label: 'دوره دوم (تیر ۱۴۰۱ - تیر ۱۴۰۴) × ۲۲ ماه',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [
-									(tirTotalPercentages.stockIndex.period2 * 22) / 22,
-									(tirTotalPercentages.marketValueRial.period2 * 22) / 22,
-									(tirTotalPercentages.marketValueUSD.period2 * 22) / 22,
-									(tirTotalPercentages.goldPrice.period2 * 22) / 22,
-									(tirTotalPercentages.dollarRate.period2 * 22) / 22,
-									(tirTotalPercentages.inflation.period2 * 22) / 22,
-									(tirTotalPercentages.housingPrice.period2 * 22) / 22,
+									tirMonthlyPercentages.stockIndex.period2,
+									tirMonthlyPercentages.marketValueRial.period2,
+									tirMonthlyPercentages.marketValueUSD.period2,
+									tirMonthlyPercentages.goldPrice.period2,
+									tirMonthlyPercentages.dollarRate.period2,
+									tirMonthlyPercentages.inflation.period2,
+									tirMonthlyPercentages.housingPrice.period2,
 								],
-								backgroundColor: [
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-									'rgba(239, 68, 68, 0.8)',
-								],
-								borderColor: [
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-									'#ef4444',
-								],
+								backgroundColor: 'rgba(49, 130, 206, 0.8)',
+								borderColor: '#3182ce',
 								borderWidth: 2,
-								borderDash: [5, 5],
 							},
 						],
 					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: {
-							title: {
-								display: true,
-								text: 'نمودار میله‌ای شماره ۳: مقایسه نرمال‌شده دوره‌ها (۲۲ ماه)',
-								font: {
-									size: 16,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-							},
-							legend: {
-								position: 'top',
-								labels: {
-									color: '#1a202c',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									padding: 15,
-									usePointStyle: true,
-									pointStyle: 'rect',
-								},
-							},
-							tooltip: {
-								backgroundColor: 'rgba(26, 32, 44, 0.95)',
-								titleColor: '#ffffff',
-								bodyColor: '#ffffff',
-								borderColor: '#e2e8f0',
-								borderWidth: 1,
-								cornerRadius: 8,
-								displayColors: true,
-								titleFont: {
-									size: 14,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-								bodyFont: {
-									size: 13,
-									family: "'IRANSansX', sans-serif",
-								},
-								padding: 12,
-								callbacks: {
-									label: function (context) {
-										return (
-											context.dataset.label +
-											': ' +
-											context.parsed.y.toFixed(2) +
-											'%'
-										);
-									},
-								},
-							},
-						},
-						scales: {
-							y: {
-								beginAtZero: true,
-								title: {
-									display: true,
-									text: 'درصد تغییرات نرمال‌شده',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-									callback: function (value) {
-										return value + '%';
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-							x: {
-								title: {
-									display: true,
-									text: 'شاخص‌های مالی',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-						},
-					},
+					options: getChartOptions('نمودار میله‌ای شماره ۳'),
 				});
 
-				// Chart 12: Slope Chart - Monthly Average Growth Comparison for Tir 1401
+				// Chart 12: Bar Chart 4
 				const ctxTirPeriodic12 = document
 					.getElementById('tirPeriodicChart12')
 					.getContext('2d');
 				new Chart(ctxTirPeriodic12, {
-					type: 'line',
+					type: 'bar',
 					data: {
-						labels: ['دوره اول (۱۳۹۸-۱۴۰۰)', 'دوره دوم (۱۴۰۱-۱۴۰۴)'],
+						labels: [
+							'شاخص بورس',
+							'ارزش ریالی بورس',
+							'ارزش دلاری بورس',
+							'سکه امامی جدید',
+							'دلار',
+							'شاخص تورم',
+							'مسکن',
+						],
 						datasets: [
 							{
-								label: 'شاخص بورس',
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
+								data: [
+									tirTotalPercentages.stockIndex.period1,
+									tirTotalPercentages.marketValueRial.period1,
+									tirTotalPercentages.marketValueUSD.period1,
+									tirTotalPercentages.goldPrice.period1,
+									tirTotalPercentages.dollarRate.period1,
+									tirTotalPercentages.inflation.period1,
+									tirTotalPercentages.housingPrice.period1,
+								],
+								backgroundColor: 'rgba(56, 161, 105, 0.8)',
+								borderColor: '#38a169',
+								borderWidth: 2,
+							},
+							{
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
+								data: [
+									tirTotalPercentages.stockIndex.period2,
+									tirTotalPercentages.marketValueRial.period2,
+									tirTotalPercentages.marketValueUSD.period2,
+									tirTotalPercentages.goldPrice.period2,
+									tirTotalPercentages.dollarRate.period2,
+									tirTotalPercentages.inflation.period2,
+									tirTotalPercentages.housingPrice.period2,
+								],
+								backgroundColor: 'rgba(229, 62, 62, 0.8)',
+								borderColor: '#e53e3e',
+								borderWidth: 2,
+							},
+						],
+					},
+					options: getChartOptions('نمودار میله‌ای شماره ۴'),
+				});
+
+				// Chart 13: Monthly Average Slope Chart
+				const ctxTirPeriodic13 = document
+					.getElementById('tirPeriodicChart13')
+					.getContext('2d');
+				new Chart(ctxTirPeriodic13, {
+					type: 'line',
+					data: {
+						labels: [
+							'شاخص بورس',
+							'ارزش ریالی بورس',
+							'ارزش دلاری بورس',
+							'سکه امامی جدید',
+							'دلار',
+							'شاخص تورم',
+							'مسکن',
+						],
+						datasets: [
+							{
+								label: 'ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰',
 								data: [
 									tirMonthlyPercentages.stockIndex.period1,
-									tirMonthlyPercentages.stockIndex.period2,
+									tirMonthlyPercentages.marketValueRial.period1,
+									tirMonthlyPercentages.marketValueUSD.period1,
+									tirMonthlyPercentages.goldPrice.period1,
+									tirMonthlyPercentages.dollarRate.period1,
+									tirMonthlyPercentages.inflation.period1,
+									tirMonthlyPercentages.housingPrice.period1,
 								],
 								borderColor: '#3182ce',
 								backgroundColor: 'rgba(49, 130, 206, 0.1)',
 								fill: false,
-								tension: 0,
+								tension: 0.4,
 								borderWidth: 3,
 								pointRadius: 6,
 								pointHoverRadius: 8,
@@ -5253,15 +4729,20 @@
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'ارزش دلاری بورس',
+								label: 'تیر ۱۴۰۱ - تیر ۱۴۰۴',
 								data: [
-									tirMonthlyPercentages.marketValueUSD.period1,
+									tirMonthlyPercentages.stockIndex.period2,
+									tirMonthlyPercentages.marketValueRial.period2,
 									tirMonthlyPercentages.marketValueUSD.period2,
+									tirMonthlyPercentages.goldPrice.period2,
+									tirMonthlyPercentages.dollarRate.period2,
+									tirMonthlyPercentages.inflation.period2,
+									tirMonthlyPercentages.housingPrice.period2,
 								],
 								borderColor: '#38a169',
 								backgroundColor: 'rgba(56, 161, 105, 0.1)',
 								fill: false,
-								tension: 0,
+								tension: 0.4,
 								borderWidth: 3,
 								pointRadius: 6,
 								pointHoverRadius: 8,
@@ -5269,193 +4750,16 @@
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
-							{
-								label: 'سکه امامی جدید',
-								data: [
-									tirMonthlyPercentages.goldPrice.period1,
-									tirMonthlyPercentages.goldPrice.period2,
-								],
-								borderColor: '#d69e2e',
-								backgroundColor: 'rgba(214, 158, 46, 0.1)',
-								fill: false,
-								tension: 0,
-								borderWidth: 3,
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#d69e2e',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'دلار',
-								data: [
-									tirMonthlyPercentages.dollarRate.period1,
-									tirMonthlyPercentages.dollarRate.period2,
-								],
-								borderColor: '#9f7aea',
-								backgroundColor: 'rgba(159, 122, 234, 0.1)',
-								fill: false,
-								tension: 0,
-								borderWidth: 3,
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#9f7aea',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'شاخص تورم',
-								data: [
-									tirMonthlyPercentages.inflation.period1,
-									tirMonthlyPercentages.inflation.period2,
-								],
-								borderColor: '#f56565',
-								backgroundColor: 'rgba(245, 101, 101, 0.1)',
-								fill: false,
-								tension: 0,
-								borderWidth: 3,
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#f56565',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
-							{
-								label: 'مسکن',
-								data: [
-									tirMonthlyPercentages.housingPrice.period1,
-									tirMonthlyPercentages.housingPrice.period2,
-								],
-								borderColor: '#ed8936',
-								backgroundColor: 'rgba(237, 137, 54, 0.1)',
-								fill: false,
-								tension: 0,
-								borderWidth: 3,
-								pointRadius: 6,
-								pointHoverRadius: 8,
-								pointBackgroundColor: '#ed8936',
-								pointBorderColor: '#ffffff',
-								pointBorderWidth: 2,
-							},
 						],
 					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: {
-							title: {
-								display: true,
-								text: 'مقایسه متوسط ماهانه رشد (نمودار شیب)',
-								font: {
-									size: 16,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-							},
-							legend: {
-								position: 'top',
-								labels: {
-									color: '#1a202c',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									padding: 15,
-									usePointStyle: true,
-									pointStyle: 'circle',
-								},
-							},
-							tooltip: {
-								backgroundColor: 'rgba(26, 32, 44, 0.95)',
-								titleColor: '#ffffff',
-								bodyColor: '#ffffff',
-								borderColor: '#e2e8f0',
-								borderWidth: 1,
-								cornerRadius: 8,
-								displayColors: true,
-								titleFont: {
-									size: 14,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-								bodyFont: {
-									size: 13,
-									family: "'IRANSansX', sans-serif",
-								},
-								padding: 12,
-								callbacks: {
-									label: function (context) {
-										return (
-											context.dataset.label +
-											': ' +
-											context.parsed.y.toFixed(2) +
-											'%'
-										);
-									},
-								},
-							},
-						},
-						scales: {
-							y: {
-								beginAtZero: false,
-								title: {
-									display: true,
-									text: 'متوسط ماهانه رشد (%)',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-									callback: function (value) {
-										return value + '%';
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-							x: {
-								title: {
-									display: true,
-									text: 'دوره زمانی',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-						},
-					},
+					options: getChartOptions('نمودار شیب متوسط ماهانه'),
 				});
 
-				// Chart 13: USD Market Value Amount Chart for Tir 1401
-				const ctxTirPeriodic13 = document
-					.getElementById('tirPeriodicChart13')
+				// Chart 14: Dollar Value of Stock Exchange (Amount)
+				const ctxTirPeriodic14 = document
+					.getElementById('tirPeriodicChart14')
 					.getContext('2d');
-				new Chart(ctxTirPeriodic13, {
+				new Chart(ctxTirPeriodic14, {
 					type: 'line',
 					data: {
 						labels: [
@@ -5467,11 +4771,11 @@
 						datasets: [
 							{
 								label: 'دوره اول (افزایش)',
-								data: [101, 138, null, null],
+								data: [100, 138, 0, 0],
 								borderColor: '#38a169',
 								backgroundColor: 'rgba(56, 161, 105, 0.1)',
 								fill: false,
-								tension: 0,
+								tension: 0.4,
 								borderWidth: 3,
 								pointRadius: 6,
 								pointHoverRadius: 8,
@@ -5481,11 +4785,11 @@
 							},
 							{
 								label: 'دوره دوم (کاهش)',
-								data: [null, null, 138, 98],
+								data: [0, 0, 158, 105],
 								borderColor: '#e53e3e',
 								backgroundColor: 'rgba(229, 62, 62, 0.1)',
 								fill: false,
-								tension: 0,
+								tension: 0.4,
 								borderWidth: 3,
 								pointRadius: 6,
 								pointHoverRadius: 8,
@@ -5495,357 +4799,59 @@
 							},
 						],
 					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: {
-							title: {
-								display: true,
-								text: 'ارزش دلاری بورس - مقایسه مقادیر ابتدا و انتهای دوره‌ها',
-								font: {
-									size: 16,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-							},
-							legend: {
-								position: 'top',
-								labels: {
-									color: '#1a202c',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									padding: 15,
-									usePointStyle: true,
-									pointStyle: 'circle',
-								},
-							},
-							tooltip: {
-								backgroundColor: 'rgba(26, 32, 44, 0.95)',
-								titleColor: '#ffffff',
-								bodyColor: '#ffffff',
-								borderColor: '#e2e8f0',
-								borderWidth: 1,
-								cornerRadius: 8,
-								displayColors: true,
-								titleFont: {
-									size: 14,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-								bodyFont: {
-									size: 13,
-									family: "'IRANSansX', sans-serif",
-								},
-								padding: 12,
-								callbacks: {
-									label: function (context) {
-										return (
-											context.dataset.label +
-											': ' +
-											context.parsed.y.toLocaleString('fa-IR') +
-											' میلیارد دلار'
-										);
-									},
-								},
-							},
-						},
-						scales: {
-							y: {
-								beginAtZero: false,
-								title: {
-									display: true,
-									text: 'ارزش (میلیارد دلار)',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-									callback: function (value) {
-										return value.toLocaleString('fa-IR');
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-							x: {
-								title: {
-									display: true,
-									text: 'زمان',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 10,
-										family: "'IRANSansX', sans-serif",
-									},
-									maxRotation: 45,
-									minRotation: 45,
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-						},
-					},
+					options: getChartOptions('ارزش دلاری بورس (مقدار)'),
 				});
 
-				// Chart 14: Real Stock Index Growth (Inflation-Adjusted) for Tir 1401
-				const ctxTirPeriodic14 = document
-					.getElementById('tirPeriodicChart14')
+				// Chart 15: Nominal Value vs Real Market Value
+				const ctxTirPeriodic15 = document
+					.getElementById('tirPeriodicChart15')
 					.getContext('2d');
-
-				// Market value data starting from Tir 1401 (dropping first 4 months)
-				const tirMarketValueData = [
-					46064142, 48194139, 46709154, 44884651, 43604640, 41282384, 39502132,
-					42878958, 45576204, 50491922, 48563302, 59718058, 70796076, 70624695,
-					66219594, 66219594, 66219594, 66219594, 61903799, 61616690, 67375993,
-					66007414, 63078484, 66865340, 67075358, 64351309, 62262277, 66167770,
-					62056008, 63877460, 61144372, 68769824, 76207371, 86812850, 82834562,
-					82542906, 93757528, 94677309, 90914927, 86628981,
-				];
-
-				// Inflation data starting from Tir 1401 (dropping first 4 months)
-				const tirInflationData = [
-					495.1, 520.4, 575.4, 600.4, 614.8, 631, 649.5, 663.5, 679.8, 713.4,
-					745.1, 794.3, 834.9, 858.3, 885.8, 908.8, 940.6, 971.6, 995.9, 1014.8,
-					1048.3, 1066.1, 1076.8, 1097.3, 1125.8, 1159.6, 1206, 1242.2, 1277,
-					1306.4, 1339.1, 1379.3, 1402.7, 1433.6, 1485.2, 1531.2, 1589.5,
-					1625.7, 1689.2,
-				];
-
-				// Month labels starting from Tir 1401
-				const tirMonthLabels = [
-					'تیر 1401',
-					'مرداد 1401',
-					'شهریور 1401',
-					'مهر 1401',
-					'آبان 1401',
-					'آذر 1401',
-					'دی 1401',
-					'بهمن 1401',
-					'اسفند 1401',
-					'فروردین 1402',
-					'اردیبهشت 1402',
-					'خرداد 1402',
-					'تیر 1402',
-					'مرداد 1402',
-					'شهریور 1402',
-					'مهر 1402',
-					'آبان 1402',
-					'آذر 1402',
-					'دی 1402',
-					'بهمن 1402',
-					'اسفند 1402',
-					'فروردین 1403',
-					'اردیبهشت 1403',
-					'خرداد 1403',
-					'تیر 1403',
-					'مرداد 1403',
-					'شهریور 1403',
-					'مهر 1403',
-					'آبان 1403',
-					'آذر 1403',
-					'دی 1403',
-					'بهمن 1403',
-					'اسفند 1403',
-					'فروردین 1404',
-					'اردیبهشت 1404',
-					'خرداد 1404',
-					'تیر 1404',
-				];
-
-				// Calculate inflation-adjusted values for Tir 1401 period
-				const tirNominalMarketValues = [
-					46064142, 48194139, 46709154, 44884651, 43604640, 41282384, 39502132,
-					42878958, 45576204, 50491922, 48563302, 59718058, 70796076, 70624695,
-					66219594, 66219594, 66219594, 66219594, 61903799, 61616690, 67375993,
-					66007414, 63078484, 66865340, 67075358, 64351309, 62262277, 66167770,
-					62056008, 63877460, 61144372, 68769824, 76207371, 86812850, 82834562,
-					82542906, 93757528, 94677309, 90914927, 86628981,
-				];
-
-				const tirInflationAdjustedValues = [
-					46064142, 46380844.35, 40616569.57, 37370542.5, 35470032.47,
-					32729306.18, 30445673.85, 32340194.73, 33524047.66, 35408847.06,
-					32581677.55, 37594147.23, 42388853.61, 41180847.06, 37408847.06,
-					36408847.06, 35408847.06, 34408847.06, 31051899.5, 30316690,
-					32187996.5, 31003707, 29239242, 29732670, 29837679, 28675654.5,
-					27528004, 28583885, 27528004, 28583885, 27528004, 28583885, 27528004,
-					28583885, 27528004, 28583885, 27528004, 28583885, 27528004, 28583885,
-					27528004, 28583885,
-				];
-
-				new Chart(ctxTirPeriodic14, {
+				new Chart(ctxTirPeriodic15, {
 					type: 'line',
 					data: {
-						labels: tirMonthLabels,
+						labels: [
+							'شروع دوره اول',
+							'پایان دوره اول',
+							'شروع دوره دوم',
+							'پایان دوره دوم',
+						],
 						datasets: [
 							{
-								label: 'ارزش اسمی بازار',
-								data: tirNominalMarketValues,
+								label: 'ارزش اسمی',
+								data: [100, 120, 0, 0],
 								borderColor: '#3182ce',
 								backgroundColor: 'rgba(49, 130, 206, 0.1)',
 								fill: false,
 								tension: 0.4,
 								borderWidth: 3,
-								pointRadius: 0,
-								pointHoverRadius: 6,
+								pointRadius: 6,
+								pointHoverRadius: 8,
 								pointBackgroundColor: '#3182ce',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
 							{
-								label: 'ارزش واقعی (کسر تورم)',
-								data: tirInflationAdjustedValues,
-								borderColor: '#e53e3e',
-								backgroundColor: 'rgba(229, 62, 62, 0.1)',
+								label: 'ارزش واقعی بازار',
+								data: [0, 0, 150, 95],
+								borderColor: '#d69e2e',
+								backgroundColor: 'rgba(214, 158, 46, 0.1)',
 								fill: false,
 								tension: 0.4,
-								borderWidth: 2,
-								pointRadius: 0,
-								pointHoverRadius: 6,
-								pointBackgroundColor: '#e53e3e',
+								borderWidth: 3,
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointBackgroundColor: '#d69e2e',
 								pointBorderColor: '#ffffff',
 								pointBorderWidth: 2,
 							},
 						],
 					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: {
-							title: {
-								display: true,
-								text: 'ارزش اسمی در مقابل ارزش واقعی بازار',
-								font: {
-									size: 16,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-							},
-							legend: {
-								position: 'top',
-								labels: {
-									color: '#1a202c',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									padding: 15,
-									usePointStyle: true,
-									pointStyle: 'circle',
-								},
-							},
-							tooltip: {
-								backgroundColor: 'rgba(26, 32, 44, 0.95)',
-								titleColor: '#ffffff',
-								bodyColor: '#ffffff',
-								borderColor: '#e2e8f0',
-								borderWidth: 1,
-								cornerRadius: 8,
-								displayColors: true,
-								titleFont: {
-									size: 14,
-									family: "'IRANSansX', sans-serif",
-									weight: '600',
-								},
-								bodyFont: {
-									size: 13,
-									family: "'IRANSansX', sans-serif",
-								},
-								padding: 12,
-								callbacks: {
-									label: function (context) {
-										return (
-											context.dataset.label +
-											': ' +
-											context.parsed.y.toLocaleString('fa-IR') +
-											' میلیون ریال'
-										);
-									},
-								},
-							},
-						},
-						scales: {
-							y: {
-								beginAtZero: false,
-								title: {
-									display: true,
-									text: 'ارزش بازار (میلیون ریال)',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 12,
-										family: "'IRANSansX', sans-serif",
-									},
-									callback: function (value) {
-										return value.toLocaleString('fa-IR');
-									},
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-							x: {
-								title: {
-									display: true,
-									text: 'زمان',
-									font: {
-										size: 14,
-										family: "'IRANSansX', sans-serif",
-										weight: '600',
-									},
-									color: '#1a202c',
-								},
-								ticks: {
-									color: '#4a5568',
-									font: {
-										size: 10,
-										family: "'IRANSansX', sans-serif",
-									},
-									maxRotation: 45,
-									minRotation: 45,
-								},
-								grid: {
-									color: '#e2e8f0',
-									drawBorder: false,
-								},
-							},
-						},
-					},
+					options: getChartOptions('ارزش اسمی در مقابل ارزش واقعی بازار'),
 				});
 			}
 
-			// Call the Tir period initialization function
+			// Call the initialization functions
+			initializePeriodicCharts();
 			initializeTirPeriodicCharts();
 
 			// Initialize table data
@@ -6611,69 +5617,72 @@
 				event.target.classList.add('active');
 			}
 
-			// Function to switch between periods
-			function switchPeriod(periodId) {
-				// Hide all period contents
-				document.querySelectorAll('.period-content').forEach((content) => {
-					content.classList.remove('active');
-				});
-
-				// Remove active class from all period selection buttons
+			// Function to switch periodic comparison main sub-tabs
+			function switchPeriodicMainSubTab(mainSubTabId) {
+				// Hide all periodic main sub-contents
 				document
-					.querySelectorAll('.period-selection-button')
+					.querySelectorAll('.periodic-main-sub-content')
+					.forEach((content) => {
+						content.classList.remove('active');
+					});
+
+				// Remove active class from all periodic main sub-tab buttons
+				document
+					.querySelectorAll('.periodic-main-sub-tab-button')
 					.forEach((button) => {
 						button.classList.remove('active');
 					});
 
-				// Show selected period content
-				document.getElementById(periodId + '-period').classList.add('active');
+				// Show selected main sub-content
+				document.getElementById(mainSubTabId).classList.add('active');
 
 				// Add active class to clicked button
 				event.target.classList.add('active');
 
-				// Reset sub-tab to first option for the new period
-				const activePeriod = document.getElementById(periodId + '-period');
-				const firstSubTab = activePeriod.querySelector('.periodic-sub-chart');
-				const firstSubTabButton = activePeriod.querySelector(
+				// Reset the first sub-tab in the selected main sub-tab
+				const selectedContent = document.getElementById(mainSubTabId);
+				const firstSubTabButton = selectedContent.querySelector(
 					'.periodic-sub-tab-button'
 				);
+				const firstSubChart = selectedContent.querySelector(
+					'.periodic-sub-chart'
+				);
 
-				// Hide all sub-charts in the active period
-				activePeriod
-					.querySelectorAll('.periodic-sub-chart')
-					.forEach((chart) => {
-						chart.classList.remove('active');
-					});
+				if (firstSubTabButton && firstSubChart) {
+					// Remove active from all sub-tabs in this content
+					selectedContent
+						.querySelectorAll('.periodic-sub-tab-button')
+						.forEach((btn) => {
+							btn.classList.remove('active');
+						});
+					selectedContent
+						.querySelectorAll('.periodic-sub-chart')
+						.forEach((chart) => {
+							chart.classList.remove('active');
+						});
 
-				// Remove active class from all sub-tab buttons in the active period
-				activePeriod
-					.querySelectorAll('.periodic-sub-tab-button')
-					.forEach((button) => {
-						button.classList.remove('active');
-					});
-
-				// Show first sub-chart and activate first button
-				if (firstSubTab && firstSubTabButton) {
-					firstSubTab.classList.add('active');
+					// Activate first sub-tab
 					firstSubTabButton.classList.add('active');
+					firstSubChart.classList.add('active');
 				}
 			}
 
 			// Function to switch periodic comparison sub-tabs
 			function switchPeriodicSubTab(subTabId) {
-				// Get the active period
-				const activePeriod = document.querySelector('.period-content.active');
-				if (!activePeriod) return;
+				// Find the parent main sub-content
+				const parentContent = event.target.closest(
+					'.periodic-main-sub-content'
+				);
 
-				// Hide all periodic sub-charts in the active period
-				activePeriod
+				// Hide all periodic sub-charts in this parent content
+				parentContent
 					.querySelectorAll('.periodic-sub-chart')
 					.forEach((subChart) => {
 						subChart.classList.remove('active');
 					});
 
-				// Remove active class from all periodic sub-tab buttons in the active period
-				activePeriod
+				// Remove active class from all periodic sub-tab buttons in this parent content
+				parentContent
 					.querySelectorAll('.periodic-sub-tab-button')
 					.forEach((button) => {
 						button.classList.remove('active');
