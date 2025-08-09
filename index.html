@@ -63,13 +63,13 @@
 						class="period-selection-button active"
 						onclick="switchPeriod('beginning-1401')"
 					>
-						ابتدای ۱۴۰۱
+						مبنا: ابتدای ۱۴۰۱
 					</button>
 					<button
 						class="period-selection-button"
 						onclick="switchPeriod('tir-1401')"
 					>
-						تیر ماه ۱۴۰۱
+						مبنا: تیر ماه ۱۴۰۱
 					</button>
 				</div>
 				<!-- Beginning 1401 Period -->
@@ -302,6 +302,12 @@
 						>
 							ارزش اسمی در مقابل ارزش واقعی بازار
 						</button>
+						<button
+							class="periodic-sub-tab-button"
+							onclick="switchPeriodicSubTab('tir-periodic-chart15')"
+						>
+							مقایسه عملکرد دوره‌ها (نرمال شده بر اساس ۲۲ ماه)
+						</button>
 					</div>
 
 					<div id="tir-periodic-chart1" class="periodic-sub-chart active">
@@ -353,6 +359,24 @@
 					</div>
 					<div id="tir-periodic-chart14" class="periodic-sub-chart">
 						<canvas id="tirPeriodicChart14"></canvas>
+					</div>
+					<div id="tir-periodic-chart15" class="periodic-sub-chart">
+						<div class="comparison-table-container">
+							<table class="comparison-table">
+								<thead>
+									<tr>
+										<th>شاخص</th>
+										<th>دوره اول</th>
+										<th></th>
+										<th>دوره دوم</th>
+										<th>مقایسه</th>
+									</tr>
+								</thead>
+								<tbody id="tir-comparison-table-body">
+									<!-- Data will be populated by JavaScript -->
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -3972,6 +3996,17 @@
 			// Call the initialization function
 			initializePeriodicCharts();
 
+			// Total percentage changes for Tir 1401 period (global scope)
+			const tirTotalPercentages = {
+				stockIndex: { period1: 183.86, period2: 93.21 },
+				marketValueRial: { period1: 183.86, period2: 93.21 },
+				marketValueUSD: { period1: 36.63, period2: -28.98 },
+				goldPrice: { period1: 150.42, period2: 436.8 },
+				dollarRate: { period1: 104.57, period2: 170.89 },
+				inflation: { period1: 113.21, period2: 181.35 },
+				housingPrice: { period1: 141.81, period2: 172.67 },
+			};
+
 			// Initialize Tir 1401 period charts
 			function initializeTirPeriodicCharts() {
 				// Monthly percentage changes for Tir 1401 period
@@ -3983,17 +4018,6 @@
 					dollarRate: { period1: 4.75, period2: 4.75 },
 					inflation: { period1: 5.15, period2: 5.04 },
 					housingPrice: { period1: 6.45, period2: 4.8 },
-				};
-
-				// Total percentage changes for Tir 1401 period
-				const tirTotalPercentages = {
-					stockIndex: { period1: 183.86, period2: 93.21 },
-					marketValueRial: { period1: 183.86, period2: 93.21 },
-					marketValueUSD: { period1: 36.63, period2: -28.98 },
-					goldPrice: { period1: 150.42, period2: 436.8 },
-					dollarRate: { period1: 104.57, period2: 170.89 },
-					inflation: { period1: 113.21, period2: 181.35 },
-					housingPrice: { period1: 141.81, period2: 172.67 },
 				};
 
 				// Chart 1: Stock Index
@@ -5836,8 +5860,150 @@
 				});
 			}
 
+			// Function to populate Tir 1401 comparison table
+			function populateTirComparisonTable() {
+				const tableBody = document.getElementById('tir-comparison-table-body');
+
+				// Debug: Check if table body exists
+				if (!tableBody) {
+					console.error('Table body not found: tir-comparison-table-body');
+					return;
+				}
+
+				// Debug: Check if tirTotalPercentages exists
+				if (!tirTotalPercentages) {
+					console.error('tirTotalPercentages not found');
+					return;
+				}
+
+				// Define the 7 factors with their names and normalized data
+				const factors = [
+					{
+						name: 'شاخص بورس',
+						period1: tirTotalPercentages.stockIndex.period1,
+						period2: tirTotalPercentages.stockIndex.period2 * (22 / 36), // Normalized to 22 months
+					},
+					{
+						name: 'ارزش ریالی بورس',
+						period1: tirTotalPercentages.marketValueRial.period1,
+						period2: tirTotalPercentages.marketValueRial.period2 * (22 / 36),
+					},
+					{
+						name: 'ارزش دلاری بورس',
+						period1: tirTotalPercentages.marketValueUSD.period1,
+						period2: tirTotalPercentages.marketValueUSD.period2 * (22 / 36),
+					},
+					{
+						name: 'سکه امامی جدید',
+						period1: tirTotalPercentages.goldPrice.period1,
+						period2: tirTotalPercentages.goldPrice.period2 * (22 / 36),
+					},
+					{
+						name: 'دلار',
+						period1: tirTotalPercentages.dollarRate.period1,
+						period2: tirTotalPercentages.dollarRate.period2 * (22 / 36),
+					},
+					{
+						name: 'شاخص تورم',
+						period1: tirTotalPercentages.inflation.period1,
+						period2: tirTotalPercentages.inflation.period2 * (22 / 36),
+					},
+					{
+						name: 'مسکن',
+						period1: tirTotalPercentages.housingPrice.period1,
+						period2: tirTotalPercentages.housingPrice.period2 * (22 / 36),
+					},
+				];
+
+				// Clear existing content
+				tableBody.innerHTML = '';
+
+				// Populate table rows
+				factors.forEach((factor) => {
+					const row = document.createElement('tr');
+
+					// Determine which period performed better
+					const period1Value = factor.period1;
+					const period2Value = factor.period2;
+					const difference = period1Value - period2Value;
+
+					let comparisonSymbol, comparisonText, rowClass;
+
+					// Special case for dollar - higher tolerance since values are very close
+					const tolerance = factor.name === 'دلار' ? 1.0 : 0.1;
+
+					if (Math.abs(difference) < tolerance) {
+						// Equal performance
+						comparisonSymbol =
+							'<span style="font-size: 18px; font-weight: bold; color: #718096;">=</span>';
+						comparisonText = 'عملکرد برابر';
+						rowClass = 'period-equal';
+					} else if (
+						factor.name === 'مسکن' ||
+						factor.name === 'شاخص تورم' ||
+						factor.name === 'سکه امامی جدید'
+					) {
+						// For housing, inflation, and gold coin, show which period had more increase
+						if (period1Value > period2Value) {
+							// Period 1 had more increase
+							comparisonSymbol =
+								'<span style="font-size: 18px; font-weight: bold; color: #38a169;">></span>';
+							comparisonText = 'دوره اول بیشتر';
+							rowClass = 'period-first';
+						} else {
+							// Period 2 had more increase
+							comparisonSymbol =
+								'<span style="font-size: 18px; font-weight: bold; color: #e53e3e;"><</span>';
+							comparisonText = 'دوره دوم بیشتر';
+							rowClass = 'period-second';
+						}
+					} else if (difference > 0) {
+						// Period 1 had more increase
+						comparisonSymbol =
+							'<span style="font-size: 18px; font-weight: bold; color: #38a169;">></span>';
+						comparisonText = 'دوره اول بیشتر';
+						rowClass = 'period-first';
+					} else {
+						// Period 2 had more increase
+						comparisonSymbol =
+							'<span style="font-size: 18px; font-weight: bold; color: #e53e3e;"><</span>';
+						comparisonText = 'دوره دوم بیشتر';
+						rowClass = 'period-second';
+					}
+
+					row.className = rowClass;
+					// Format numbers with proper negative sign positioning
+					const formatNumber = (value) => {
+						if (value < 0) {
+							return `<span style="color: #e53e3e; font-weight: bold; unicode-bidi: bidi-override; direction: ltr;">-${Math.abs(
+								value
+							).toFixed(2)}%</span>`;
+						} else {
+							return `<span style="unicode-bidi: bidi-override; direction: ltr;">${value.toFixed(
+								2
+							)}%</span>`;
+						}
+					};
+
+					row.innerHTML = `
+						<td><strong>${factor.name}</strong></td>
+						<td>${formatNumber(period1Value)}</td>
+						<td style="text-align: center;">${comparisonSymbol}</td>
+						<td>${formatNumber(period2Value)}</td>
+						<td>${comparisonText}</td>
+					`;
+
+					tableBody.appendChild(row);
+				});
+			}
+
 			// Call the Tir period initialization function
 			initializeTirPeriodicCharts();
+
+			// Populate Tir 1401 comparison table after DOM is ready
+			document.addEventListener('DOMContentLoaded', function () {
+				populateTirComparisonTable();
+			});
 
 			// Initialize table data
 			populateSubTable('ev-revenue', 'original');
@@ -5849,6 +6015,11 @@
 			document
 				.getElementById('ev-revenue-original-table')
 				.classList.add('active');
+
+			// Populate Tir comparison table (fallback)
+			setTimeout(() => {
+				populateTirComparisonTable();
+			}, 1000);
 
 			// Table functions
 			function showCategory(category) {
