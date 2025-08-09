@@ -53,23 +53,23 @@
 				<canvas id="myChart"></canvas>
 			</div>
 
-			<div id="periodic-comparison" class="chart-container">
-				<!-- New period selection navigation -->
-				<div class="period-selection-navigation">
-					<button
-						class="period-selection-button active"
-						onclick="switchPeriod('beginning-1401')"
-					>
-						ابتدای ۱۴۰۱
-					</button>
-					<button
-						class="period-selection-button"
-						onclick="switchPeriod('tir-1401')"
-					>
-						تیر ماه ۱۴۰۱
-					</button>
-				</div>
+			<!-- Period selection navigation - moved outside chart container -->
+			<div class="period-selection-navigation">
+				<button
+					class="period-selection-button active"
+					onclick="switchPeriod('beginning-1401')"
+				>
+					ابتدای ۱۴۰۱
+				</button>
+				<button
+					class="period-selection-button"
+					onclick="switchPeriod('tir-1401')"
+				>
+					تیر ماه ۱۴۰۱
+				</button>
+			</div>
 
+			<div id="periodic-comparison" class="chart-container">
 				<!-- Beginning 1401 Period -->
 				<div id="beginning-1401-period" class="period-content active">
 					<div class="periodic-sub-tab-navigation">
