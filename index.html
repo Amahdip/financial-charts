@@ -2694,7 +2694,7 @@
 					},
 				});
 
-				// Chart 10: Bar Chart 3 - Normalized Comparison (Period 1 × 40 months)
+				// Chart 10: Bar Chart 3 - Normalized Comparison (40 months)
 				const ctxPeriodic10 = document
 					.getElementById('periodicChart10')
 					.getContext('2d');
@@ -2712,15 +2712,15 @@
 						],
 						datasets: [
 							{
-								label: 'دوره اول (اسفند ۹۸ - دیماه ۱۴۰۰) × ۴۰ ماه',
+								label: 'دوره اول (اسفند ۹۸ - دیماه ۱۴۰۰) × ۴۰/۲۲',
 								data: [
-									monthlyPercentages.stockIndex.period1 * 40,
-									monthlyPercentages.marketValueRial.period1 * 40,
-									monthlyPercentages.marketValueUSD.period1 * 40,
-									monthlyPercentages.goldPrice.period1 * 40,
-									monthlyPercentages.dollarRate.period1 * 40,
-									monthlyPercentages.inflation.period1 * 40,
-									monthlyPercentages.housingPrice.period1 * 40,
+									totalPercentages.stockIndex.period1 * (40 / 22),
+									totalPercentages.marketValueRial.period1 * (40 / 22),
+									totalPercentages.marketValueUSD.period1 * (40 / 22),
+									totalPercentages.goldPrice.period1 * (40 / 22),
+									totalPercentages.dollarRate.period1 * (40 / 22),
+									totalPercentages.inflation.period1 * (40 / 22),
+									totalPercentages.housingPrice.period1 * (40 / 22),
 								],
 								backgroundColor: [
 									'rgba(34, 197, 94, 0.8)',
@@ -2743,15 +2743,15 @@
 								borderWidth: 2,
 							},
 							{
-								label: 'دوره دوم (فروردین ۱۴۰۲ - تیر ۱۴۰۴) × ۴۰ ماه',
+								label: 'دوره دوم (فروردین ۱۴۰۲ - تیر ۱۴۰۴) - بدون تغییر',
 								data: [
-									monthlyPercentages.stockIndex.period2 * 40,
-									monthlyPercentages.marketValueRial.period2 * 40,
-									monthlyPercentages.marketValueUSD.period2 * 40,
-									monthlyPercentages.goldPrice.period2 * 40,
-									monthlyPercentages.dollarRate.period2 * 40,
-									monthlyPercentages.inflation.period2 * 40,
-									monthlyPercentages.housingPrice.period2 * 40,
+									totalPercentages.stockIndex.period2,
+									totalPercentages.marketValueRial.period2,
+									totalPercentages.marketValueUSD.period2,
+									totalPercentages.goldPrice.period2,
+									totalPercentages.dollarRate.period2,
+									totalPercentages.inflation.period2,
+									totalPercentages.housingPrice.period2,
 								],
 								backgroundColor: [
 									'rgba(239, 68, 68, 0.8)',
@@ -2888,7 +2888,7 @@
 					},
 				});
 
-				// Chart 11: Bar Chart 4 - Normalized Comparison (Period 2 × 22 months)
+				// Chart 11: Bar Chart 4 - Normalized Comparison (22 months)
 				const ctxPeriodic11 = document
 					.getElementById('periodicChart11')
 					.getContext('2d');
@@ -2906,15 +2906,15 @@
 						],
 						datasets: [
 							{
-								label: 'دوره اول (اسفند ۹۸ - دیماه ۱۴۰۰) × ۲۲ ماه',
+								label: 'دوره اول (اسفند ۹۸ - دیماه ۱۴۰۰) - بدون تغییر',
 								data: [
-									monthlyPercentages.stockIndex.period1 * 22,
-									monthlyPercentages.marketValueRial.period1 * 22,
-									monthlyPercentages.marketValueUSD.period1 * 22,
-									monthlyPercentages.goldPrice.period1 * 22,
-									monthlyPercentages.dollarRate.period1 * 22,
-									monthlyPercentages.inflation.period1 * 22,
-									monthlyPercentages.housingPrice.period1 * 22,
+									totalPercentages.stockIndex.period1,
+									totalPercentages.marketValueRial.period1,
+									totalPercentages.marketValueUSD.period1,
+									totalPercentages.goldPrice.period1,
+									totalPercentages.dollarRate.period1,
+									totalPercentages.inflation.period1,
+									totalPercentages.housingPrice.period1,
 								],
 								backgroundColor: [
 									'rgba(34, 197, 94, 0.8)',
@@ -2937,15 +2937,15 @@
 								borderWidth: 2,
 							},
 							{
-								label: 'دوره دوم (فروردین ۱۴۰۲ - تیر ۱۴۰۴) × ۲۲ ماه',
+								label: 'دوره دوم (فروردین ۱۴۰۲ - تیر ۱۴۰۴) × ۲۲/۴۰',
 								data: [
-									monthlyPercentages.stockIndex.period2 * 22,
-									monthlyPercentages.marketValueRial.period2 * 22,
-									monthlyPercentages.marketValueUSD.period2 * 22,
-									monthlyPercentages.goldPrice.period2 * 22,
-									monthlyPercentages.dollarRate.period2 * 22,
-									monthlyPercentages.inflation.period2 * 22,
-									monthlyPercentages.housingPrice.period2 * 22,
+									totalPercentages.stockIndex.period2 * (22 / 40),
+									totalPercentages.marketValueRial.period2 * (22 / 40),
+									totalPercentages.marketValueUSD.period2 * (22 / 40),
+									totalPercentages.goldPrice.period2 * (22 / 40),
+									totalPercentages.dollarRate.period2 * (22 / 40),
+									totalPercentages.inflation.period2 * (22 / 40),
+									totalPercentages.housingPrice.period2 * (22 / 40),
 								],
 								backgroundColor: [
 									'rgba(239, 68, 68, 0.8)',
@@ -3987,13 +3987,13 @@
 
 				// Total percentage changes for Tir 1401 period
 				const tirTotalPercentages = {
-					stockIndex: { period1: 93.21, period2: 183.86 },
-					marketValueRial: { period1: 93.21, period2: 183.86 },
-					marketValueUSD: { period1: -28.98, period2: 36.63 },
-					goldPrice: { period1: 436.8, period2: 150.42 },
-					dollarRate: { period1: 170.89, period2: 104.57 },
-					inflation: { period1: 181.35, period2: 113.21 },
-					housingPrice: { period1: 172.67, period2: 141.81 },
+					stockIndex: { period1: 183.86, period2: 93.21 },
+					marketValueRial: { period1: 183.86, period2: 93.21 },
+					marketValueUSD: { period1: 36.63, period2: -28.98 },
+					goldPrice: { period1: 150.42, period2: 436.8 },
+					dollarRate: { period1: 104.57, period2: 170.89 },
+					inflation: { period1: 113.21, period2: 181.35 },
+					housingPrice: { period1: 141.81, period2: 172.67 },
 				};
 
 				// Chart 1: Stock Index
@@ -4814,15 +4814,15 @@
 						],
 						datasets: [
 							{
-								label: 'دوره اول (ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰)',
+								label: 'دوره اول (ابتدای اسفند ۹۸ - ابتدای دیماه ۱۴۰۰) × ۳۶/۲۲',
 								data: [
-									tirTotalPercentages.stockIndex.period1,
-									tirTotalPercentages.marketValueRial.period1,
-									tirTotalPercentages.marketValueUSD.period1,
-									tirTotalPercentages.goldPrice.period1,
-									tirTotalPercentages.dollarRate.period1,
-									tirTotalPercentages.inflation.period1,
-									tirTotalPercentages.housingPrice.period1,
+									tirTotalPercentages.stockIndex.period1 * (36 / 22),
+									tirTotalPercentages.marketValueRial.period1 * (36 / 22),
+									tirTotalPercentages.marketValueUSD.period1 * (36 / 22),
+									tirTotalPercentages.goldPrice.period1 * (36 / 22),
+									tirTotalPercentages.dollarRate.period1 * (36 / 22),
+									tirTotalPercentages.inflation.period1 * (36 / 22),
+									tirTotalPercentages.housingPrice.period1 * (36 / 22),
 								],
 								backgroundColor: [
 									'rgba(34, 197, 94, 0.8)',
@@ -4845,7 +4845,7 @@
 								borderWidth: 2,
 							},
 							{
-								label: 'دوره دوم (تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴)',
+								label: 'دوره دوم (تیر ۱۴۰۱ - انتهای تیر ۱۴۰۴) - بدون تغییر',
 								data: [
 									tirTotalPercentages.stockIndex.period2,
 									tirTotalPercentages.marketValueRial.period2,
@@ -5041,15 +5041,15 @@
 						],
 						datasets: [
 							{
-								label: 'دوره اول (اسفند ۹۸ - دیماه ۱۴۰۰) × ۲۲ ماه',
+								label: 'دوره اول (اسفند ۹۸ - دیماه ۱۴۰۰) - بدون تغییر',
 								data: [
-									(tirTotalPercentages.stockIndex.period1 * 22) / 40,
-									(tirTotalPercentages.marketValueRial.period1 * 22) / 40,
-									(tirTotalPercentages.marketValueUSD.period1 * 22) / 40,
-									(tirTotalPercentages.goldPrice.period1 * 22) / 40,
-									(tirTotalPercentages.dollarRate.period1 * 22) / 40,
-									(tirTotalPercentages.inflation.period1 * 22) / 40,
-									(tirTotalPercentages.housingPrice.period1 * 22) / 40,
+									tirTotalPercentages.stockIndex.period1,
+									tirTotalPercentages.marketValueRial.period1,
+									tirTotalPercentages.marketValueUSD.period1,
+									tirTotalPercentages.goldPrice.period1,
+									tirTotalPercentages.dollarRate.period1,
+									tirTotalPercentages.inflation.period1,
+									tirTotalPercentages.housingPrice.period1,
 								],
 								backgroundColor: [
 									'rgba(34, 197, 94, 0.8)',
@@ -5072,15 +5072,15 @@
 								borderWidth: 2,
 							},
 							{
-								label: 'دوره دوم (تیر ۱۴۰۱ - تیر ۱۴۰۴) × ۲۲ ماه',
+								label: 'دوره دوم (تیر ۱۴۰۱ - تیر ۱۴۰۴) × ۲۲/۳۶',
 								data: [
-									(tirTotalPercentages.stockIndex.period2 * 22) / 22,
-									(tirTotalPercentages.marketValueRial.period2 * 22) / 22,
-									(tirTotalPercentages.marketValueUSD.period2 * 22) / 22,
-									(tirTotalPercentages.goldPrice.period2 * 22) / 22,
-									(tirTotalPercentages.dollarRate.period2 * 22) / 22,
-									(tirTotalPercentages.inflation.period2 * 22) / 22,
-									(tirTotalPercentages.housingPrice.period2 * 22) / 22,
+									tirTotalPercentages.stockIndex.period2 * (22 / 36),
+									tirTotalPercentages.marketValueRial.period2 * (22 / 36),
+									tirTotalPercentages.marketValueUSD.period2 * (22 / 36),
+									tirTotalPercentages.goldPrice.period2 * (22 / 36),
+									tirTotalPercentages.dollarRate.period2 * (22 / 36),
+									tirTotalPercentages.inflation.period2 * (22 / 36),
+									tirTotalPercentages.housingPrice.period2 * (22 / 36),
 								],
 								backgroundColor: [
 									'rgba(239, 68, 68, 0.8)',
