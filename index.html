@@ -727,6 +727,19 @@
 					2097005, 2007281, 2257614, 2501778, 2849940, 2719339, 2709764,
 					3077924, 3108119, 2984605, 2843904,
 				],
+				equalWeightIndex: [
+					40652.6, 47534.9, 56261.2, 60369.2, 72125.4, 85766.7, 81993.4,
+					87779.5, 111891.0, 128090.0, 155685.0, 177080.0, 238107.0, 322025.0,
+					409243.0, 507609.0, 481797.0, 422085.0, 393880.0, 381274.88, 447838.7,
+					430423.75, 438957.83, 439801.9, 431683.0, 396983.0, 370028.0,
+					403073.0, 436030.0, 415499.0, 397262.0, 383326.0, 348209.0, 335639.0,
+					325088.0, 348268.0, 401430.0, 440177.0, 423457.0, 403781.0, 397296.0,
+					395678.0, 378995.0, 404470.0, 445721.0, 526187.0, 476719.0, 585249.0,
+					760754.0, 764056.0, 746134.0, 699939.0, 663229.0, 721799.0, 690147.0,
+					703544.0, 761358.0, 754333.0, 727278.0, 742576.0, 723566.0, 694717.0,
+					665732.0, 693986.0, 639030.0, 687605.0, 665897.0, 719826.0, 827270.0,
+					887440.0, 832390.0, 795277.0, 878660.0, 954869.0, 923686.0, 853724.0,
+				],
 				marketValueRial: [
 					6225526, 6554295, 7124469, 7654252, 8106571, 9487808, 9315275,
 					9290602, 10866181, 12367527, 14583494, 15623595, 21596889, 30057957,
@@ -1054,6 +1067,59 @@
 								49620, 47295, 43515, 43515, 43515, 43515, 43515, 43515, 43515,
 								43515, 43515, 43515, 43515,
 							],
+							borderColor: '#fbbf24',
+							backgroundColor: 'rgba(251, 191, 36, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#fbbf24',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#fbbf24',
+							pointHoverBorderColor: '#ffffff',
+						},
+						{
+							label: 'شاخص بورس هموزن / 203',
+							data: [
+								20020, 23400, 27690, 29720, 35500, 42200, 40340, 43200, 55040,
+								63040, 76600, 87120, 117200, 158400, 201300, 249700, 237000,
+								207600, 193700, 187600, 220200, 211700, 215900, 216000, 212400,
+								162000, 181400, 192400, 175000, 165000, 174800, 177600, 173200,
+								163000, 162400, 174000, 192600, 201000, 195000, 187000, 182600,
+								172800, 165400, 179400, 190400, 211000, 203000, 249600, 296000,
+								295400, 276800, 252600, 246800, 270000, 258800, 257600, 281200,
+								275800, 263800, 279800, 281000, 269600, 260800, 277400, 259800,
+								267600, 256400, 288400, 320000, 364800, 348000, 346000, 393000,
+								396600, 381000, 363200,
+							],
+							borderColor: '#8b5cf6',
+							backgroundColor: 'rgba(139, 92, 246, 0.08)',
+							fill: true,
+							tension: 0.4,
+							borderWidth: 3,
+							pointRadius: 0,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#8b5cf6',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#8b5cf6',
+							pointHoverBorderColor: '#ffffff',
+						},
+						{
+							label: 'ارزش کل بورس (میلیارد دلار) × 435',
+							data: [
+								20010, 20010, 23490, 26535, 30450, 36105, 36105, 34365, 36105,
+								40020, 43935, 45675, 60900, 73950, 88305, 115710, 101790, 76125,
+								63075, 70470, 74385, 69165, 64815, 72210, 66120, 66990, 64815,
+								70470, 72645, 66555, 67860, 65685, 60030, 61770, 66555, 69165,
+								71775, 69165, 63510, 61335, 64815, 56550, 52200, 52200, 50025,
+								50025, 42195, 53940, 59595, 58725, 57855, 55680, 54345, 54345,
+								53070, 53070, 48720, 48720, 48285, 48285, 36540, 36540, 49155,
+								49620, 47295, 43515, 43515, 43515, 43515, 43515, 43515, 43515,
+								43515, 43515, 43515, 43515,
+							],
 							borderColor: '#d69e2e',
 							backgroundColor: 'rgba(214, 158, 46, 0.08)',
 							fill: true,
@@ -1143,6 +1209,10 @@
 											realValue = realData.marketValueUSD[dataIndex];
 											label = 'ارزش کل بورس (میلیارد دلار)';
 											break;
+										case 4: // Equal Weight Index
+											realValue = realData.equalWeightIndex[dataIndex];
+											label = 'شاخص بورس هموزن';
+											break;
 										default:
 											return context.dataset.label + ': ' + scaledValue;
 									}
@@ -1169,7 +1239,7 @@
 								},
 							},
 							min: 0,
-							max: 350000,
+							max: 500000,
 							grid: {
 								color: 'rgba(226, 232, 240, 0.8)',
 								borderColor: '#e2e8f0',
@@ -1452,6 +1522,22 @@
 							pointHoverBackgroundColor: '#3182ce',
 							pointHoverBorderColor: '#ffffff',
 						},
+						{
+							label: 'شاخص بورس هموزن',
+							data: realData.equalWeightIndex,
+							borderColor: '#8b5cf6',
+							backgroundColor: 'rgba(139, 92, 246, 0.1)',
+							fill: false,
+							tension: 0,
+							borderWidth: 2,
+							pointRadius: 4,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#8b5cf6',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointHoverBackgroundColor: '#8b5cf6',
+							pointHoverBorderColor: '#ffffff',
+						},
 					],
 				},
 				options: {
@@ -1498,7 +1584,14 @@
 							callbacks: {
 								label: function (context) {
 									const value = context.parsed.y;
-									return `شاخص بورس: ${value.toLocaleString('fa-IR')}`;
+									const datasetIndex = context.datasetIndex;
+
+									if (datasetIndex === 0) {
+										return `شاخص بورس: ${value.toLocaleString('fa-IR')}`;
+									} else if (datasetIndex === 1) {
+										return `شاخص بورس هموزن: ${value.toLocaleString('fa-IR')}`;
+									}
+									return '';
 								},
 							},
 						},
