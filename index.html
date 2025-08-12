@@ -766,12 +766,12 @@
 					827900, 831900, 835350, 881100,
 				],
 				marketValueUSD: [
-					46, 46, 54, 61, 70, 83, 83, 79, 83, 92, 101, 105, 140, 170, 203, 266,
-					234, 175, 145, 162, 171, 159, 149, 166, 152, 154, 149, 162, 167, 153,
-					156, 151, 138, 142, 153, 159, 165, 159, 146, 141, 149, 130, 120, 120,
-					115, 115, 97, 124, 137, 135, 133, 125, 120, 131, 122, 123, 135, 122,
-					111, 111, 112, 106, 101, 115, 107, 108, 94, 100, 99, 108, 90, 84, 113,
-					114, 109, 98,
+					68, 71, 80, 93, 101, 117, 119, 113, 120, 139, 148, 153, 205, 254, 306,
+					412, 348, 264, 223, 240, 265, 250, 230, 255, 246, 247, 228, 250, 255,
+					235, 243, 226, 200, 209, 223, 236, 249, 237, 218, 204, 208, 183, 170,
+					167, 158, 166, 131, 172, 190, 187, 187, 168, 161, 176, 163, 163, 179,
+					161, 146, 145, 132, 138, 134, 142, 128, 130, 113, 118, 125, 126, 107,
+					99, 133, 135, 129, 114,
 				],
 			};
 
@@ -892,102 +892,120 @@
 				],
 			};
 
+			// Create data starting from Bahman 1398 (index 10) for line chart
+			const lineChartStartIndex = 10; // Bahman 1398
+			const lineChartLabels = [
+				'بهمن 1398',
+				'اسفند 1398',
+				'فروردین 1399',
+				'اردیبهشت 1399',
+				'خرداد 1399',
+				'تیر 1399',
+				'مرداد 1399',
+				'شهریور 1399',
+				'مهر 1399',
+				'آبان 1399',
+				'آذر 1399',
+				'دی 1399',
+				'بهمن 1399',
+				'اسفند 1399',
+				'فروردین 1400',
+				'اردیبهشت 1400',
+				'خرداد 1400',
+				'تیر 1400',
+				'مرداد 1400',
+				'شهریور 1400',
+				'مهر 1400',
+				'آبان 1400',
+				'آذر 1400',
+				'دی 1400',
+				'بهمن 1400',
+				'اسفند 1400',
+				'فروردین 1401',
+				'اردیبهشت 1401',
+				'خرداد 1401',
+				'تیر 1401',
+				'مرداد 1401',
+				'شهریور 1401',
+				'مهر 1401',
+				'آبان 1401',
+				'آذر 1401',
+				'دی 1401',
+				'بهمن 1401',
+				'اسفند 1401',
+				'فروردین 1402',
+				'اردیبهشت 1402',
+				'خرداد 1402',
+				'تیر 1402',
+				'مرداد 1402',
+				'شهریور 1402',
+				'مهر 1402',
+				'آبان 1402',
+				'آذر 1402',
+				'دی 1402',
+				'بهمن 1402',
+				'اسفند 1402',
+				'فروردین 1403',
+				'اردیبهشت 1403',
+				'خرداد 1403',
+				'تیر 1403',
+				'مرداد 1403',
+				'شهریور 1403',
+				'مهر 1403',
+				'آبان 1403',
+				'آذر 1403',
+				'دی 1403',
+				'بهمن 1403',
+				'اسفند 1403',
+				'فروردین 1404',
+				'اردیبهشت 1404',
+				'خرداد 1404',
+				'تیر 1404',
+			];
+
+			// Get the starting values for rescaling (Bahman 1398 - index 10)
+			const stockIndexStartValue = realData.stockIndex[lineChartStartIndex]; // 478755
+			const marketValueRialStartValue =
+				realData.marketValueRial[lineChartStartIndex]; // 14583494
+			const dollarRateStartValue = realData.dollarRate[lineChartStartIndex]; // 143930
+			const marketValueUSDStartValue =
+				realData.marketValueUSD[lineChartStartIndex]; // 148
+			const equalWeightStartValue =
+				realData.equalWeightIndex[lineChartStartIndex]; // 155685.0
+
+			// Calculate scaling factors to make all lines start at the same baseline (let's use 50000 as baseline)
+			const baseline = 50000;
+			const stockIndexScale = baseline / stockIndexStartValue;
+			const marketValueRialScale = baseline / marketValueRialStartValue;
+			const dollarRateScale = baseline / dollarRateStartValue;
+			const marketValueUSDScale = baseline / marketValueUSDStartValue;
+			const equalWeightScale = baseline / equalWeightStartValue;
+
+			// Create scaled data starting from Bahman 1398
+			const scaledStockIndexData = realData.stockIndex
+				.slice(lineChartStartIndex)
+				.map((value) => value * stockIndexScale);
+			const scaledMarketValueRialData = realData.marketValueRial
+				.slice(lineChartStartIndex)
+				.map((value) => value * marketValueRialScale);
+			const scaledDollarRateData = realData.dollarRate
+				.slice(lineChartStartIndex)
+				.map((value) => value * dollarRateScale);
+			const scaledMarketValueUSDData = realData.marketValueUSD
+				.slice(lineChartStartIndex)
+				.map((value) => value * marketValueUSDScale);
+			const scaledEqualWeightData = realData.equalWeightIndex
+				.slice(lineChartStartIndex)
+				.map((value) => value * equalWeightScale);
+
 			const chartData = {
 				type: 'line',
 				data: {
-					labels: [
-						'فروردین 1398',
-						'اردیبهشت 1398',
-						'خرداد 1398',
-						'تیر 1398',
-						'مرداد 1398',
-						'شهریور 1398',
-						'مهر 1398',
-						'آبان 1398',
-						'آذر 1398',
-						'دی 1398',
-						'بهمن 1398',
-						'اسفند 1398',
-						'فروردین 1399',
-						'اردیبهشت 1399',
-						'خرداد 1399',
-						'تیر 1399',
-						'مرداد 1399',
-						'شهریور 1399',
-						'مهر 1399',
-						'آبان 1399',
-						'آذر 1399',
-						'دی 1399',
-						'بهمن 1399',
-						'اسفند 1399',
-						'فروردین 1400',
-						'اردیبهشت 1400',
-						'خرداد 1400',
-						'تیر 1400',
-						'مرداد 1400',
-						'شهریور 1400',
-						'مهر 1400',
-						'آبان 1400',
-						'آذر 1400',
-						'دی 1400',
-						'بهمن 1400',
-						'اسفند 1400',
-						'فروردین 1401',
-						'اردیبهشت 1401',
-						'خرداد 1401',
-						'تیر 1401',
-						'مرداد 1401',
-						'شهریور 1401',
-						'مهر 1401',
-						'آبان 1401',
-						'آذر 1401',
-						'دی 1401',
-						'بهمن 1401',
-						'اسفند 1401',
-						'فروردین 1402',
-						'اردیبهشت 1402',
-						'خرداد 1402',
-						'تیر 1402',
-						'مرداد 1402',
-						'شهریور 1402',
-						'مهر 1402',
-						'آبان 1402',
-						'آذر 1402',
-						'دی 1402',
-						'بهمن 1402',
-						'اسفند 1402',
-						'فروردین 1403',
-						'اردیبهشت 1403',
-						'خرداد 1403',
-						'تیر 1403',
-						'مرداد 1403',
-						'شهریور 1403',
-						'مهر 1403',
-						'آبان 1403',
-						'آذر 1403',
-						'دی 1403',
-						'بهمن 1403',
-						'اسفند 1403',
-						'فروردین 1404',
-						'اردیبهشت 1404',
-						'خرداد 1404',
-						'تیر 1404',
-					],
+					labels: lineChartLabels,
 					datasets: [
 						{
-							label: 'شاخص بورس / 10',
-							data: [
-								20438, 21517, 23389, 25128, 26613, 31147, 30581, 30500, 35672,
-								40601, 47876, 51290, 70899, 98676, 130081, 190117, 172726,
-								158121, 141235, 136654, 143639, 118398, 123272, 130766, 120705,
-								112816, 118691, 131131, 151589, 138647, 140776, 140713, 135901,
-								127945, 127430, 136725, 151222, 158214, 153339, 147350, 143148,
-								135524, 129680, 140765, 149620, 165758, 159426, 196046, 232413,
-								231851, 217389, 210305, 206763, 204992, 203221, 202279, 221186,
-								216693, 207078, 219509, 220199, 211256, 204398, 217219, 203721,
-								209700, 200728, 225761, 250178, 284994, 271934, 270976, 307792,
-								310812, 298461, 284390,
-							],
+							label: 'شاخص بورس (مقیاس‌شده)',
+							data: scaledStockIndexData,
 							borderColor: '#3182ce',
 							backgroundColor: 'rgba(49, 130, 206, 0.08)',
 							fill: true,
@@ -1002,19 +1020,8 @@
 							pointHoverBorderColor: '#ffffff',
 						},
 						{
-							label: 'ارزش کل بورس (میلیارد ریال) / 311',
-							data: [
-								20018, 21075, 22908, 24611, 26066, 30507, 29952, 29873, 34939,
-								39767, 46892, 50254, 69443, 96649, 127618, 186212, 169201,
-								154728, 138383, 133958, 140721, 115968, 120420, 128240, 118329,
-								110662, 116345, 128595, 148668, 135889, 138073, 137993, 133280,
-								125459, 124954, 134059, 148266, 155185, 150369, 144517, 140481,
-								132875, 127137, 138073, 146721, 162538, 156321, 192244, 227985,
-								227585, 213184, 206270, 202809, 201280, 199334, 198425, 216843,
-								212534, 203185, 215234, 215882, 207185, 200489, 212985, 199834,
-								205630, 196854, 221420, 245421, 279421, 266668, 265668, 301668,
-								304668, 292668, 278668,
-							],
+							label: 'ارزش کل بورس (ریال) (مقیاس‌شده)',
+							data: scaledMarketValueRialData,
 							borderColor: '#e53e3e',
 							backgroundColor: 'rgba(229, 62, 62, 0.08)',
 							fill: true,
@@ -1029,18 +1036,8 @@
 							pointHoverBorderColor: '#ffffff',
 						},
 						{
-							label: 'نرخ دلار (ریال) / 6.7',
-							data: [
-								20104, 21246, 19701, 18692, 17313, 17004, 16764, 17603, 19655,
-								20058, 21482, 22243, 23048, 26419, 29075, 32537, 33585, 41040,
-								44245, 38239, 38215, 33799, 37569, 35766, 36110, 33284, 36207,
-								36758, 41293, 41076, 40918, 42463, 44891, 41082, 37936, 39227,
-								41585, 45258, 47728, 47587, 43804, 47251, 48988, 53221, 59345,
-								65636, 74481, 71793, 77025, 78091, 74225, 72158, 73169, 73721,
-								75576, 74924, 74666, 80855, 85128, 90076, 89761, 90313, 91761,
-								85987, 86791, 88328, 96724, 102881, 114560, 120403, 137306,
-								145940, 123567, 124164, 124679, 131507,
-							],
+							label: 'نرخ دلار (ریال) (مقیاس‌شده)',
+							data: scaledDollarRateData,
 							borderColor: '#38a169',
 							backgroundColor: 'rgba(56, 161, 105, 0.08)',
 							fill: true,
@@ -1055,18 +1052,8 @@
 							pointHoverBorderColor: '#ffffff',
 						},
 						{
-							label: 'ارزش کل بورس (میلیارد دلار) × 435',
-							data: [
-								20010, 20010, 23490, 26535, 30450, 36105, 36105, 34365, 36105,
-								40020, 43935, 45675, 60900, 73950, 88305, 115710, 101790, 76125,
-								63075, 70470, 74385, 69165, 64815, 72210, 66120, 66990, 64815,
-								70470, 72645, 66555, 67860, 65685, 60030, 61770, 66555, 69165,
-								71775, 69165, 63510, 61335, 64815, 56550, 52200, 52200, 50025,
-								50025, 42195, 53940, 59595, 58725, 57855, 55680, 54345, 54345,
-								53070, 53070, 48720, 48720, 48285, 48285, 36540, 36540, 49155,
-								49620, 47295, 43515, 43515, 43515, 43515, 43515, 43515, 43515,
-								43515, 43515, 43515, 43515,
-							],
+							label: 'ارزش کل بورس (دلار) (مقیاس‌شده)',
+							data: scaledMarketValueUSDData,
 							borderColor: '#fbbf24',
 							backgroundColor: 'rgba(251, 191, 36, 0.08)',
 							fill: true,
@@ -1081,19 +1068,8 @@
 							pointHoverBorderColor: '#ffffff',
 						},
 						{
-							label: 'شاخص بورس هموزن / 203',
-							data: [
-								20020, 23400, 27690, 29720, 35500, 42200, 40340, 43200, 55040,
-								63040, 76600, 87120, 117200, 158400, 201300, 249700, 237000,
-								207600, 193700, 187600, 220200, 211700, 215900, 216000, 212400,
-								162000, 181400, 192400, 175000, 165000, 174800, 177600, 173200,
-								163000, 162400, 174000, 192600, 201000, 195000, 187000, 182600,
-								172800, 165400, 179400, 190400, 211000, 203000, 249600, 296000,
-								295400, 276800, 252600, 246800, 270000, 258800, 257600, 281200,
-								275800, 263800, 279800, 281000, 269600, 260800, 277400, 259800,
-								267600, 256400, 288400, 320000, 364800, 348000, 346000, 393000,
-								396600, 381000, 363200,
-							],
+							label: 'شاخص بورس هموزن (مقیاس‌شده)',
+							data: scaledEqualWeightData,
 							borderColor: '#8b5cf6',
 							backgroundColor: 'rgba(139, 92, 246, 0.08)',
 							fill: true,
@@ -1105,32 +1081,6 @@
 							pointBorderColor: '#ffffff',
 							pointBorderWidth: 2,
 							pointHoverBackgroundColor: '#8b5cf6',
-							pointHoverBorderColor: '#ffffff',
-						},
-						{
-							label: 'ارزش کل بورس (میلیارد دلار) × 435',
-							data: [
-								20010, 20010, 23490, 26535, 30450, 36105, 36105, 34365, 36105,
-								40020, 43935, 45675, 60900, 73950, 88305, 115710, 101790, 76125,
-								63075, 70470, 74385, 69165, 64815, 72210, 66120, 66990, 64815,
-								70470, 72645, 66555, 67860, 65685, 60030, 61770, 66555, 69165,
-								71775, 69165, 63510, 61335, 64815, 56550, 52200, 52200, 50025,
-								50025, 42195, 53940, 59595, 58725, 57855, 55680, 54345, 54345,
-								53070, 53070, 48720, 48720, 48285, 48285, 36540, 36540, 49155,
-								49620, 47295, 43515, 43515, 43515, 43515, 43515, 43515, 43515,
-								43515, 43515, 43515, 43515,
-							],
-							borderColor: '#d69e2e',
-							backgroundColor: 'rgba(214, 158, 46, 0.08)',
-							fill: true,
-							tension: 0.4,
-							borderWidth: 3,
-							pointRadius: 0,
-							pointHoverRadius: 8,
-							pointBackgroundColor: '#d69e2e',
-							pointBorderColor: '#ffffff',
-							pointBorderWidth: 2,
-							pointHoverBackgroundColor: '#d69e2e',
 							pointHoverBorderColor: '#ffffff',
 						},
 					],
@@ -1188,29 +1138,32 @@
 									const datasetIndex = context.datasetIndex;
 									const scaledValue = context.parsed.y;
 
+									// Adjust dataIndex to account for starting from Bahman 1398 (index 10)
+									const realDataIndex = dataIndex + lineChartStartIndex;
+
 									// Get real value based on dataset
 									let realValue;
 									let label;
 
 									switch (datasetIndex) {
 										case 0: // Stock Index
-											realValue = realData.stockIndex[dataIndex];
+											realValue = realData.stockIndex[realDataIndex];
 											label = 'شاخص بورس';
 											break;
 										case 1: // Market Value Rial
-											realValue = realData.marketValueRial[dataIndex];
+											realValue = realData.marketValueRial[realDataIndex];
 											label = 'ارزش کل بورس (میلیارد ریال)';
 											break;
 										case 2: // Dollar Rate
-											realValue = realData.dollarRate[dataIndex];
+											realValue = realData.dollarRate[realDataIndex];
 											label = 'نرخ دلار (ریال)';
 											break;
 										case 3: // Market Value USD
-											realValue = realData.marketValueUSD[dataIndex];
+											realValue = realData.marketValueUSD[realDataIndex];
 											label = 'ارزش کل بورس (میلیارد دلار)';
 											break;
 										case 4: // Equal Weight Index
-											realValue = realData.equalWeightIndex[dataIndex];
+											realValue = realData.equalWeightIndex[realDataIndex];
 											label = 'شاخص بورس هموزن';
 											break;
 										default:
@@ -1239,7 +1192,7 @@
 								},
 							},
 							min: 0,
-							max: 500000,
+							max: 370000,
 							grid: {
 								color: 'rgba(226, 232, 240, 0.8)',
 								borderColor: '#e2e8f0',
@@ -1424,98 +1377,111 @@
 			const ctxPointChart = document
 				.getElementById('stockIndexPointChart')
 				.getContext('2d');
+
+			// Create data starting from Bahman 1398 (index 10)
+			const startIndex = 10; // Bahman 1398
+			const stockIndexData = realData.stockIndex.slice(startIndex);
+			const equalWeightData = realData.equalWeightIndex.slice(startIndex);
+			const labels = [
+				'بهمن 1398',
+				'اسفند 1398',
+				'فروردین 1399',
+				'اردیبهشت 1399',
+				'خرداد 1399',
+				'تیر 1399',
+				'مرداد 1399',
+				'شهریور 1399',
+				'مهر 1399',
+				'آبان 1399',
+				'آذر 1399',
+				'دی 1399',
+				'بهمن 1399',
+				'اسفند 1399',
+				'فروردین 1400',
+				'اردیبهشت 1400',
+				'خرداد 1400',
+				'تیر 1400',
+				'مرداد 1400',
+				'شهریور 1400',
+				'مهر 1400',
+				'آبان 1400',
+				'آذر 1400',
+				'دی 1400',
+				'بهمن 1400',
+				'اسفند 1400',
+				'فروردین 1401',
+				'اردیبهشت 1401',
+				'خرداد 1401',
+				'تیر 1401',
+				'مرداد 1401',
+				'شهریور 1401',
+				'مهر 1401',
+				'آبان 1401',
+				'آذر 1401',
+				'دی 1401',
+				'بهمن 1401',
+				'اسفند 1401',
+				'فروردین 1402',
+				'اردیبهشت 1402',
+				'خرداد 1402',
+				'تیر 1402',
+				'مرداد 1402',
+				'شهریور 1402',
+				'مهر 1402',
+				'آبان 1402',
+				'آذر 1402',
+				'دی 1402',
+				'بهمن 1402',
+				'اسفند 1402',
+				'فروردین 1403',
+				'اردیبهشت 1403',
+				'خرداد 1403',
+				'تیر 1403',
+				'مرداد 1403',
+				'شهریور 1403',
+				'مهر 1403',
+				'آبان 1403',
+				'آذر 1403',
+				'دی 1403',
+				'بهمن 1403',
+				'اسفند 1403',
+				'فروردین 1404',
+				'اردیبهشت 1404',
+				'خرداد 1404',
+				'تیر 1404',
+			];
+
+			// Function to determine if a point should be shown (every 4 months)
+			function shouldShowPoint(index) {
+				// Always show the last point (تیر 1404)
+				if (index === labels.length - 1) return true;
+
+				// Starting from Bahman 1398 (month 11), show every 4 months
+				// Bahman 1398 (0), Khordad 1399 (4), Mehr 1399 (8), Dey 1399 (12), etc.
+				const monthOffset = index % 12;
+				const adjustedMonth = (monthOffset + 11) % 12; // Adjust to start from Bahman (11)
+				return adjustedMonth % 4 === 3; // Show every 4th month (3, 7, 11)
+			}
+
 			new Chart(ctxPointChart, {
 				type: 'line',
 				data: {
-					labels: [
-						'فروردین 1398',
-						'اردیبهشت 1398',
-						'خرداد 1398',
-						'تیر 1398',
-						'مرداد 1398',
-						'شهریور 1398',
-						'مهر 1398',
-						'آبان 1398',
-						'آذر 1398',
-						'دی 1398',
-						'بهمن 1398',
-						'اسفند 1398',
-						'فروردین 1399',
-						'اردیبهشت 1399',
-						'خرداد 1399',
-						'تیر 1399',
-						'مرداد 1399',
-						'شهریور 1399',
-						'مهر 1399',
-						'آبان 1399',
-						'آذر 1399',
-						'دی 1399',
-						'بهمن 1399',
-						'اسفند 1399',
-						'فروردین 1400',
-						'اردیبهشت 1400',
-						'خرداد 1400',
-						'تیر 1400',
-						'مرداد 1400',
-						'شهریور 1400',
-						'مهر 1400',
-						'آبان 1400',
-						'آذر 1400',
-						'دی 1400',
-						'بهمن 1400',
-						'اسفند 1400',
-						'فروردین 1401',
-						'اردیبهشت 1401',
-						'خرداد 1401',
-						'تیر 1401',
-						'مرداد 1401',
-						'شهریور 1401',
-						'مهر 1401',
-						'آبان 1401',
-						'آذر 1401',
-						'دی 1401',
-						'بهمن 1401',
-						'اسفند 1401',
-						'فروردین 1402',
-						'اردیبهشت 1402',
-						'خرداد 1402',
-						'تیر 1402',
-						'مرداد 1402',
-						'شهریور 1402',
-						'مهر 1402',
-						'آبان 1402',
-						'آذر 1402',
-						'دی 1402',
-						'بهمن 1402',
-						'اسفند 1402',
-						'فروردین 1403',
-						'اردیبهشت 1403',
-						'خرداد 1403',
-						'تیر 1403',
-						'مرداد 1403',
-						'شهریور 1403',
-						'مهر 1403',
-						'آبان 1403',
-						'آذر 1403',
-						'دی 1403',
-						'بهمن 1403',
-						'اسفند 1403',
-						'فروردین 1404',
-						'اردیبهشت 1404',
-						'خرداد 1404',
-						'تیر 1404',
-					],
+					labels: labels,
 					datasets: [
 						{
 							label: 'شاخص بورس',
-							data: realData.stockIndex,
+							data: stockIndexData,
 							borderColor: '#3182ce',
 							backgroundColor: 'rgba(49, 130, 206, 0.1)',
 							fill: false,
 							tension: 0,
 							borderWidth: 2,
-							pointRadius: 4,
-							pointHoverRadius: 8,
+							pointRadius: function (context) {
+								return shouldShowPoint(context.dataIndex) ? 4 : 0;
+							},
+							pointHoverRadius: function (context) {
+								return shouldShowPoint(context.dataIndex) ? 8 : 0;
+							},
 							pointBackgroundColor: '#3182ce',
 							pointBorderColor: '#ffffff',
 							pointBorderWidth: 2,
@@ -1524,14 +1490,18 @@
 						},
 						{
 							label: 'شاخص بورس هموزن',
-							data: realData.equalWeightIndex,
+							data: equalWeightData,
 							borderColor: '#8b5cf6',
 							backgroundColor: 'rgba(139, 92, 246, 0.1)',
 							fill: false,
 							tension: 0,
 							borderWidth: 2,
-							pointRadius: 4,
-							pointHoverRadius: 8,
+							pointRadius: function (context) {
+								return shouldShowPoint(context.dataIndex) ? 4 : 0;
+							},
+							pointHoverRadius: function (context) {
+								return shouldShowPoint(context.dataIndex) ? 8 : 0;
+							},
 							pointBackgroundColor: '#8b5cf6',
 							pointBorderColor: '#ffffff',
 							pointBorderWidth: 2,
@@ -1678,8 +1648,11 @@
 			// Calculate annual growth percentages
 			function calculateAnnualGrowth() {
 				const stockData = realData.stockIndex;
+				const equalWeightData = realData.equalWeightIndex;
 				const annualGrowth = [];
 				const projectedGrowth = [];
+				const equalWeightGrowth = [];
+				const equalWeightProjectedGrowth = [];
 
 				// Calculate growth for each year (1398-1403)
 				for (let year = 1398; year <= 1403; year++) {
@@ -1687,6 +1660,7 @@
 					const endIndex = startIndex + 11; // End of year (اسفند)
 
 					if (endIndex < stockData.length) {
+						// Stock Index growth
 						const startValue = stockData[startIndex];
 						const endValue = stockData[endIndex];
 						const growth = ((endValue - startValue) / startValue) * 100;
@@ -1696,6 +1670,17 @@
 							type: 'full',
 						});
 						projectedGrowth.push(null); // No projection for complete years
+
+						// Equal Weight Index growth
+						const startValueEW = equalWeightData[startIndex];
+						const endValueEW = equalWeightData[endIndex];
+						const growthEW = ((endValueEW - startValueEW) / startValueEW) * 100;
+						equalWeightGrowth.push({
+							year: year,
+							growth: growthEW,
+							type: 'full',
+						});
+						equalWeightProjectedGrowth.push(null); // No projection for complete years
 					}
 				}
 
@@ -1704,6 +1689,7 @@
 				const endIndex1404 = startIndex1404 + 3; // End of 4 months (تیر)
 
 				if (endIndex1404 < stockData.length) {
+					// Stock Index 1404
 					const startValue1404 = stockData[startIndex1404];
 					const endValue1404 = stockData[endIndex1404];
 					const growth1404 =
@@ -1719,54 +1705,127 @@
 					// Add projected full-year growth (extrapolated)
 					const projectedGrowth1404 = growth1404 * (12 / 4); // Extrapolate to full year
 					projectedGrowth.push(projectedGrowth1404);
+
+					// Equal Weight Index 1404
+					const startValue1404EW = equalWeightData[startIndex1404];
+					const endValue1404EW = equalWeightData[endIndex1404];
+					const growth1404EW =
+						((endValue1404EW - startValue1404EW) / startValue1404EW) * 100;
+
+					// Add actual 4-month growth
+					equalWeightGrowth.push({
+						year: 1404,
+						growth: growth1404EW,
+						type: 'partial',
+					});
+
+					// Add projected full-year growth (extrapolated)
+					const projectedGrowth1404EW = growth1404EW * (12 / 4); // Extrapolate to full year
+					equalWeightProjectedGrowth.push(projectedGrowth1404EW);
 				}
 
-				return { annualGrowth, projectedGrowth };
+				return {
+					annualGrowth,
+					projectedGrowth,
+					equalWeightGrowth,
+					equalWeightProjectedGrowth,
+				};
 			}
 
 			// Annual Growth Chart
 			const ctxAnnualGrowth = document
 				.getElementById('annualGrowthChart')
 				.getContext('2d');
-			const { annualGrowth, projectedGrowth } = calculateAnnualGrowth();
+			const {
+				annualGrowth,
+				projectedGrowth,
+				equalWeightGrowth,
+				equalWeightProjectedGrowth,
+			} = calculateAnnualGrowth();
+
+			// Create proper grouped bar chart data
+			const barLabels = annualGrowth.map((item) => item.year.toString());
+			const growthStockIndexData = annualGrowth.map((item) => item.growth);
+			const growthEqualWeightData = equalWeightGrowth.map(
+				(item) => item.growth
+			);
+			const growthStockIndexProjectedData = projectedGrowth.map(
+				(value) => value
+			);
+			const growthEqualWeightProjectedData = equalWeightProjectedGrowth.map(
+				(value) => value
+			);
 
 			new Chart(ctxAnnualGrowth, {
 				type: 'bar',
 				data: {
-					labels: annualGrowth.map((item) => item.year.toString()),
+					labels: barLabels,
 					datasets: [
 						{
-							label: 'پیش‌بینی ۱۴۰۴',
-							data: projectedGrowth,
-							backgroundColor: projectedGrowth.map((value) => {
-								return value !== null
-									? 'rgba(156, 163, 175, 0.3)'
-									: 'transparent';
+							label: 'پیش‌بینی شاخص کل (۱۴۰۴)',
+							data: growthStockIndexProjectedData,
+							backgroundColor: growthStockIndexProjectedData.map((value) => {
+								if (value === null) return 'transparent';
+								return value >= 0
+									? 'rgba(128, 128, 128, 0.3)' // Light gray for positive
+									: 'rgba(128, 128, 128, 0.3)'; // Light gray for negative
 							}),
-							borderColor: projectedGrowth.map((value) => {
-								return value !== null
-									? 'rgba(156, 163, 175, 0.6)'
-									: 'transparent';
+							borderColor: growthStockIndexProjectedData.map((value) => {
+								if (value === null) return 'transparent';
+								return 'rgba(128, 128, 128, 0.8)';
 							}),
-							borderWidth: 2,
-							borderDash: [5, 5], // Dashed border for projected
-							order: 1, // This dataset will be drawn behind
+							borderWidth: 1,
+							borderDash: [5, 5], // Dashed border for projections
+							order: 2, // Draw behind actual data
 						},
 						{
-							label: 'درصد رشد سالانه',
-							data: annualGrowth.map((item) => item.growth),
-							backgroundColor: annualGrowth.map((item) => {
-								return item.growth >= 0
+							label: 'پیش‌بینی شاخص هموزن (۱۴۰۴)',
+							data: growthEqualWeightProjectedData,
+							backgroundColor: growthEqualWeightProjectedData.map((value) => {
+								if (value === null) return 'transparent';
+								return value >= 0
+									? 'rgba(128, 128, 128, 0.3)' // Light gray for positive
+									: 'rgba(128, 128, 128, 0.3)'; // Light gray for negative
+							}),
+							borderColor: growthEqualWeightProjectedData.map((value) => {
+								if (value === null) return 'transparent';
+								return 'rgba(128, 128, 128, 0.8)';
+							}),
+							borderWidth: 1,
+							borderDash: [5, 5], // Dashed border for projections
+							order: 2, // Draw behind actual data
+						},
+						{
+							label: 'شاخص کل',
+							data: growthStockIndexData,
+							backgroundColor: growthStockIndexData.map((value) => {
+								return value >= 0
 									? 'rgba(56, 161, 105, 0.9)'
 									: 'rgba(229, 62, 62, 0.9)'; // Green for positive, Red for negative
 							}),
-							borderColor: annualGrowth.map((item) => {
-								return item.growth >= 0
+							borderColor: growthStockIndexData.map((value) => {
+								return value >= 0
 									? 'rgba(56, 161, 105, 1)'
 									: 'rgba(229, 62, 62, 1)';
 							}),
 							borderWidth: 1,
-							order: 2, // This dataset will be drawn on top
+							order: 1, // Draw on top
+						},
+						{
+							label: 'شاخص هموزن',
+							data: growthEqualWeightData,
+							backgroundColor: growthEqualWeightData.map((value) => {
+								return value >= 0
+									? 'rgba(139, 92, 246, 0.9)'
+									: 'rgba(245, 101, 101, 0.9)'; // Purple for positive, Red for negative
+							}),
+							borderColor: growthEqualWeightData.map((value) => {
+								return value >= 0
+									? 'rgba(139, 92, 246, 1)'
+									: 'rgba(245, 101, 101, 1)';
+							}),
+							borderWidth: 1,
+							order: 1, // Draw on top
 						},
 					],
 				},
@@ -1778,6 +1837,21 @@
 					interaction: {
 						intersect: false,
 						mode: 'index',
+					},
+					scales: {
+						x: {
+							stacked: false,
+							grid: {
+								display: false,
+							},
+						},
+						y: {
+							stacked: false,
+							grid: {
+								color: '#e2e8f0',
+								drawBorder: false,
+							},
+						},
 					},
 					plugins: {
 						legend: {
@@ -1791,35 +1865,6 @@
 								},
 								usePointStyle: true,
 								padding: 20,
-								generateLabels: function (chart) {
-									return [
-										{
-											text: 'رشد مثبت',
-											fillStyle: 'rgba(56, 161, 105, 0.9)',
-											strokeStyle: 'rgba(56, 161, 105, 1)',
-											lineWidth: 1,
-											hidden: false,
-											index: 0,
-										},
-										{
-											text: 'رشد منفی',
-											fillStyle: 'rgba(229, 62, 62, 0.9)',
-											strokeStyle: 'rgba(229, 62, 62, 1)',
-											lineWidth: 1,
-											hidden: false,
-											index: 1,
-										},
-										{
-											text: 'پیش‌بینی ۱۴۰۴ (پشت)',
-											fillStyle: 'rgba(156, 163, 175, 0.3)',
-											strokeStyle: 'rgba(156, 163, 175, 0.6)',
-											lineWidth: 2,
-											lineDash: [5, 5],
-											hidden: false,
-											index: 2,
-										},
-									];
-								},
 							},
 						},
 						tooltip: {
@@ -1861,18 +1906,31 @@
 										});
 									};
 
+									// Determine which dataset and type
 									if (datasetIndex === 0) {
-										// Projected dataset (drawn behind)
+										// Projected Stock Index
 										if (value !== null) {
-											return `پیش‌بینی رشد سالانه: ${formatNumber(value)}%`;
+											return `پیش‌بینی شاخص کل: ${formatNumber(value)}%`;
 										}
 									} else if (datasetIndex === 1) {
-										// Main dataset (actual growth, drawn on top)
+										// Projected Equal Weight Index
+										if (value !== null) {
+											return `پیش‌بینی شاخص هموزن: ${formatNumber(value)}%`;
+										}
+									} else if (datasetIndex === 2) {
+										// Actual Stock Index
 										const item = annualGrowth[dataIndex];
 										if (item?.type === 'partial') {
-											return `رشد ۴ ماهه: ${formatNumber(value)}%`;
+											return `شاخص کل (۴ ماهه): ${formatNumber(value)}%`;
 										}
-										return `رشد سالانه: ${formatNumber(value)}%`;
+										return `شاخص کل: ${formatNumber(value)}%`;
+									} else if (datasetIndex === 3) {
+										// Actual Equal Weight Index
+										const item = equalWeightGrowth[dataIndex];
+										if (item?.type === 'partial') {
+											return `شاخص هموزن (۴ ماهه): ${formatNumber(value)}%`;
+										}
+										return `شاخص هموزن: ${formatNumber(value)}%`;
 									}
 									return '';
 								},
@@ -1881,7 +1939,7 @@
 					},
 					scales: {
 						x: {
-							stacked: true, // Enable stacking for overlapping bars
+							stacked: false, // Disable stacking for side-by-side bars
 							display: true,
 							title: {
 								display: true,
@@ -1897,9 +1955,11 @@
 								color: '#4a5568',
 								font: {
 									family: 'IRANSansX',
-									size: 12,
+									size: 10,
 									weight: '500',
 								},
+								maxRotation: 45,
+								minRotation: 45,
 							},
 							grid: {
 								color: '#e2e8f0',
@@ -1907,7 +1967,7 @@
 							},
 						},
 						y: {
-							stacked: true, // Enable stacking for overlapping bars
+							stacked: false, // Disable stacking for side-by-side bars
 							display: true,
 							title: {
 								display: true,
