@@ -9,9 +9,6 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>روند داده‌های مقیاس‌شده</h1>
-			<div class="subtitle">تحلیل جامع شاخص‌های مالی (1398 تا 1404)</div>
-
 			<!-- Tab Navigation -->
 			<div class="tab-navigation">
 				<button
@@ -27,28 +24,18 @@
 					شاخص‌های جایگزین
 				</button>
 				<button class="tab-button" onclick="switchTab('tables')">جداول</button>
+				<button class="tab-button" onclick="switchTab('farabourse-table')">
+					داده‌های فرابورس
+				</button>
 				<button class="tab-button" onclick="switchTab('comparison')">
 					مقایسه شرکت‌ها
 				</button>
-			</div>
-
-			<div class="stats-grid">
-				<div class="stat-card">
-					<div class="stat-value" style="color: #3182ce">3,108,119</div>
-					<div class="stat-label">بالاترین شاخص بورس</div>
-				</div>
-				<div class="stat-card">
-					<div class="stat-value" style="color: #e53e3e">94,677,309</div>
-					<div class="stat-label">بالاترین ارزش کل بورس (ریال)</div>
-				</div>
-				<div class="stat-card">
-					<div class="stat-value" style="color: #38a169">977,800</div>
-					<div class="stat-label">بالاترین نرخ دلار (ریال)</div>
-				</div>
-				<div class="stat-card">
-					<div class="stat-value" style="color: #d69e2e">266</div>
-					<div class="stat-label">بالاترین ارزش کل بورس (دلار)</div>
-				</div>
+				<button class="tab-button" onclick="switchTab('financial-table')">
+					جدول داده‌های مالی
+				</button>
+				<button class="tab-button" onclick="switchTab('financial-chart')">
+					نمودار میله‌ای مالی
+				</button>
 			</div>
 
 			<!-- Chart Containers -->
@@ -604,6 +591,117 @@
 				</div>
 			</div>
 
+			<!-- Farabourse Data Table Section -->
+			<div id="farabourse-table" class="chart-container">
+				<div class="farabourse-content">
+					<!-- Sub-tabs for different periods -->
+					<div class="farabourse-sub-tabs">
+						<button
+							class="sub-tab-button active"
+							onclick="switchFarabourseTab('period1')"
+						>
+							دوره اول
+						</button>
+						<button
+							class="sub-tab-button"
+							onclick="switchFarabourseTab('period2a')"
+						>
+							دوره دوم الف
+						</button>
+						<button
+							class="sub-tab-button"
+							onclick="switchFarabourseTab('period2b')"
+						>
+							دوره دوم ب
+						</button>
+						<button
+							class="sub-tab-button"
+							onclick="switchFarabourseTab('comprehensive')"
+						>
+							مقایسه جامع
+						</button>
+					</div>
+
+					<!-- Period 1 Table -->
+					<div id="period1-tab" class="farabourse-tab-content active">
+						<div class="table-container">
+							<table class="farabourse-data-table">
+								<thead>
+									<tr>
+										<th>موضوع</th>
+										<th>دوره اول</th>
+										<th>شاخص فرابورس</th>
+										<th>ارزش دلاری فرابورس (میلیارد دلار)</th>
+									</tr>
+								</thead>
+								<tbody id="period1-data-body">
+									<!-- Data will be populated by JavaScript -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Period 2A Table -->
+					<div id="period2a-tab" class="farabourse-tab-content">
+						<div class="table-container">
+							<table class="farabourse-data-table">
+								<thead>
+									<tr>
+										<th>موضوع</th>
+										<th>دوره دوم الف</th>
+										<th>شاخص فرابورس</th>
+										<th>ارزش دلاری فرابورس (میلیارد دلار)</th>
+									</tr>
+								</thead>
+								<tbody id="period2a-data-body">
+									<!-- Data will be populated by JavaScript -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Period 2B Table -->
+					<div id="period2b-tab" class="farabourse-tab-content">
+						<div class="table-container">
+							<table class="farabourse-data-table">
+								<thead>
+									<tr>
+										<th>موضوع</th>
+										<th>دوره دوم ب</th>
+										<th>شاخص فرابورس</th>
+										<th>ارزش دلاری فرابورس (میلیارد دلار)</th>
+									</tr>
+								</thead>
+								<tbody id="period2b-data-body">
+									<!-- Data will be populated by JavaScript -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Comprehensive Comparison Table -->
+					<div id="comprehensive-tab" class="farabourse-tab-content">
+						<div class="table-container">
+							<table class="farabourse-data-table comprehensive-table">
+								<thead>
+									<tr>
+										<th>دوره اول</th>
+										<th>شاخص فرابورس</th>
+										<th>شاخص کل</th>
+										<th>شاخص هموزن</th>
+										<th>ارزش دلاری فرابورس (میلیارد دلار)</th>
+										<th>قیمت سکه</th>
+									</tr>
+								</thead>
+								<tbody id="comprehensive-data-body">
+									<!-- Data will be populated by JavaScript -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div id="comparison" class="chart-container">
 				<div class="sub-tab-navigation">
 					<button
@@ -706,6 +804,90 @@
 								<!-- Data will be populated by JavaScript -->
 							</tbody>
 						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Financial Data Table Section -->
+			<div id="financial-table" class="chart-container">
+				<div class="financial-content">
+					<div class="table-container">
+						<table class="financial-data-table">
+							<thead>
+								<tr>
+									<th>دوره اول / دوره دوم ب</th>
+									<th>شاخص فرابورس</th>
+									<th>شاخص کل</th>
+									<th>شاخص هموزن</th>
+									<th>ارزش دلاری فرابورس (میلیارد دلار)</th>
+									<th>قیمت سکه</th>
+									<th>قیمت دلار</th>
+									<th>کل متغیرها</th>
+								</tr>
+							</thead>
+							<tbody id="financial-data-body">
+								<!-- Data will be populated by JavaScript -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Financial Bar Chart Section -->
+			<div id="financial-chart" class="chart-container">
+				<div class="financial-chart-content">
+					<div class="chart-controls">
+						<button
+							class="chart-type-btn active"
+							onclick="switchChartType('percentage')"
+						>
+							درصد تغییر
+						</button>
+						<button class="chart-type-btn" onclick="switchChartType('monthly')">
+							میانگین ماهانه
+						</button>
+						<button
+							class="chart-type-btn"
+							onclick="switchChartType('compound')"
+						>
+							نرخ رشد مرکب ماهانه
+						</button>
+					</div>
+					<div class="factor-controls">
+						<h4>انتخاب شاخص‌ها:</h4>
+						<div class="factor-buttons">
+							<button
+								class="factor-btn active"
+								data-factor="0"
+								onclick="toggleFactor(0)"
+							>
+								شاخص فرابورس
+							</button>
+							<button
+								class="factor-btn active"
+								data-factor="1"
+								onclick="toggleFactor(1)"
+							>
+								شاخص کل
+							</button>
+							<button
+								class="factor-btn active"
+								data-factor="2"
+								onclick="toggleFactor(2)"
+							>
+								شاخص هموزن
+							</button>
+							<button
+								class="factor-btn active"
+								data-factor="3"
+								onclick="toggleFactor(3)"
+							>
+								ارزش دلاری فرابورس
+							</button>
+						</div>
+					</div>
+					<div class="chart-container-wrapper">
+						<canvas id="financialBarChart"></canvas>
 					</div>
 				</div>
 			</div>
@@ -891,6 +1073,66 @@
 					'تیر 1404',
 				],
 			};
+
+			// ===== NEW DATASETS SECTION =====
+			// Additional datasets for new charts and analysis
+			const newDatasets = {
+				// Dataset 1: Placeholder for your first dataset
+				dataset1: {
+					name: 'Dataset 1',
+					description: 'Description for dataset 1',
+					realData: [
+						// Your first dataset values will go here
+						// Example format: [value1, value2, value3, ...]
+					],
+					scaledData: [
+						// Scaled values for visualization
+						// Example format: [scaledValue1, scaledValue2, scaledValue3, ...]
+					],
+					labels: [
+						// Time labels for your dataset
+						// Example: ['Jan 2020', 'Feb 2020', 'Mar 2020', ...]
+					],
+					color: '#3182ce', // Blue color
+					unit: 'units', // Unit of measurement
+				},
+
+				// Dataset 2: Placeholder for your second dataset
+				dataset2: {
+					name: 'Dataset 2',
+					description: 'Description for dataset 2',
+					realData: [
+						// Your second dataset values will go here
+					],
+					scaledData: [
+						// Scaled values for visualization
+					],
+					labels: [
+						// Time labels for your dataset
+					],
+					color: '#e53e3e', // Red color
+					unit: 'units', // Unit of measurement
+				},
+
+				// Dataset 3: Placeholder for your third dataset
+				dataset3: {
+					name: 'Dataset 3',
+					description: 'Description for dataset 3',
+					realData: [
+						// Your third dataset values will go here
+					],
+					scaledData: [
+						// Scaled values for visualization
+					],
+					labels: [
+						// Time labels for your dataset
+					],
+					color: '#38a169', // Green color
+					unit: 'units', // Unit of measurement
+				},
+			};
+
+			// ===== END NEW DATASETS SECTION =====
 
 			// Create data starting from Bahman 1398 (index 10) for line chart
 			const lineChartStartIndex = 10; // Bahman 1398
@@ -1367,6 +1609,22 @@
 
 					// Populate comparison tables
 					populateComparisonTables();
+				} else if (activeTab === 'financial-table') {
+					// Financial Data Table tab - hide stat boxes
+					statCards.forEach((card) => {
+						card.style.display = 'none';
+					});
+
+					// Populate financial data table
+					populateFinancialDataTable();
+				} else if (activeTab === 'financial-chart') {
+					// Financial Chart tab - hide stat boxes
+					statCards.forEach((card) => {
+						card.style.display = 'none';
+					});
+
+					// Initialize financial bar chart
+					initializeFinancialBarChart();
 				}
 			}
 
@@ -6381,6 +6639,7 @@
 			// Populate Tir 1401 comparison table after DOM is ready
 			document.addEventListener('DOMContentLoaded', function () {
 				populateTirComparisonTable();
+				populateFarabourseTable();
 			});
 
 			// Initialize table data
@@ -7226,6 +7485,563 @@
 				event.target.classList.add('active');
 			}
 
+			// ===== NEW DATASET FUNCTIONS =====
+
+			// Function to switch new dataset tabs
+			function switchNewDatasetTab(tabId) {
+				// Hide all new dataset sub-sections
+				document.querySelectorAll('.new-dataset-sub').forEach((section) => {
+					section.classList.remove('active');
+				});
+
+				// Remove active class from all sub-tab buttons
+				document.querySelectorAll('.sub-tab-button').forEach((button) => {
+					button.classList.remove('active');
+				});
+
+				// Show selected sub-section
+				document.getElementById(tabId).classList.add('active');
+
+				// Add active class to clicked button
+				event.target.classList.add('active');
+			}
+
+			// Function to handle Excel file upload
+			function handleExcelUpload(datasetNumber, input) {
+				const file = input.files[0];
+				if (!file) return;
+
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					try {
+						const data = new Uint8Array(e.target.result);
+						const workbook = XLSX.read(data, { type: 'array' });
+						const sheetName = workbook.SheetNames[0];
+						const worksheet = workbook.Sheets[sheetName];
+						const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+						// Process the data
+						processExcelData(datasetNumber, jsonData);
+					} catch (error) {
+						console.error('Error reading Excel file:', error);
+						alert('خطا در خواندن فایل Excel');
+					}
+				};
+				reader.readAsArrayBuffer(file);
+			}
+
+			// Function to process Excel data
+			function processExcelData(datasetNumber, jsonData) {
+				const dates = [];
+				const values = [];
+				const descriptions = [];
+
+				// Skip header row if it exists
+				const startRow = jsonData[0]?.some(
+					(cell) =>
+						typeof cell === 'string' && cell.toLowerCase().includes('date')
+				)
+					? 1
+					: 0;
+
+				for (let i = startRow; i < jsonData.length; i++) {
+					const row = jsonData[i];
+					if (row && row.length >= 2) {
+						const date = row[0];
+						const value = parseFloat(row[1]);
+						const description = row[2] || '';
+
+						if (date && !isNaN(value)) {
+							dates.push(date);
+							values.push(value);
+							descriptions.push(description);
+						}
+					}
+				}
+
+				// Update the newDatasets object
+				const datasetKey = `dataset${datasetNumber}`;
+				newDatasets[datasetKey] = {
+					name: `Dataset ${datasetNumber}`,
+					description: `Data from Excel file ${datasetNumber}`,
+					realData: values,
+					scaledData: values, // For now, use same values (can be scaled later)
+					labels: dates,
+					color:
+						datasetNumber === 1
+							? '#3182ce'
+							: datasetNumber === 2
+							? '#e53e3e'
+							: '#38a169',
+					unit: 'units',
+					descriptions: descriptions,
+				};
+
+				// Update the data view
+				updateDataView(datasetNumber, dates, values, descriptions);
+
+				console.log(
+					`Dataset ${datasetNumber} loaded:`,
+					newDatasets[datasetKey]
+				);
+			}
+
+			// Function to update data view
+			function updateDataView(datasetNumber, dates, values, descriptions) {
+				const container = document.getElementById(
+					`dataset${datasetNumber}-table`
+				);
+				if (!container) return;
+
+				let html =
+					'<table class="data-table"><thead><tr><th>ردیف</th><th>تاریخ</th><th>مقدار</th><th>توضیحات</th></tr></thead><tbody>';
+
+				for (let i = 0; i < dates.length; i++) {
+					html += `<tr>
+						<td>${i + 1}</td>
+						<td>${dates[i]}</td>
+						<td>${values[i]?.toLocaleString()}</td>
+						<td>${descriptions[i] || ''}</td>
+					</tr>`;
+				}
+
+				html += '</tbody></table>';
+				container.innerHTML = html;
+			}
+
+			// Function to create new dataset charts
+			function createNewDatasetChart(chartType) {
+				const ctx = document.getElementById('newDatasetChart');
+				if (!ctx) return;
+
+				// Destroy existing chart if it exists
+				if (window.newDatasetChartInstance) {
+					window.newDatasetChartInstance.destroy();
+				}
+
+				const datasets = [];
+				const colors = ['#3182ce', '#e53e3e', '#38a169'];
+
+				// Add datasets that have data
+				for (let i = 1; i <= 3; i++) {
+					const dataset = newDatasets[`dataset${i}`];
+					if (dataset?.realData?.length > 0) {
+						datasets.push({
+							label: dataset.name,
+							data: dataset.realData,
+							borderColor: dataset.color,
+							backgroundColor: dataset.color + '20',
+							tension: 0.1,
+							fill: false,
+						});
+					}
+				}
+
+				if (datasets.length === 0) {
+					alert('لطفاً ابتدا فایل‌های Excel را آپلود کنید');
+					return;
+				}
+
+				// Use the labels from the first dataset
+				const labels = newDatasets.dataset1?.labels || [];
+
+				window.newDatasetChartInstance = new Chart(ctx, {
+					type: chartType,
+					data: {
+						labels: labels,
+						datasets: datasets,
+					},
+					options: {
+						responsive: true,
+						plugins: {
+							title: {
+								display: true,
+								text: 'نمودار داده‌های جدید',
+							},
+							legend: {
+								display: true,
+								position: 'top',
+							},
+						},
+						scales: {
+							y: {
+								beginAtZero: false,
+							},
+						},
+					},
+				});
+			}
+
+			// ===== END NEW DATASET FUNCTIONS =====
+
+			// ===== FARABOURSE DATA FUNCTIONS =====
+
+			// Farabourse data for all periods
+			const farabourseData = {
+				// Period 1 Data
+				period1: {
+					startDate: '1398-11-30',
+					endDate: '1400-09-30',
+					startIndex: 6207,
+					endIndex: 18524,
+					startDollar: 25.73,
+					endDollar: 33.47,
+					totalDiffIndex: 12317,
+					totalDiffDollar: 7.74,
+					percentageChangeIndex: 198.44,
+					percentageChangeDollar: 30.08,
+					monthlyAvgIndex: 9.02,
+					monthlyAvgDollar: 1.37,
+				},
+				// Period 2A Data
+				period2a: {
+					startDate: '1401-01-06',
+					endDate: '1404-02-31',
+					startIndex: 18554,
+					endIndex: 27622,
+					startDollar: 38.49,
+					endDollar: 18.73,
+					totalDiffIndex: 9068,
+					totalDiffDollar: -19.76,
+					percentageChangeIndex: 48.87,
+					percentageChangeDollar: -51.33,
+					monthlyAvgIndex: 1.29,
+					monthlyAvgDollar: -1.35,
+				},
+				// Period 2B Data
+				period2b: {
+					startDate: '1401-04-25',
+					endDate: '1404-04-16',
+					startIndex: 19752,
+					endIndex: 24864,
+					startDollar: 32.16,
+					endDollar: 15.69,
+					totalDiffIndex: 5112,
+					totalDiffDollar: -16.46,
+					percentageChangeIndex: 25.88,
+					percentageChangeDollar: -51.2,
+					monthlyAvgIndex: 0.72,
+					monthlyAvgDollar: -1.42,
+				},
+				// Comprehensive Data
+				comprehensive: {
+					period1: {
+						startDate: '1398-11-30',
+						endDate: '1400-10-03',
+						farabourseIndex: {
+							start: 6207,
+							end: 18785,
+							diff: 12578,
+							percentage: 202.64,
+							monthly: 9.21,
+						},
+						totalIndex: {
+							start: 478756,
+							end: 1359025,
+							diff: 880269,
+							percentage: 183.87,
+							monthly: 8.36,
+						},
+						equalWeightIndex: {
+							start: 155685,
+							end: 357756,
+							diff: 202071,
+							percentage: 129.79,
+							monthly: 5.9,
+						},
+						dollarValue: {
+							start: 25.73,
+							end: 24.42,
+							diff: -1,
+							percentage: -5.09,
+							monthly: -0.23,
+						},
+						coinPrice: {
+							start: 53060000,
+							end: 132220000,
+							diff: 79160000,
+							percentage: 149.19,
+							monthly: 6.78,
+						},
+					},
+					period2b: {
+						startDate: '1401-04-22',
+						endDate: '1404-04-16',
+						farabourseIndex: {
+							start: 19808,
+							end: 24864,
+							diff: 5056,
+							percentage: 25.53,
+							monthly: 0.71,
+						},
+						totalIndex: {
+							start: 1490052,
+							end: 2709514,
+							diff: 1219462,
+							percentage: 81.84,
+							monthly: 2.27,
+						},
+						equalWeightIndex: {
+							start: 407012,
+							end: 846118,
+							diff: 439106,
+							percentage: 107.89,
+							monthly: 3.0,
+						},
+						dollarValue: {
+							start: 32.94,
+							end: 15.69,
+							diff: -17,
+							percentage: -52.36,
+							monthly: -1.45,
+						},
+						coinPrice: {
+							start: 150770000,
+							end: 795000000,
+							diff: 644230000,
+							percentage: 427.29,
+							monthly: 11.87,
+						},
+					},
+				},
+			};
+
+			// Function to switch between Farabourse sub-tabs
+			function switchFarabourseTab(tabName) {
+				// Hide all tab contents
+				const tabContents = document.querySelectorAll(
+					'.farabourse-tab-content'
+				);
+				tabContents.forEach((content) => {
+					content.classList.remove('active');
+				});
+
+				// Remove active class from all buttons
+				const tabButtons = document.querySelectorAll('.sub-tab-button');
+				tabButtons.forEach((button) => {
+					button.classList.remove('active');
+				});
+
+				// Show selected tab content
+				const selectedTab = document.getElementById(tabName + '-tab');
+				if (selectedTab) {
+					selectedTab.classList.add('active');
+				}
+
+				// Add active class to clicked button
+				const clickedButton = event.target;
+				clickedButton.classList.add('active');
+			}
+
+			// Function to populate all Farabourse tables
+			function populateFarabourseTable() {
+				populatePeriod1Table();
+				populatePeriod2ATable();
+				populatePeriod2BTable();
+				populateComprehensiveTable();
+			}
+
+			// Function to populate Period 1 table
+			function populatePeriod1Table() {
+				const tbody = document.getElementById('period1-data-body');
+				if (!tbody) return;
+
+				const data = farabourseData.period1;
+
+				// Helper function for proper RTL negative sign placement
+				const formatNumber = (num) => {
+					return num.toLocaleString('fa-IR', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 2,
+					});
+				};
+
+				let html = `
+					<tr><td></td><td>${data.startDate}</td><td>${formatNumber(
+					data.startIndex
+				)}</td><td>${data.startDollar}</td></tr>
+					<tr><td></td><td>${data.endDate}</td><td>${formatNumber(
+					data.endIndex
+				)}</td><td>${data.endDollar}</td></tr>
+					<tr><td>اختلاف کل</td><td></td><td>${formatNumber(
+						data.totalDiffIndex
+					)}</td><td>${formatNumber(data.totalDiffDollar)}</td></tr>
+					<tr><td>درصد تغییر</td><td></td><td>${data.percentageChangeIndex}%</td><td>${
+					data.percentageChangeDollar
+				}%</td></tr>
+					<tr><td>میانگین تغییر ماهانه</td><td></td><td>${
+						data.monthlyAvgIndex
+					}%</td><td>${data.monthlyAvgDollar}%</td></tr>
+				`;
+				tbody.innerHTML = html;
+			}
+
+			// Function to populate Period 2A table
+			function populatePeriod2ATable() {
+				const tbody = document.getElementById('period2a-data-body');
+				if (!tbody) return;
+
+				const data = farabourseData.period2a;
+
+				// Helper function for proper RTL negative sign placement
+				const formatNumber = (num) => {
+					return num.toLocaleString('fa-IR', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 2,
+					});
+				};
+
+				let html = `
+					<tr><td></td><td>${data.startDate}</td><td>${formatNumber(
+					data.startIndex
+				)}</td><td>${data.startDollar}</td></tr>
+					<tr><td></td><td>${data.endDate}</td><td>${formatNumber(
+					data.endIndex
+				)}</td><td>${data.endDollar}</td></tr>
+					<tr><td>اختلاف کل</td><td></td><td>${formatNumber(
+						data.totalDiffIndex
+					)}</td><td>${formatNumber(data.totalDiffDollar)}</td></tr>
+					<tr><td>درصد تغییر</td><td></td><td>${data.percentageChangeIndex}%</td><td>${
+					data.percentageChangeDollar
+				}%</td></tr>
+					<tr><td>میانگین تغییر ماهانه</td><td></td><td>${
+						data.monthlyAvgIndex
+					}%</td><td>${data.monthlyAvgDollar}%</td></tr>
+				`;
+				tbody.innerHTML = html;
+			}
+
+			// Function to populate Period 2B table
+			function populatePeriod2BTable() {
+				const tbody = document.getElementById('period2b-data-body');
+				if (!tbody) return;
+
+				const data = farabourseData.period2b;
+
+				// Helper function for proper RTL negative sign placement
+				const formatNumber = (num) => {
+					return num.toLocaleString('fa-IR', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 2,
+					});
+				};
+
+				let html = `
+					<tr><td></td><td>${data.startDate}</td><td>${formatNumber(
+					data.startIndex
+				)}</td><td>${data.startDollar}</td></tr>
+					<tr><td></td><td>${data.endDate}</td><td>${formatNumber(
+					data.endIndex
+				)}</td><td>${data.endDollar}</td></tr>
+					<tr><td>اختلاف کل</td><td></td><td>${formatNumber(
+						data.totalDiffIndex
+					)}</td><td>${formatNumber(data.totalDiffDollar)}</td></tr>
+					<tr><td>درصد تغییر</td><td></td><td>${data.percentageChangeIndex}%</td><td>${
+					data.percentageChangeDollar
+				}%</td></tr>
+					<tr><td>میانگین تغییر ماهانه</td><td></td><td>${
+						data.monthlyAvgIndex
+					}%</td><td>${data.monthlyAvgDollar}%</td></tr>
+				`;
+				tbody.innerHTML = html;
+			}
+
+			// Function to populate Comprehensive table
+			function populateComprehensiveTable() {
+				const tbody = document.getElementById('comprehensive-data-body');
+				if (!tbody) return;
+
+				const p1 = farabourseData.comprehensive.period1;
+				const p2b = farabourseData.comprehensive.period2b;
+
+				// Helper function for proper RTL negative sign placement
+				const formatNumber = (num) => {
+					return num.toLocaleString('fa-IR', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 2,
+					});
+				};
+
+				let html = `
+					<!-- Period 1 Section -->
+					<tr class="section-header">
+						<td colspan="6" class="period-header">دوره اول</td>
+					</tr>
+					<tr><td>${p1.startDate}</td><td>${formatNumber(
+					p1.farabourseIndex.start
+				)}</td><td>${formatNumber(p1.totalIndex.start)}</td><td>${formatNumber(
+					p1.equalWeightIndex.start
+				)}</td><td>${p1.dollarValue.start}</td><td>${formatNumber(
+					p1.coinPrice.start
+				)}</td></tr>
+					<tr><td>${p1.endDate}</td><td>${formatNumber(
+					p1.farabourseIndex.end
+				)}</td><td>${formatNumber(p1.totalIndex.end)}</td><td>${formatNumber(
+					p1.equalWeightIndex.end
+				)}</td><td>${p1.dollarValue.end}</td><td>${formatNumber(
+					p1.coinPrice.end
+				)}</td></tr>
+					<tr><td>اختلاف کل</td><td>${formatNumber(
+						p1.farabourseIndex.diff
+					)}</td><td>${formatNumber(p1.totalIndex.diff)}</td><td>${formatNumber(
+					p1.equalWeightIndex.diff
+				)}</td><td>${formatNumber(p1.dollarValue.diff)}</td><td>${formatNumber(
+					p1.coinPrice.diff
+				)}</td></tr>
+					<tr><td>درصد تغییر</td><td>${p1.farabourseIndex.percentage}%</td><td>${
+					p1.totalIndex.percentage
+				}%</td><td>${p1.equalWeightIndex.percentage}%</td><td>${
+					p1.dollarValue.percentage
+				}%</td><td>${p1.coinPrice.percentage}%</td></tr>
+					<tr><td>میانگین تغییر ماهانه</td><td>${p1.farabourseIndex.monthly}%</td><td>${
+					p1.totalIndex.monthly
+				}%</td><td>${p1.equalWeightIndex.monthly}%</td><td>${
+					p1.dollarValue.monthly
+				}%</td><td>${p1.coinPrice.monthly}%</td></tr>
+					
+					<!-- Period 2B Section -->
+					<tr class="section-header">
+						<td colspan="6" class="period-header">دوره دوم ب</td>
+					</tr>
+					<tr><td>${p2b.startDate}</td><td>${formatNumber(
+					p2b.farabourseIndex.start
+				)}</td><td>${formatNumber(p2b.totalIndex.start)}</td><td>${formatNumber(
+					p2b.equalWeightIndex.start
+				)}</td><td>${p2b.dollarValue.start}</td><td>${formatNumber(
+					p2b.coinPrice.start
+				)}</td></tr>
+					<tr><td>${p2b.endDate}</td><td>${formatNumber(
+					p2b.farabourseIndex.end
+				)}</td><td>${formatNumber(p2b.totalIndex.end)}</td><td>${formatNumber(
+					p2b.equalWeightIndex.end
+				)}</td><td>${p2b.dollarValue.end}</td><td>${formatNumber(
+					p2b.coinPrice.end
+				)}</td></tr>
+					<tr><td>اختلاف کل</td><td>${formatNumber(
+						p2b.farabourseIndex.diff
+					)}</td><td>${formatNumber(
+					p2b.totalIndex.diff
+				)}</td><td>${formatNumber(
+					p2b.equalWeightIndex.diff
+				)}</td><td>${formatNumber(p2b.dollarValue.diff)}</td><td>${formatNumber(
+					p2b.coinPrice.diff
+				)}</td></tr>
+					<tr><td>درصد تغییر</td><td>${p2b.farabourseIndex.percentage}%</td><td>${
+					p2b.totalIndex.percentage
+				}%</td><td>${p2b.equalWeightIndex.percentage}%</td><td>${
+					p2b.dollarValue.percentage
+				}%</td><td>${p2b.coinPrice.percentage}%</td></tr>
+					<tr><td>میانگین تغییر ماهانه</td><td>${p2b.farabourseIndex.monthly}%</td><td>${
+					p2b.totalIndex.monthly
+				}%</td><td>${p2b.equalWeightIndex.monthly}%</td><td>${
+					p2b.dollarValue.monthly
+				}%</td><td>${p2b.coinPrice.monthly}%</td></tr>
+				`;
+				tbody.innerHTML = html;
+			}
+
+			// ===== END FARABOURSE DATA FUNCTIONS =====
+
 			// Function to populate comparison tables
 			function populateComparisonTables() {
 				// Populate evaluator P/E companies table
@@ -7454,6 +8270,841 @@
 					<td><strong>${ourEvRevenue2025Median}x</strong></td>
 				`;
 				ourEvRevenueTbody.appendChild(ourEvRevenueMedianRow);
+			}
+
+			// Function to populate financial data table
+			function populateFinancialDataTable() {
+				const tbody = document.getElementById('financial-data-body');
+				if (!tbody) return;
+
+				// Helper function for proper RTL negative sign placement
+				const formatNumber = (num) => {
+					// For negative numbers, use simple formatting without locale
+					if (num < 0) {
+						let absNum = Math.abs(num);
+						// Format the absolute value with Persian numerals manually
+						let formatted = absNum
+							.toFixed(2)
+							.replace(/\.00$/, '')
+							.replace(/\.0$/, '');
+						// Convert to Persian numerals
+						formatted = formatted
+							.replace(/0/g, '۰')
+							.replace(/1/g, '۱')
+							.replace(/2/g, '۲')
+							.replace(/3/g, '۳')
+							.replace(/4/g, '۴')
+							.replace(/5/g, '۵')
+							.replace(/6/g, '۶')
+							.replace(/7/g, '۷')
+							.replace(/8/g, '۸')
+							.replace(/9/g, '۹');
+						return '-' + formatted;
+					}
+					// For positive numbers, use Persian locale
+					return num.toLocaleString('fa-IR', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 2,
+					});
+				};
+
+				// Helper function to determine percentage class
+				const getPercentageClass = (value) => {
+					if (value > 0) return 'percentage-positive';
+					if (value < 0) return 'percentage-negative';
+					return 'percentage-neutral';
+				};
+
+				// Financial data from the provided table
+				const financialData = {
+					period1: {
+						startDate: '1398-11-30',
+						endDate: '1400-10-03',
+						faraboursIndex: {
+							start: 6207,
+							end: 18785,
+							diff: 12578,
+							percentage: 202.64,
+							monthly: 9.21,
+						},
+						totalIndex: {
+							start: 478756,
+							end: 1359025,
+							diff: 880269,
+							percentage: 183.87,
+							monthly: 8.36,
+						},
+						equalWeightIndex: {
+							start: 155685,
+							end: 357756,
+							diff: 202071,
+							percentage: 129.79,
+							monthly: 5.9,
+						},
+						dollarValue: {
+							start: 25.73,
+							end: 24.42,
+							diff: -1,
+							percentage: -5.09,
+							monthly: -0.23,
+						},
+						coinPrice: {
+							start: 53060000,
+							end: 132220000,
+							diff: 79160000,
+							percentage: 149.19,
+							monthly: 6.78,
+						},
+						dollarPrice: {
+							start: 146500,
+							end: 302410,
+							diff: 155910,
+							percentage: 106.42,
+							monthly: 4.84,
+						},
+						monthlyAverage: 5.81,
+						compound: 5.81,
+					},
+					period2: {
+						startDate: '1401-04-22',
+						endDate: '1404-04-16',
+						faraboursIndex: {
+							start: 19808,
+							end: 24864,
+							diff: 5056,
+							percentage: 25.53,
+							monthly: 0.71,
+						},
+						totalIndex: {
+							start: 1490052,
+							end: 2709514,
+							diff: 1219462,
+							percentage: 81.84,
+							monthly: 2.27,
+						},
+						equalWeightIndex: {
+							start: 407012,
+							end: 846118,
+							diff: 439106,
+							percentage: 107.89,
+							monthly: 3.0,
+						},
+						dollarValue: {
+							start: 32.94,
+							end: 15.69,
+							diff: -17,
+							percentage: -52.36,
+							monthly: -1.45,
+						},
+						coinPrice: {
+							start: 150770000,
+							end: 795000000,
+							diff: 644230000,
+							percentage: 427.29,
+							monthly: 11.87,
+						},
+						dollarPrice: {
+							start: 325040,
+							end: 879700,
+							diff: 554660,
+							percentage: 170.64,
+							monthly: 4.74,
+						},
+						monthlyAverage: 3.52,
+						compound: 3.52,
+					},
+					period2a: {
+						startDate: '1401-01-06',
+						endDate: '1404-02-31',
+						faraboursIndex: {
+							start: 18554,
+							end: 27622,
+							diff: 9068,
+							percentage: 48.87,
+							monthly: 1.29,
+						},
+						totalIndex: {
+							start: 1390860,
+							end: 3108119,
+							diff: 1717259,
+							percentage: 123.47,
+							monthly: 3.25,
+						},
+						equalWeightIndex: {
+							start: 350545,
+							end: 954869,
+							diff: 604324,
+							percentage: 172.4,
+							monthly: 4.54,
+						},
+						dollarValue: {
+							start: 38.49,
+							end: 18.73,
+							diff: -20,
+							percentage: -51.33,
+							monthly: -1.35,
+						},
+						coinPrice: {
+							start: 0,
+							end: 0,
+							diff: 0,
+							percentage: 0,
+							monthly: 0,
+						},
+						dollarPrice: {
+							start: 0,
+							end: 0,
+							diff: 0,
+							percentage: 0,
+							monthly: 0,
+						},
+						monthlyAverage: 1.93,
+						compound: 1.95,
+					},
+				};
+
+				let html = `
+					<!-- Period 1 Header -->
+					<tr class="period-header">
+						<td colspan="8">دوره اول</td>
+					</tr>
+					
+					<!-- Period 1 Data -->
+					<tr>
+						<td>${financialData.period1.startDate}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.faraboursIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.totalIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.equalWeightIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.dollarValue.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.coinPrice.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.dollarPrice.start
+						)}</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>${financialData.period1.endDate}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.faraboursIndex.end
+						)}</td>
+						<td class="data-cell">${formatNumber(financialData.period1.totalIndex.end)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.equalWeightIndex.end
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.dollarValue.end
+						)}</td>
+						<td class="data-cell">${formatNumber(financialData.period1.coinPrice.end)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.dollarPrice.end
+						)}</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>اختلاف کل</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.faraboursIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.totalIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.equalWeightIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.dollarValue.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(financialData.period1.coinPrice.diff)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period1.dollarPrice.diff
+						)}</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>درصد تغییر</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.faraboursIndex.percentage
+						)}">${financialData.period1.faraboursIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.totalIndex.percentage
+						)}">${financialData.period1.totalIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.equalWeightIndex.percentage
+						)}">${financialData.period1.equalWeightIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.dollarValue.percentage
+						)}">${financialData.period1.dollarValue.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.coinPrice.percentage
+						)}">${financialData.period1.coinPrice.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.dollarPrice.percentage
+						)}">${financialData.period1.dollarPrice.percentage}%</td>
+						<td></td>
+					</tr>
+					
+					<tr class="average-row">
+						<td>میانگین تغییر ماهانه</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.faraboursIndex.monthly
+						)}">${financialData.period1.faraboursIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.totalIndex.monthly
+						)}">${financialData.period1.totalIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.equalWeightIndex.monthly
+						)}">${financialData.period1.equalWeightIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.dollarValue.monthly
+						)}">${financialData.period1.dollarValue.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.coinPrice.monthly
+						)}">${financialData.period1.coinPrice.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.dollarPrice.monthly
+						)}">${financialData.period1.dollarPrice.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period1.monthlyAverage
+						)}">${financialData.period1.monthlyAverage}%</td>
+					</tr>
+					
+					<!-- Period 2 Header -->
+					<tr class="period-header">
+						<td colspan="8">دوره دوم ب</td>
+					</tr>
+					
+					<!-- Period 2 Data -->
+					<tr>
+						<td>${financialData.period2.startDate}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.faraboursIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.totalIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.equalWeightIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.dollarValue.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.coinPrice.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.dollarPrice.start
+						)}</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>${financialData.period2.endDate}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.faraboursIndex.end
+						)}</td>
+						<td class="data-cell">${formatNumber(financialData.period2.totalIndex.end)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.equalWeightIndex.end
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.dollarValue.end
+						)}</td>
+						<td class="data-cell">${formatNumber(financialData.period2.coinPrice.end)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.dollarPrice.end
+						)}</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>اختلاف کل</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.faraboursIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.totalIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.equalWeightIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.dollarValue.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(financialData.period2.coinPrice.diff)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2.dollarPrice.diff
+						)}</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>درصد تغییر</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.faraboursIndex.percentage
+						)}">${financialData.period2.faraboursIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.totalIndex.percentage
+						)}">${financialData.period2.totalIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.equalWeightIndex.percentage
+						)}">${financialData.period2.equalWeightIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.dollarValue.percentage
+						)}">${financialData.period2.dollarValue.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.coinPrice.percentage
+						)}">${financialData.period2.coinPrice.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.dollarPrice.percentage
+						)}">${financialData.period2.dollarPrice.percentage}%</td>
+						<td></td>
+					</tr>
+					
+					<tr class="average-row">
+						<td>میانگین تغییر ماهانه</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.faraboursIndex.monthly
+						)}">${financialData.period2.faraboursIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.totalIndex.monthly
+						)}">${financialData.period2.totalIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.equalWeightIndex.monthly
+						)}">${financialData.period2.equalWeightIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.dollarValue.monthly
+						)}">${financialData.period2.dollarValue.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.coinPrice.monthly
+						)}">${financialData.period2.coinPrice.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.dollarPrice.monthly
+						)}">${financialData.period2.dollarPrice.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2.monthlyAverage
+						)}">${financialData.period2.monthlyAverage}%</td>
+					</tr>
+					
+					<!-- Period 2a Header -->
+					<tr class="period-header">
+						<td colspan="8">دوره دوم الف</td>
+					</tr>
+					
+					<!-- Period 2a Data -->
+					<tr>
+						<td>${financialData.period2a.startDate}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.faraboursIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.totalIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.equalWeightIndex.start
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.dollarValue.start
+						)}</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell">-</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>${financialData.period2a.endDate}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.faraboursIndex.end
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.totalIndex.end
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.equalWeightIndex.end
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.dollarValue.end
+						)}</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell">-</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>اختلاف کل</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.faraboursIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.totalIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.equalWeightIndex.diff
+						)}</td>
+						<td class="data-cell">${formatNumber(
+							financialData.period2a.dollarValue.diff
+						)}</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell">-</td>
+						<td></td>
+					</tr>
+					
+					<tr>
+						<td>درصد تغییر</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.faraboursIndex.percentage
+						)}">${financialData.period2a.faraboursIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.totalIndex.percentage
+						)}">${financialData.period2a.totalIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.equalWeightIndex.percentage
+						)}">${financialData.period2a.equalWeightIndex.percentage}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.dollarValue.percentage
+						)}">${financialData.period2a.dollarValue.percentage}%</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell">-</td>
+						<td></td>
+					</tr>
+					
+					<tr class="average-row">
+						<td>میانگین تغییر ماهانه</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.faraboursIndex.monthly
+						)}">${financialData.period2a.faraboursIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.totalIndex.monthly
+						)}">${financialData.period2a.totalIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.equalWeightIndex.monthly
+						)}">${financialData.period2a.equalWeightIndex.monthly}%</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.dollarValue.monthly
+						)}">${financialData.period2a.dollarValue.monthly}%</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell ${getPercentageClass(
+							financialData.period2a.monthlyAverage
+						)}">${financialData.period2a.monthlyAverage}%</td>
+					</tr>
+					
+					<tr class="average-row">
+						<td>نرخ رشد مرکب ماهانه</td>
+						<td class="data-cell ${getPercentageClass(1.05)}">1.05%</td>
+						<td class="data-cell ${getPercentageClass(2.14)}">2.14%</td>
+						<td class="data-cell ${getPercentageClass(2.67)}">2.67%</td>
+						<td class="data-cell ${getPercentageClass(-1.88)}">-1.88%</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell">-</td>
+						<td class="data-cell ${getPercentageClass(1.95)}">1.95%</td>
+					</tr>
+				`;
+
+				tbody.innerHTML = html;
+			}
+
+			// Global variable for the financial bar chart
+			let financialBarChart = null;
+			let currentChartType = 'percentage';
+			let activeFactors = [0, 1, 2, 3]; // All factors active by default
+
+			// Function to initialize financial bar chart
+			function initializeFinancialBarChart() {
+				const ctx = document.getElementById('financialBarChart');
+				if (!ctx) return;
+
+				// Destroy existing chart if it exists
+				if (financialBarChart) {
+					financialBarChart.destroy();
+				}
+
+				// Financial data for the chart
+				const chartData = {
+					labels: [
+						'شاخص فرابورس',
+						'شاخص کل',
+						'شاخص هموزن',
+						'ارزش دلاری فرابورس',
+					],
+					period1: {
+						percentage: [202.64, 183.87, 129.79, -5.09],
+						monthly: [9.21, 8.36, 5.9, -0.23],
+						compound: [5.16, 4.86, 3.85, -0.24],
+					},
+					period2: {
+						percentage: [25.53, 81.84, 107.89, -52.36],
+						monthly: [0.71, 2.27, 3.0, -1.45],
+						compound: [0.63, 1.67, 2.05, -2.04],
+					},
+					period2a: {
+						percentage: [48.87, 123.47, 172.4, -51.33],
+						monthly: [1.29, 3.25, 4.54, -1.35],
+						compound: [1.05, 2.14, 2.67, -1.88],
+					},
+				};
+
+				// Filter data based on active factors
+				const filteredLabels = chartData.labels.filter((_, index) =>
+					activeFactors.includes(index)
+				);
+				const filteredPeriod1Data = chartData.period1[currentChartType].filter(
+					(_, index) => activeFactors.includes(index)
+				);
+				const filteredPeriod2Data = chartData.period2[currentChartType].filter(
+					(_, index) => activeFactors.includes(index)
+				);
+				const filteredPeriod2aData = chartData.period2a[
+					currentChartType
+				].filter((_, index) => activeFactors.includes(index));
+
+				// Calculate dynamic Y-axis limits based on filtered data
+				const allFilteredData = [
+					...filteredPeriod1Data,
+					...filteredPeriod2Data,
+					...filteredPeriod2aData,
+				];
+				const minValue = Math.min(...allFilteredData);
+				const maxValue = Math.max(...allFilteredData);
+				const range = maxValue - minValue;
+				const padding = range * 0.15; // 15% padding
+
+				// Ensure reasonable Y-axis limits
+				let yAxisMin = minValue - padding;
+				let yAxisMax = maxValue + padding;
+
+				// Set fixed Y-axis range for monthly and compound charts
+				if (currentChartType === 'percentage') {
+					// For percentage change, round to nearest 10
+					yAxisMin = Math.floor(yAxisMin / 10) * 10;
+					yAxisMax = Math.ceil(yAxisMax / 10) * 10;
+				} else if (currentChartType === 'monthly') {
+					// For monthly, use fixed range from -5% to 10%
+					yAxisMin = -5;
+					yAxisMax = 10;
+				} else {
+					// For compound, use fixed range from -4% to 6%
+					yAxisMin = -4;
+					yAxisMax = 6;
+				}
+
+				const config = {
+					type: 'bar',
+					data: {
+						labels: filteredLabels,
+						datasets: [
+							{
+								label: 'دوره اول',
+								data: filteredPeriod1Data,
+								backgroundColor: 'rgba(102, 126, 234, 0.8)',
+								borderColor: 'rgba(102, 126, 234, 1)',
+								borderWidth: 2,
+								borderRadius: 8,
+								borderSkipped: false,
+							},
+							{
+								label: 'دوره دوم الف',
+								data: filteredPeriod2aData,
+								backgroundColor: 'rgba(236, 72, 153, 0.6)',
+								borderColor: 'rgba(236, 72, 153, 1)',
+								borderWidth: 2,
+								borderRadius: 8,
+								borderSkipped: false,
+								pattern: {
+									pattern: 'diagonal',
+									patternSize: 6,
+									patternSpacing: 4,
+									patternColor: 'rgba(236, 72, 153, 0.3)',
+								},
+							},
+							{
+								label: 'دوره دوم ب',
+								data: filteredPeriod2Data,
+								backgroundColor: 'rgba(236, 72, 153, 0.8)',
+								borderColor: 'rgba(236, 72, 153, 1)',
+								borderWidth: 2,
+								borderRadius: 8,
+								borderSkipped: false,
+							},
+						],
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						interaction: {
+							intersect: false,
+							mode: 'index',
+						},
+						plugins: {
+							legend: {
+								position: 'top',
+								labels: {
+									color: '#1a202c',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+									padding: 20,
+									usePointStyle: true,
+									pointStyle: 'circle',
+									boxWidth: 12,
+									boxHeight: 12,
+								},
+								onClick: function (e, legendItem, legend) {
+									// Toggle dataset visibility
+									const index = legendItem.datasetIndex;
+									const ci = legend.chart;
+									const meta = ci.getDatasetMeta(index);
+
+									meta.hidden = !meta.hidden;
+									ci.update();
+								},
+							},
+							tooltip: {
+								backgroundColor: 'rgba(26, 32, 44, 0.95)',
+								titleColor: '#ffffff',
+								bodyColor: '#ffffff',
+								borderColor: '#e2e8f0',
+								borderWidth: 1,
+								cornerRadius: 8,
+								displayColors: true,
+								titleFont: {
+									size: 14,
+									family: "'IRANSansX', sans-serif",
+									weight: '600',
+								},
+								bodyFont: {
+									size: 13,
+									family: "'IRANSansX', sans-serif",
+								},
+								padding: 12,
+								callbacks: {
+									label: function (context) {
+										const value = context.parsed.y;
+										const label = context.dataset.label;
+										const suffix =
+											currentChartType === 'percentage' ? '%' : '%';
+										return label + ': ' + value.toFixed(2) + suffix;
+									},
+								},
+							},
+						},
+						scales: {
+							y: {
+								min: yAxisMin,
+								max: yAxisMax,
+								title: {
+									display: true,
+									text:
+										currentChartType === 'percentage'
+											? 'درصد تغییر'
+											: currentChartType === 'monthly'
+											? 'میانگین تغییر ماهانه (%)'
+											: 'نرخ رشد مرکب ماهانه (%)',
+									color: '#1a202c',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+								},
+								grid: {
+									color: 'rgba(226, 232, 240, 0.8)',
+									drawBorder: false,
+								},
+								ticks: {
+									color: '#718096',
+									font: {
+										size: 12,
+										family: "'IRANSansX', sans-serif",
+										weight: '500',
+									},
+									callback: function (value) {
+										return value + '%';
+									},
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: 'شاخص‌های مالی',
+									color: '#1a202c',
+									font: {
+										size: 14,
+										family: "'IRANSansX', sans-serif",
+										weight: '600',
+									},
+								},
+								grid: {
+									display: false,
+								},
+								ticks: {
+									color: '#4a5568',
+									font: {
+										size: 11,
+										family: "'IRANSansX', sans-serif",
+										weight: '500',
+									},
+									maxRotation: 45,
+									minRotation: 45,
+								},
+							},
+						},
+					},
+				};
+
+				financialBarChart = new Chart(ctx, config);
+			}
+
+			// Function to switch chart type
+			function switchChartType(type) {
+				currentChartType = type;
+
+				// Update button states
+				document.querySelectorAll('.chart-type-btn').forEach((btn) => {
+					btn.classList.remove('active');
+				});
+				event.target.classList.add('active');
+
+				// Reinitialize chart with new data
+				initializeFinancialBarChart();
+			}
+
+			// Function to toggle individual factors
+			function toggleFactor(factorIndex) {
+				const button = event.target;
+				const isActive = activeFactors.includes(factorIndex);
+
+				if (isActive) {
+					// Remove factor from active list
+					activeFactors = activeFactors.filter((f) => f !== factorIndex);
+					button.classList.remove('active');
+					button.classList.add('inactive');
+				} else {
+					// Add factor to active list
+					activeFactors.push(factorIndex);
+					button.classList.remove('inactive');
+					button.classList.add('active');
+				}
+
+				// Sort active factors to maintain order
+				activeFactors.sort((a, b) => a - b);
+
+				// Reinitialize chart with filtered data
+				initializeFinancialBarChart();
 			}
 		</script>
 	</body>

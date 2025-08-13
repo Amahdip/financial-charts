@@ -86,6 +86,15 @@ body {
 	display: none;
 }
 
+/* Special styling for farabourse table to fit in viewport */
+#farabourse-table.chart-container {
+	height: auto;
+	min-height: 100vh;
+	max-height: 100vh;
+	overflow: hidden;
+	padding: 10px 20px;
+}
+
 .chart-container.active {
 	display: block;
 }
@@ -764,5 +773,829 @@ h1 {
 	.table-container td {
 		padding: 8px 6px;
 		font-size: 10px;
+	}
+}
+
+/* ===== NEW DATASET STYLES ===== */
+
+/* New dataset sub-sections */
+.new-dataset-sub {
+	display: none;
+}
+
+.new-dataset-sub.active {
+	display: block;
+}
+
+/* Upload section styles */
+.upload-section {
+	padding: 30px;
+	background: #f8f9fa;
+	border-radius: 15px;
+	margin-bottom: 20px;
+}
+
+.upload-section h3 {
+	color: #2d3748;
+	margin-bottom: 15px;
+	font-size: 1.5em;
+}
+
+.upload-section p {
+	color: #4a5568;
+	margin-bottom: 25px;
+	line-height: 1.6;
+}
+
+.file-upload-area {
+	margin-bottom: 20px;
+	padding: 20px;
+	background: white;
+	border: 2px dashed #cbd5e0;
+	border-radius: 10px;
+	text-align: center;
+	transition: all 0.3s ease;
+}
+
+.file-upload-area:hover {
+	border-color: #3182ce;
+	background: #f7fafc;
+}
+
+.file-upload-area input[type='file'] {
+	display: none;
+}
+
+.file-upload-area label {
+	display: block;
+	padding: 15px;
+	background: #3182ce;
+	color: white;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
+
+.file-upload-area label:hover {
+	background: #2c5aa0;
+	transform: translateY(-2px);
+}
+
+.upload-instructions {
+	margin-top: 30px;
+	padding: 20px;
+	background: #e6fffa;
+	border: 1px solid #38a169;
+	border-radius: 10px;
+}
+
+.upload-instructions h4 {
+	color: #2f855a;
+	margin-bottom: 10px;
+}
+
+.upload-instructions ul {
+	margin: 0;
+	padding-right: 20px;
+}
+
+.upload-instructions li {
+	color: #2f855a;
+	margin-bottom: 5px;
+	line-height: 1.5;
+}
+
+/* Chart section styles */
+.chart-section {
+	padding: 30px;
+}
+
+.chart-section h3 {
+	color: #2d3748;
+	margin-bottom: 20px;
+	font-size: 1.5em;
+}
+
+.chart-controls {
+	margin-bottom: 25px;
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+}
+
+.chart-controls button {
+	padding: 12px 24px;
+	background: #3182ce;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.chart-controls button:hover {
+	background: #2c5aa0;
+	transform: translateY(-2px);
+}
+
+/* Data view section styles */
+.data-view-section {
+	padding: 30px;
+}
+
+.data-view-section h3 {
+	color: #2d3748;
+	margin-bottom: 25px;
+	font-size: 1.5em;
+}
+
+.dataset-view {
+	margin-bottom: 30px;
+	padding: 20px;
+	background: #f8f9fa;
+	border-radius: 10px;
+	border: 1px solid #e2e8f0;
+}
+
+.dataset-view h4 {
+	color: #2d3748;
+	margin-bottom: 15px;
+	font-size: 1.2em;
+}
+
+.data-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: white;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th {
+	background: #3182ce;
+	color: white;
+	padding: 12px;
+	text-align: center;
+	font-weight: 600;
+}
+
+.data-table td {
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table tr:nth-child(even) {
+	background: #f7fafc;
+}
+
+.data-table tr:hover {
+	background: #edf2f7;
+}
+
+/* Responsive styles for new dataset sections */
+@media (max-width: 768px) {
+	.chart-controls {
+		flex-direction: column;
+	}
+
+	.chart-controls button {
+		width: 100%;
+	}
+
+	.file-upload-area {
+		padding: 15px;
+	}
+
+	.upload-section,
+	.chart-section,
+	.data-view-section {
+		padding: 20px;
+	}
+}
+
+/* ===== FARABOURSE TABLE STYLES ===== */
+
+.farabourse-content {
+	padding: 20px;
+	background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+	border-radius: 12px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Sub-tabs styling */
+.farabourse-sub-tabs {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 30px;
+	flex-wrap: wrap;
+}
+
+.sub-tab-button {
+	background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+	border: none;
+	padding: 12px 24px;
+	border-radius: 25px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4a5568;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: relative;
+	overflow: hidden;
+}
+
+.sub-tab-button:hover {
+	background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+	color: white;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(49, 130, 206, 0.3);
+}
+
+.sub-tab-button.active {
+	background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+	color: white;
+	box-shadow: 0 4px 8px rgba(49, 130, 206, 0.4);
+}
+
+.sub-tab-button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.2),
+		transparent
+	);
+	transition: left 0.5s;
+}
+
+.sub-tab-button:hover::before {
+	left: 100%;
+}
+
+/* Tab content styling */
+.farabourse-tab-content {
+	display: none;
+	animation: fadeIn 0.5s ease-in-out;
+}
+
+.farabourse-tab-content.active {
+	display: block;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Table styling improvements */
+.farabourse-data-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+	margin: 0 auto;
+}
+
+.farabourse-data-table th {
+	background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+	color: white;
+	padding: 16px 12px;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+	border: none;
+	position: relative;
+}
+
+.farabourse-data-table th:first-child {
+	border-top-right-radius: 12px;
+}
+
+.farabourse-data-table th:last-child {
+	border-top-left-radius: 12px;
+}
+
+.farabourse-data-table td {
+	padding: 12px;
+	font-size: 13px;
+	text-align: center;
+	border-bottom: 1px solid #e2e8f0;
+	transition: background-color 0.2s ease;
+}
+
+.farabourse-data-table tr:hover {
+	background-color: #f7fafc;
+}
+
+.farabourse-data-table tr:last-child td {
+	border-bottom: none;
+}
+
+/* Special styling for summary rows */
+.farabourse-data-table tr:nth-child(3) td {
+	background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+	font-weight: 600;
+	color: #c53030;
+}
+
+.farabourse-data-table tr:nth-child(4) td {
+	background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+	font-weight: 600;
+	color: #22543d;
+}
+
+.farabourse-data-table tr:nth-child(5) td {
+	background: linear-gradient(135deg, #bee3f8 0%, #90cdf4 100%);
+	font-weight: 600;
+	color: #2a4365;
+}
+
+/* Section header styling for comprehensive table */
+.farabourse-data-table .section-header {
+	background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
+
+.farabourse-data-table .period-header {
+	color: white;
+	font-size: 16px;
+	font-weight: 700;
+	text-align: center;
+	padding: 15px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.comprehensive-table {
+	min-width: 800px;
+	max-width: 1200px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.farabourse-sub-tabs {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.sub-tab-button {
+		width: 200px;
+	}
+
+	.farabourse-data-table {
+		font-size: 12px;
+	}
+
+	.farabourse-data-table th,
+	.farabourse-data-table td {
+		padding: 8px 6px;
+	}
+}
+
+.farabourse-content h3 {
+	color: #2d3748;
+	margin-bottom: 25px;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.farabourse-data-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: white;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	margin-bottom: 15px;
+}
+
+.farabourse-data-table th {
+	background: #3182ce;
+	color: white;
+	padding: 4px 8px;
+	text-align: center;
+	font-weight: 600;
+	font-size: 12px;
+}
+
+.farabourse-data-table td {
+	padding: 3px 8px;
+	text-align: center;
+	border-bottom: 1px solid #e2e8f0;
+	font-size: 11px;
+}
+
+.farabourse-data-table tr:nth-child(even) {
+	background: #f7fafc;
+}
+
+.farabourse-data-table tr:hover {
+	background: #edf2f7;
+}
+
+.farabourse-summary {
+	background: #f8f9fa;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.summary-row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+	padding: 6px;
+	background: white;
+	border-radius: 8px;
+	border: 1px solid #e2e8f0;
+}
+
+.summary-row:last-child {
+	margin-bottom: 0;
+}
+
+.summary-label {
+	font-weight: 600;
+	color: #2d3748;
+	min-width: 200px;
+	margin-left: 20px;
+}
+
+.summary-value {
+	flex: 1;
+	color: #4a5568;
+	font-size: 12px;
+}
+
+/* Responsive styles for farabourse table */
+@media (max-width: 768px) {
+	.farabourse-content {
+		padding: 20px;
+	}
+
+	.farabourse-data-table {
+		font-size: 12px;
+	}
+
+	.farabourse-data-table th,
+	.farabourse-data-table td {
+		padding: 8px 6px;
+	}
+
+	.summary-row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.summary-label {
+		min-width: auto;
+		margin-left: 0;
+		margin-bottom: 5px;
+	}
+}
+
+/* Financial Data Table Styles */
+#financial-table.chart-container {
+	height: auto;
+	min-height: auto;
+	max-height: 95vh;
+	overflow: auto;
+	padding: 15px;
+	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.financial-content {
+	background: white;
+	border-radius: 20px;
+	padding: 20px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.financial-data-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	background: white;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+}
+
+.financial-data-table thead {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.financial-data-table th {
+	color: white;
+	padding: 8px 12px;
+	text-align: center;
+	font-weight: 700;
+	font-size: 12px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	border: none;
+	position: relative;
+}
+
+.financial-data-table th:not(:last-child)::after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 20%;
+	height: 60%;
+	width: 1px;
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.financial-data-table tbody tr {
+	transition: all 0.3s ease;
+	border-bottom: 1px solid #f1f5f9;
+}
+
+.financial-data-table tbody tr:hover {
+	background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.financial-data-table tbody tr:last-child {
+	border-bottom: none;
+}
+
+.financial-data-table td {
+	padding: 6px 12px;
+	text-align: center;
+	font-size: 11px;
+	font-weight: 500;
+	color: #374151;
+	border: none;
+	position: relative;
+}
+
+.financial-data-table tbody tr:nth-child(even) {
+	background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+/* Special styling for average rows only */
+.financial-data-table tbody tr.average-row {
+	background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+	font-weight: 600;
+}
+
+/* Period headers styling */
+.financial-data-table tbody tr.period-header {
+	background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+	color: white;
+	font-weight: 700;
+	font-size: 14px;
+	text-align: center;
+}
+
+.financial-data-table tbody tr.period-header td {
+	color: white;
+	font-weight: 700;
+}
+
+/* Data cells with special formatting */
+.financial-data-table td.data-cell {
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+	font-weight: 600;
+}
+
+/* Force negative signs to the left for RTL */
+.financial-data-table td.data-cell.percentage-negative {
+	direction: ltr;
+	text-align: center;
+}
+
+.financial-data-table td.percentage-positive {
+	color: #059669;
+	font-weight: 700;
+}
+
+.financial-data-table td.percentage-negative {
+	color: #dc2626;
+	font-weight: 700;
+}
+
+.financial-data-table td.percentage-neutral {
+	color: #6b7280;
+	font-weight: 700;
+}
+
+/* Responsive design for financial table */
+@media (max-width: 1024px) {
+	.financial-data-table {
+		font-size: 14px;
+	}
+
+	.financial-data-table th,
+	.financial-data-table td {
+		padding: 14px 12px;
+	}
+}
+
+@media (max-width: 768px) {
+	.financial-content {
+		padding: 20px;
+	}
+
+	.financial-data-table {
+		font-size: 12px;
+		border-radius: 12px;
+	}
+
+	.financial-data-table th,
+	.financial-data-table td {
+		padding: 12px 8px;
+		font-size: 12px;
+	}
+
+	.financial-data-table th {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 480px) {
+	.financial-data-table {
+		font-size: 11px;
+	}
+
+	.financial-data-table th,
+	.financial-data-table td {
+		padding: 10px 6px;
+		font-size: 11px;
+	}
+
+	.financial-data-table th {
+		font-size: 12px;
+	}
+}
+
+/* Financial Bar Chart Styles */
+#financial-chart.chart-container {
+	height: auto;
+	min-height: auto;
+	max-height: 90vh;
+	overflow: auto;
+	padding: 20px;
+	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.financial-chart-content {
+	background: white;
+	border-radius: 20px;
+	padding: 25px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chart-controls {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	margin-bottom: 25px;
+}
+
+.factor-controls {
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+.factor-controls h4 {
+	color: #1a202c;
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 15px;
+}
+
+.factor-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+}
+
+.chart-type-btn {
+	background: #f7fafc;
+	border: 2px solid #e2e8f0;
+	color: #4a5568;
+	padding: 10px 20px;
+	border-radius: 10px;
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.chart-type-btn:hover {
+	background: #edf2f7;
+	border-color: #cbd5e0;
+	transform: translateY(-2px);
+}
+
+.chart-type-btn.active {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border-color: #667eea;
+	color: white;
+	box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.factor-btn {
+	background: #f7fafc;
+	border: 2px solid #e2e8f0;
+	color: #4a5568;
+	padding: 8px 16px;
+	border-radius: 8px;
+	font-family: 'IRANSansX', 'Arial', sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.factor-btn:hover {
+	background: #edf2f7;
+	border-color: #cbd5e0;
+	transform: translateY(-1px);
+}
+
+.factor-btn.active {
+	background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+	border-color: #48bb78;
+	color: white;
+	box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+}
+
+.factor-btn.inactive {
+	background: #f7fafc;
+	border-color: #e2e8f0;
+	color: #a0aec0;
+	opacity: 0.6;
+}
+
+.chart-container-wrapper {
+	position: relative;
+	height: 500px;
+	width: 100%;
+}
+
+/* Responsive design for financial chart */
+@media (max-width: 768px) {
+	.financial-chart-content {
+		padding: 15px;
+	}
+
+	.chart-controls {
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.factor-buttons {
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.factor-btn {
+		width: 100%;
+		max-width: 200px;
+	}
+
+	.chart-type-btn {
+		width: 100%;
+		max-width: 200px;
+	}
+
+	.chart-container-wrapper {
+		height: 400px;
+	}
+}
+
+@media (max-width: 480px) {
+	.chart-container-wrapper {
+		height: 350px;
 	}
 }
